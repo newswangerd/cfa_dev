@@ -156,6 +156,18 @@ class Form {
 
 	}
 
+	public function load_from_post(){
+		
+		$data_sent = false; 
+		foreach ($form->fields as $key => $value){
+			if (!empty($_POST[$key])){
+				$form->fields[$key]->set_value($_POST[$key]);
+				$data_sent = true;
+		return $data_sent;
+	}
+}
+	}
+
 	public function validate(){
 		//validatees each field in the array, and adds any errrors to the array
 		//returns true or false
