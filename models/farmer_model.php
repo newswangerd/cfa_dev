@@ -1,97 +1,67 @@
 <?php 
+include "model_form.php"
 
-/*
-	Used for updating admin information
-	Used for creating/updating/viewing applicants
+class FarmerForm extends Form {
 
-	Models used for:
-	-Admin
-	-Farmer
-	-Landowner
+	function __construct(){
+		$this->table_name="farmer";
+		$this->id_name="farmer_id"
 
-	Separate system for:
-	-Querying all applicants
-	-Saving photos
 
-*/
+		// NEED TO CHANGE SOME OF THESE TO TEXT FIELDS
+		// NEED TO ADD FIRST NAME ETC.
+		$this->fields['fist_name'] = new TextField();
+		$this->fields['last_name'] = new TextField();
+		$this->fields['password'] = new TextField();
+		$this->fields['email'] = new TextField();
+		$this->fields['phone'] = new TextField();
+		$this->fields['address'] = new TextField();
 
-class FarmerForm {
+		$this->fields['to_rent'] = new CheckBox();
+		$this->fields['to_sell'] = new CheckBox();
+		$this->fields['to_intern'] = new CheckBox();
+		$this->fields['to_other'] = new CheckBox();
+		$this->fields['terms_other'] = new TextField();
+		$this->fields['pasture'] = new TextField();
+		$this->fields['tillable'] = new TextField();
+		$this->fields['organic'] = new CheckBox();
+		$this->fields['housing'] = new CheckBox();
+		$this->fields['describe_housing'] = new TextField();
+		$this->fields['infrastructure_storage'] = new CheckBox();
+		$this->fields['infrastructure_barn'] = new CheckBox();
+		$this->fields['infrastructure_stables'] = new CheckBox();
+		$this->fields['infrastructure_greenhouse'] = new CheckBox();
+		$this->fields['infrastructure_goats'] = new CheckBox();
+		$this->fields['infrastructure_sheep'] = new CheckBox();
+		$this->fields['infrastructure_horses'] = new CheckBox();
+		$this->fields['equipment'] = new CheckBox();
+		$this->fields['equipment_other'] = new TextField();
+		$this->fields['irrigation'] = new CheckBox();
+		$this->fields['horticulture'] = new CheckBox();
+		$this->fields['livestock_cattle_beef'] = new CheckBox();
+		$this->fields['livestock_cattle_dairy'] = new CheckBox();
+		$this->fields['livestock_poultry'] = new CheckBox();
+		$this->fields['livestock_hogs'] = new CheckBox();
+		$this->fields['livestock_goats'] = new CheckBox();
+		$this->fields['livestock_sheep'] = new CheckBox();
+		$this->fields['livestock_horses'] = new CheckBox();
+		$this->fields['aquaculture'] = new CheckBox();
+		$this->fields['tobacco'] = new CheckBox();
+		$this->fields['rowcrops'] = new CheckBox();
+		$this->fields['lease_agreement'] = new TextField();
+		$this->fields['purchase_agreement'] = new TextField();
+		$this->fields['highschool'] = new TextField();
+		$this->fields['some_college'] = new CheckBox();
+		$this->fields['college_graduate'] = new CheckBox();
+		$this->fields['other_education'] = new CheckBox();
+		$this->fields['northern'] = new CheckBox();
+		$this->fields['central'] = new TextField();
+		$this->fields['eastern'] = new CheckBox();
+		$this->fields['western'] = new TextField();
+		$this->fields['goals'] = new TextField();
+		$this->fields['currently_farming'] = new TextField();
+		$this->fields['sell_produce'] = new TextField();
 
-	//Data = [field_name1 = [value, error], field_name2 = [value, error]]
-	private $fields = array(
-		'to_rent' => array('',''),
-		'to_sell' => array('', ''),
-		'to_intern' => array('', ''),
-		'to_other' => array('', ''),
-		'terms_other' => array('', ''),
-		'pasture' => array('', ''),
-		'tillable' => array('', ''),
-		'organic' => array('', ''),
-		'housing' => array('', ''),
-		'describe_housing' => array('', ''),
-		'infrastructure_storage' => array('', ''),
-		'infrastructure_barn' => array('', ''),
-		'infrastructure_stables' => array('', ''),
-		'infrastructure_greenhouse' => array('', ''),
-		'infrastructure_goats' => array('', ''),
-		'infrastructure_sheep' => array('', ''),
-		'infrastructure_horses' => array('', ''),
-		'equipment' => array('', ''),
-		'equipment_other' => array('', ''),
-		'irrigation' => array('', ''),
-		'horticulture' => array('', ''),
-		'livestock_cattle_beef' => array('', ''),
-		'livestock_cattle_dairy' => array('', ''),
-		'livestock_cattle_poultry' => array('', ''),
-		'livestock_hogs' => array('', ''),
-		'livestock_goats' => array('', ''),
-		'livestock_sheep' => array('', ''),
-		'livestock_horses' => array('', ''),
-		'aquaculture' => array('', ''),
-		'tobacco' => array('', ''),
-		'rowcrops' => array('', ''),
-		'lease_agreement' => array('', ''),
-		'purchase_agreement' => array('', ''),
-		'highschool' => array('', ''),
-		'some_college' => array('', ''),
-		'college_graduate' => array('', ''),
-		'other_education' => array('', ''),
-		'northern' => array('', ''),
-		'central' => array('', ''),
-		'eastern' => array('', ''),
-		'western' => array('', ''),
-		'goals' => array('', ''),
-		'currently_farming' => array('', ''),
-		'sell_produce' => array('', '')
-		);
-
-	private $id = "";
-
-	public function load($ID){
-		//loads data from database
-		//sets the id
-	}
-
-	public function save(){
-		//saves data to databse
-		//If the ID for the model is set, an existing entry is update
-		//If the ID is not set, a new entry is made.
-	}
-
-	public function validate(){
-		//validatees each field in the array, and adds any errrors to the array
-		//returns true or false
-	}
-
-	public function new_data($data){
-		// Loads new data into the model's array
-		$this->data = $fields;
-	}
-
-	public function get_data(){
-		// Returns the data array
-		return $this->fields;
-	}
 
 }
 
