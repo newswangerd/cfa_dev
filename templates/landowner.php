@@ -1,4 +1,4 @@
-<form action = "populate.php" method = "post">
+<form action = "landownerq.php" method = "post">
 <div class="col-sm-6">
 	<b>Are you looking to...</b>
 	 	<br />
@@ -8,7 +8,7 @@
 		<br />
 		<input type="checkbox" name="to_intern" <?php echo $form->fields['to_intern']; ?> > Farm Intern of Apprentice? 
 		<br />
-		<input type="checkbox" name="to_other" <?php echo $form->fields['to_other']; ?> > Other: <input type="text" name="terms_other" value="<?php echo $form->fields['to_other']; ?>"/>
+		<input type="checkbox" name="to_other" <?php echo $form->fields['to_other']; ?> > Other: <input type="text" name="terms_other" value="<?php echo $form->fields['terms_other']; ?>"/>
 	<br />
 	<br />
 	<b>Location</b>
@@ -40,7 +40,7 @@
 		<br />
 		<br />
 
-	<b>Housing Needed</b>
+	<b>Housing Available</b>
 	<br />
 	<input type="checkbox" name="housing" <?php echo $form->fields['housing']; ?> > Yes. Describe: <input type="text" name="describe_housing" value="<?php echo $form->fields['describe_housing']; ?>" />
 	<br />
@@ -107,7 +107,7 @@
 	<br />
 	<b>Equipment Available</b>
 	<br />
-	<input type="checkbox" name="equipment" <?php echo $form->fields['equipment']; ?> >Yes. Describe: <input type = "textbox" name = "equipment_other"/>
+	<input type="checkbox" name="equipment" <?php echo $form->fields['equipment']; ?> >Yes. Describe: <input type = "textbox" name = "equipment_other" value="<?php echo $form->fields['equipment_other']; ?>"/>
 	<br />
 	<input type="checkbox" name="irrigation" <?php echo $form->fields['irrigation']; ?> > Irrigation Available?
 </div>
@@ -121,6 +121,6 @@
 	<b>Select image to upload:</b>
 	<input type="file" name="fileToUpload" id="fileToUpload">
 	<br />
-	<button type="button" class="btn btn-primary btn-lg">Submit</button>
+	<input type="submit" class="btn btn-primary btn-lg" name="submit" value="Submit" />
 </div>
 </form>

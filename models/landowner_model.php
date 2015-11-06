@@ -24,7 +24,7 @@ class LandownerForm extends Form {
 		$this->fields['to_other'] = new CheckBox();
 		$this->fields['terms_other'] = new TextField();
 
-		// Locattion
+		// Location
 		$this->fields['street'] = new TextField();
 		$this->fields['city'] = new TextField();
 		$this->fields['zip'] = new IntegerField();
@@ -69,7 +69,7 @@ class LandownerForm extends Form {
 
 		// Equipment
 		$this->fields['equipment'] = new CheckBox();
-		$this->fields['equipment_other'] = new CheckBox();
+		$this->fields['equipment_other'] = new TextField(); // CHECK DATABSE
 		
 		// Misc
 		$this->fields['irrigation'] = new CheckBox();

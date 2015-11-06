@@ -60,18 +60,18 @@ class FarmerForm extends Form {
 		// Terms extended
 		$this->fields['lease_agreement'] = new TextField();
 		$this->fields['purchase_agreement'] = new TextField();
-		$this->fields['highschool'] = new TextField();
-
+		
 		// Education
+		$this->fields['highschool'] = new CheckBox();  // CHECK DATABASE
 		$this->fields['some_college'] = new CheckBox();
 		$this->fields['college_graduate'] = new CheckBox();
 		$this->fields['other_education'] = new CheckBox();
 
 		// Location
 		$this->fields['northern'] = new CheckBox();
-		$this->fields['central'] = new TextField();
+		$this->fields['central'] = new CheckBox(); // CHECK DATABASE
 		$this->fields['eastern'] = new CheckBox();
-		$this->fields['western'] = new TextField();
+		$this->fields['western'] = new CheckBox(); // CHECK DATABASE
 
 		// Short answer
 		$this->fields['goals'] = new TextField();

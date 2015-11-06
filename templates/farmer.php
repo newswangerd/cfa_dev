@@ -1,15 +1,15 @@
- <form action = "populate.php" method = "post">
+ <form action = "farmerq.php" method = "post">
 	<div class="col-sm-6">
 
 		 <b>Are you looking to...</b>
 			<br />
-			<input type="checkbox" name="to_rent" value="Rent"> Lease or Rent?
+			<input type="checkbox" name="to_rent" <?php echo $form->fields['to_rent']; ?> > Lease or Rent?
 			<br />
-			<input type="checkbox" name="to_sell" value="Sell"> Sell
+			<input type="checkbox" name="to_sell" <?php echo $form->fields['to_sell']; ?> > Sell
 			<br />
-			<input type="checkbox" name="to_intern" value="Intern"> Farm Intern of Apprentice? 
+			<input type="checkbox" name="to_intern" <?php echo $form->fields['to_intern']; ?> > Farm Intern of Apprentice? 
 			<br />
-			<input type="checkbox" name="to_other" value="Other"> Other: <input type="text" name="terms_other"/>
+			<input type="checkbox" name="to_other" <?php echo $form->fields['to_other']; ?> > Other: <input type="text" name="terms_other" value="<?php echo $form->fields['terms_other']; ?>"/>
 		
 		<br/>
 		<br/>
@@ -17,44 +17,44 @@
 		<br>
 			Pasture: 
 			<br />
-			<input type="text" name="pasture">
+			<input type="text" name="pasture" value="<?php echo $form->fields['pasture']; ?>">
 			<br />
 			Tillable: 
 			<br />
-			<input type="text" name="tillable">
+			<input type="text" name="tillable" value="<?php echo $form->fields['tillable']; ?>">
 			<br>
 			<br>
-			<input type="checkbox" name="organic" value="Organic"> Certified Organic?
+			<input type="checkbox" name="organic" <?php echo $form->fields['organic']; ?> > Certified Organic?
 		</p>
 		<p>
 		<b>Housing Needed</b>
 		<br>
-		<input type="checkbox" name="housing" value="housing"> Yes. Describe: <input type="text" name="describe_housing" />
+		<input type="checkbox" name="housing"  <?php echo $form->fields['housing']; ?> > Yes. Describe: <input type="text" name="describe_housing" value="<?php echo $form->fields['describe_housing']; ?>" />
 		<br>
 		<p>
 		<b>Infastructure Needed</b>
 			<br>
-			<input type="checkbox" name="infastructure_storage" value="Equipment_Storage"> Equipment Storage
+			<input type="checkbox" name="infrastructure_storage" <?php echo $form->fields['infrastructure_storage']; ?> > Equipment Storage
 			<br>
-			<input type="checkbox" name="infastructure_barn" value="Livestock_Barn"> Livestock Barn
+			<input type="checkbox" name="infrastructure_barn" <?php echo $form->fields['infrastructure_barn']; ?> > Livestock Barn
 			<br>
-			<input type="checkbox" name="infastructure_stables" value="Stables"> Stables
+			<input type="checkbox" name="infrastructure_stables" <?php echo $form->fields['infrastructure_stables']; ?> > Stables
 			<br>
-			<input type="checkbox" name="infastructure_greenhouse" value="Greenhouse"> Greenhouse/High Tunnel
+			<input type="checkbox" name="infrastructure_greenhouse" <?php echo $form->fields['infrastructure_greenhouse']; ?> > Greenhouse/High Tunnel
 			<br>
-			<input type="checkbox" name="infastructure_goats" value="Goats"> Goats
+			<input type="checkbox" name="infrastructure_goats" <?php echo $form->fields['infrastructure_goats']; ?> > Goats
 			<br>
-			<input type="checkbox" name="infastructure_sheep" value="Sheep"> Sheep
+			<input type="checkbox" name="infrastructure_sheep" <?php echo $form->fields['infrastructure_sheep']; ?> > Sheep
 			<br>
-			<input type="checkbox" name="infastructure_horses" value="Horses"> Horses
+			<input type="checkbox" name="infrastructure_horses" <?php echo $form->fields['infrastructure_horses']; ?> > Horses
 		</p>
 		<b>Equipment Needed</b>
 		<br />
-		<input type="checkbox" name="equipment" value="Other"> 
-		Yes. Describe: <input type="text" name="equipment_other" />
+		<input type="checkbox" name="equipment" <?php echo $form->fields['equipment']; ?> > 
+		Yes. Describe: <input type="text" name="equipment_other" value="<?php echo $form->fields['equipment_other']; ?>"/>
 		<br>
 		<br />
-		<input type="checkbox" name="irrigation" value="Bike"> Irrigation Needed?
+		<input type="checkbox" name="irrigation"  <?php echo $form->fields['irrigation']; ?> > Irrigation Needed?
 
 	</div>
 	<div class="col-sm-6">
@@ -64,23 +64,23 @@
 		<br />
 		(Check all that apply)
 		<br />
-		<input type="checkbox" name="horticulture" value="Bike"> Vegetables/Horticulture
+		<input type="checkbox" name="horticulture" <?php echo $form->fields['horticulture']; ?> > Vegetables/Horticulture
 		<br />
 		Livestock:
 		<ul >
-			<li> <input type="checkbox" name="livestock_cattle_beef" value="Beef"> Cattle-Beef </li>
-			<li><input type="checkbox" name="livestock_cattle_dairy" value="Dairy"> Cattle-Dairy</li>
-			<li><input type="checkbox" name="livestock_poultry" value="Poultry"> Poultry</li>
-			<li><input type="checkbox" name="livestock_hogs" value="Hogs"> Hogs</li>
-			<li><input type="checkbox" name="livestock_goats" value="Goats"> Goats</li>
-			<li><input type="checkbox" name="livestock_sheep" value="Sheep"> Sheep</li>
-			<li><input type="checkbox" name="livestock_horses" value="Horses"> Horses</li>
+			<li> <input type="checkbox" name="livestock_cattle_beef" <?php echo $form->fields['livestock_cattle_beef']; ?> > Cattle-Beef </li>
+			<li><input type="checkbox" name="livestock_cattle_dairy" <?php echo $form->fields['livestock_cattle_dairy']; ?> > Cattle-Dairy</li>
+			<li><input type="checkbox" name="livestock_poultry" <?php echo $form->fields['livestock_poultry']; ?> > Poultry</li>
+			<li><input type="checkbox" name="livestock_hogs" <?php echo $form->fields['livestock_hogs']; ?> > Hogs</li>
+			<li><input type="checkbox" name="livestock_goats" <?php echo $form->fields['livestock_goats']; ?> > Goats</li>
+			<li><input type="checkbox" name="livestock_sheep" <?php echo $form->fields['livestock_sheep']; ?> > Sheep</li>
+			<li><input type="checkbox" name="livestock_horses" <?php echo $form->fields['livestock_horses']; ?> > Horses</li>
 		</ul>
-		<input type="checkbox" name="aquaculture" value="Aquaculture"> Aquaculture
+		<input type="checkbox" name="aquaculture" <?php echo $form->fields['aquaculture']; ?> > Aquaculture
 		<br />
-		<input type="checkbox" name="tobacco" value="Tobacco"> Tobacco
+		<input type="checkbox" name="tobacco" <?php echo $form->fields['tobacco']; ?> > Tobacco
 		<br />
-		<input type="checkbox" name="rowcrops" value="Crops"> Row Crops
+		<input type="checkbox" name="rowcrops" <?php echo $form->fields['rowcrops']; ?> > Row Crops
 		<br >
 		<br />
 		Rent Lease Agreement
@@ -102,24 +102,24 @@
 		<p>
 			<b>Education</b>
 			<br>
-			<input type="checkbox" name="highschool" value="Highschool"> Highschool Graduate
+			<input type="checkbox" name="highschool" <?php echo $form->fields['highschool']; ?> > Highschool Graduate
 			<br>
-			<input type="checkbox" name="some_college" value="Some_College"> Some College
+			<input type="checkbox" name="some_college" <?php echo $form->fields['some_college']; ?> > Some College
 			<br>
-			<input type="checkbox" name="college_graduate" value="College"> College Graduate
+			<input type="checkbox" name="college_graduate"<?php echo $form->fields['college_graduate']; ?> > College Graduate
 			<br>
-			<input type="checkbox" name="other_education" value="education"> Other
+			<input type="checkbox" name="other_education" <?php echo $form->fields['other_education']; ?> > Other
 			<br>
 			<br>
 			<b>Where are you willing to farm?</b>
 			<br>
-			<input type="checkbox" name="northern" value="Northern"> Northern Kentucky
+			<input type="checkbox" name="northern" <?php echo $form->fields['northern']; ?> > Northern Kentucky
 			<br>
-			<input type="checkbox" name="central" value="Central"> Central Kentucky
+			<input type="checkbox" name="central" <?php echo $form->fields['central']; ?> > Central Kentucky
 			<br>
-			<input type="checkbox" name="eastern" value="Eastern"> Eastern Kentucky
+			<input type="checkbox" name="eastern" <?php echo $form->fields['eastern']; ?> > Eastern Kentucky
 			<br>
-			<input type="checkbox" name="western" value="Western">  Western Kentucky
+			<input type="checkbox" name="western" <?php echo $form->fields['western']; ?> >  Western Kentucky
 		</p>
 
 	</div>
@@ -132,19 +132,19 @@
 		<p>
 		<b>Please describe your longterm goals farming (100 words or less open ended)</b>
 		<br>
-		 <textarea name="goals" class="form-control"></textarea>
+		 <textarea name="goals" class="form-control"><?php echo $form->fields['goals']; ?></textarea>
 		<br>
 		<br>
 		<b>Where are you currently farming?</b>
 		<br>
-		 <textarea name="currently_farming" class="form-control"></textarea>
+		 <textarea name="currently_farming" class="form-control"><?php echo $form->fields['currently_farming']; ?></textarea>
 		<br>
 		<br>
 		<b>How do you sell your products?</b>
 		<br>
-		 <textarea name="sell_produce" class="form-control"></textarea>
+		 <textarea name="sell_produce" class="form-control"><?php echo $form->fields['sell_produce']; ?></textarea>
 	</p>
 	<br>
-	<button type="button" class="btn btn-primary btn-lg">Submit</button>
+	<input type="submit" class="btn btn-primary btn-lg" name="submit" value="Submit" />
 	</div>
 </form>
