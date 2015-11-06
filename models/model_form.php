@@ -21,11 +21,16 @@ class TextField {
 	public $error;
 	private $required;
 	private $length;
+	public $load_without_post = false;
 
 	public function __construct($required=True, $value="", $length=255){
 		$this->required = $required;
 		$this->value = $value;
 		$this->length = $length;
+	}
+
+	public function set_value($val){
+		$this->value = $val;
 	}
 
 	function __toString(){
@@ -50,15 +55,35 @@ class TextField {
 class CheckBox {
 	public $value;
 	public $name;
-	private $required;
+	public $load_without_post = true;
 
-	public function __construct($required, $value, $name){
+	public function __construct($name, $value=False){
 		$this->required = $required;
 		$this->value = $value;
+		$this->name = $name;
 	}
 
-	function __toString(){
-		return $this->value;
+	public function set_value($val){
+		switch($val){
+			case "on":
+				$this->value = true;
+				break;
+			case false:
+				$this->value = false;
+				break;
+			case true:
+				$this->value = true;
+				break;
+			case 0:
+				$this->value = false;
+				break;
+			case 1:
+				$this->value = true;
+				break;
+			case "":
+				$this->value = false;
+				break;
+		}
 	}
 
 	public function validate(){
@@ -71,10 +96,16 @@ class IntegerField {
 	public $value;
 	public $error;
 	private $required;
+	public $load_without_post = false;
+
 
 	public function __construct($required, $value){
 		$this->required = $required;
-		$this->value = $value;
+		$this->value = (int)$value;
+	}
+
+	public function set_value($val){
+		$this->value = $val;
 	}
 
 	function __toString(){
@@ -82,7 +113,7 @@ class IntegerField {
 	}
 
 	public function validate(){
-		// Makes sure that all the charactes in value are numbers
+		return is_int($this->value);
 	}
 }
 
@@ -116,7 +147,7 @@ class Form {
 		}
 
 		foreach ($this->fields as $key => $value){
-			$this->fields[$key]->value = $row[$key];
+			$this->fields[$key]->set_value($row[$key]);
 		}
 
 		
@@ -161,11 +192,6 @@ class Form {
 				}
 			}
 		}
-
-		// Zeros out the objects in thefields array so that data won't be accidentally added.
-		foreach($this->fields as $key => $value){
-			$this->fields[$key]->value = "";
-		}
 	}
 
 	public function save(){
@@ -180,7 +206,7 @@ class Form {
 			$values = "";
 			foreach ($this->fields as $key => $value){
 				$fields = $fields . $key . ", ";
-				$values = $values . "'" . $value . "', ";
+				$values = $values . "'" . $value->value . "', ";
 			}
 
 			$fields = substr($fields, 0, -2);
@@ -192,7 +218,7 @@ class Form {
 		} else {
 			$update = "";
 			foreach ($this->fields as $key => $value){
-				$update = $update . $key . " = '" . $value . "', ";
+				$update = $update . $key . " = '" . $value->value . "', ";
 			}
 			$update = substr($update, 0, -2);
 
@@ -201,6 +227,7 @@ class Form {
 		}
 
 		$conn = mysqli_connect($GLOBALS['config']['db_host'], $GLOBALS['config']['db_user'], $GLOBALS['config']['db_pass'], $GLOBALS['config']['db']);
+		
 		if ($result = mysqli_query($conn, $query)) {
       		return true;
     	} else {
@@ -236,14 +263,22 @@ class Form {
 			Returns false if no data is detected in the $_POST array and true if data is
 			found in the $_POST array.
 		*/
+		if (empty($_POST)){
+			return false;
+		}
+
 		$data = false;
 		
 		foreach($this->fields as $key=>$value){
-			if(!empty($_POST[$key])) {
-				$this->fields[$key]->value = $_POST[$key];
+			if(isset($_POST[$key])) {
+				$this->fields[$key]->set_value($_POST[$key]);
+				$data = true;
+			} elseif($this->fields[$key]->load_without_post){  // Necesary to load checkboxes because checkboxes don't send a post value if they
+				$this->fields[$key]->set_value($_POST[$key]);  // aren't checked.
 				$data = true;
 			}
 		}
+
 		return $data;	
 	}
 }
