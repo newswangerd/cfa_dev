@@ -90,6 +90,14 @@ class CheckBox {
 		// Always validates to true.
 		return true;
 	}
+
+	function __toString(){
+		if ($this->value){
+			return "checked";
+		} else {
+			return "";
+		}
+	}
 }
 
 class IntegerField {
@@ -99,21 +107,25 @@ class IntegerField {
 	public $load_without_post = false;
 
 
-	public function __construct($required, $value){
+	public function __construct($required=True, $value=null){
 		$this->required = $required;
-		$this->value = (int)$value;
+		$this->value = $value;
 	}
 
 	public function set_value($val){
-		$this->value = $val;
+		$this->value = (int)$val;
 	}
 
 	function __toString(){
-		return $this->value;
+		return (string)$this->value;
 	}
 
 	public function validate(){
-		return is_int($this->value);
+		if (!is_int($this->value)){
+			$this->error = "Must contain only numbers.";
+			return false;
+		}
+		return true;
 	}
 }
 
@@ -282,5 +294,4 @@ class Form {
 		return $data;	
 	}
 }
-
 ?> 
