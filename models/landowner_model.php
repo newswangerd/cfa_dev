@@ -1,12 +1,12 @@
 <?php 
 
-include "model_form.php"
+include "model_form.php";
 
 class LandownerForm extends Form {
 
 	function __construct(){
 		$this->table_name="landowner";
-		$this->id_name="landowner_id"
+		$this->id_name="landowner_id";
 
 
 		// General Information
@@ -77,8 +77,7 @@ class LandownerForm extends Form {
 
 		// Enabled
 		$this->fields['enabled'] = new CheckBox();
-
-
+	}
 }
 
 ?> 

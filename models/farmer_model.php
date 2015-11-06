@@ -1,11 +1,11 @@
 <?php 
-include "model_form.php"
+include "model_form.php";
 
 class FarmerForm extends Form {
 
 	function __construct(){
 		$this->table_name="farmer";
-		$this->id_name="farmer_id"
+		$this->id_name="farmer_id";
 
 
 		// General Information
@@ -80,7 +80,7 @@ class FarmerForm extends Form {
 
 		// Enabled
 		$this->fields['enabled'] = new CheckBox();
-
+	}
 }
 
 ?> 
