@@ -8,8 +8,7 @@ class FarmerForm extends Form {
 		$this->id_name="farmer_id"
 
 
-		// NEED TO CHANGE SOME OF THESE TO TEXT FIELDS
-		// NEED TO ADD FIRST NAME ETC.
+		// General Information
 		$this->fields['fist_name'] = new TextField();
 		$this->fields['last_name'] = new TextField();
 		$this->fields['password'] = new TextField();
@@ -17,16 +16,23 @@ class FarmerForm extends Form {
 		$this->fields['phone'] = new TextField();
 		$this->fields['address'] = new TextField();
 
+		// Terms
 		$this->fields['to_rent'] = new CheckBox();
 		$this->fields['to_sell'] = new CheckBox();
 		$this->fields['to_intern'] = new CheckBox();
 		$this->fields['to_other'] = new CheckBox();
 		$this->fields['terms_other'] = new TextField();
+
+		// Amount and type of land
 		$this->fields['pasture'] = new TextField();
 		$this->fields['tillable'] = new TextField();
 		$this->fields['organic'] = new CheckBox();
+
+		// Housing
 		$this->fields['housing'] = new CheckBox();
 		$this->fields['describe_housing'] = new TextField();
+
+		// Infrastructure
 		$this->fields['infrastructure_storage'] = new CheckBox();
 		$this->fields['infrastructure_barn'] = new CheckBox();
 		$this->fields['infrastructure_stables'] = new CheckBox();
@@ -37,6 +43,8 @@ class FarmerForm extends Form {
 		$this->fields['equipment'] = new CheckBox();
 		$this->fields['equipment_other'] = new TextField();
 		$this->fields['irrigation'] = new CheckBox();
+
+		// Type of agriculture
 		$this->fields['horticulture'] = new CheckBox();
 		$this->fields['livestock_cattle_beef'] = new CheckBox();
 		$this->fields['livestock_cattle_dairy'] = new CheckBox();
@@ -48,16 +56,24 @@ class FarmerForm extends Form {
 		$this->fields['aquaculture'] = new CheckBox();
 		$this->fields['tobacco'] = new CheckBox();
 		$this->fields['rowcrops'] = new CheckBox();
+
+		// Terms extended
 		$this->fields['lease_agreement'] = new TextField();
 		$this->fields['purchase_agreement'] = new TextField();
 		$this->fields['highschool'] = new TextField();
+
+		// Education
 		$this->fields['some_college'] = new CheckBox();
 		$this->fields['college_graduate'] = new CheckBox();
 		$this->fields['other_education'] = new CheckBox();
+
+		// Location
 		$this->fields['northern'] = new CheckBox();
 		$this->fields['central'] = new TextField();
 		$this->fields['eastern'] = new CheckBox();
 		$this->fields['western'] = new TextField();
+
+		// Short answer
 		$this->fields['goals'] = new TextField();
 		$this->fields['currently_farming'] = new TextField();
 		$this->fields['sell_produce'] = new TextField();
