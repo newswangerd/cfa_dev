@@ -78,6 +78,8 @@ class FarmerForm extends Form {
 		$this->fields['currently_farming'] = new TextField();
 		$this->fields['sell_produce'] = new TextField();
 
+		// Enabled
+		$this->fields['enabled'] = new CheckBox();
 
 }
 

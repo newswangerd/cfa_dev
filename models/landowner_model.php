@@ -75,6 +75,9 @@ class LandownerForm extends Form {
 		$this->fields['irrigation'] = new CheckBox();
 		$this->fields['goals'] = new TextField();
 
+		// Enabled
+		$this->fields['enabled'] = new CheckBox();
+
 
 }
 
