@@ -40,22 +40,22 @@
 					<b>Farmland</b>
 					<br />
 						Total Acres:<br />
-						<input type="text" name="acres">
+						<input type="text" name="acres_total">
 						<br />
 						Pasture:<br />
-						<input type="text" name="pasture">
+						<input type="text" name="pasture_acres">
 						<br />
 						Tillable:<br />
-						<input type="text" name="tillable">
+						<input type="text" name="tillable_acres">
 						<br />
 						Woodland:<br />
-						<input type="text" name="woodland">
+						<input type="text" name="woodland_acres">
 						<br />
 						<br />
 
 					<b>Housing Needed</b>
 					<br />
-					<input type="checkbox" name="housing" > Yes. Describe: <input type="text" name="housing_other" />
+					<input type="checkbox" name="housing" > Yes. Describe: <input type="text" name="describe_housing" />
 					<br />
 					<br />
 					<b>infrastructure</b>
@@ -86,15 +86,15 @@
 					<input type="checkbox" name="horticulture"> Vegetables/Horticulture
 					<br />
 					Livestock:
-					<ul >
-						<li> <input type="checkbox" name="livestock_cattle" value="Beef"> Cattle-Beef </li>
-						<li><input type="checkbox" name="livestock_barn" value="Dairy"> Cattle-Dairy</li>
-						<li><input type="checkbox" name="livestock_stables" value="Poultry"> Poultry</li>
-						<li><input type="checkbox" name="livestock_hogs" value="Hogs"> Hogs</li>
-						<li><input type="checkbox" name="livestock_goats" value="Goats"> Goats</li>
-						<li><input type="checkbox" name="livestock_sheep" value="Sheep"> Sheep</li>
-						<li><input type="checkbox" name="livestock_horses" value="Horses"> Horses</li>
-					</ul>
+						<ul >
+							<li> <input type="checkbox" name="livestock_cattle_beef" value="Beef"> Cattle-Beef </li>
+							<li><input type="checkbox" name="livestock_cattle_dairy" value="Dairy"> Cattle-Dairy</li>
+							<li><input type="checkbox" name="livestock_poultry" value="Poultry"> Poultry</li>
+							<li><input type="checkbox" name="livestock_hogs" value="Hogs"> Hogs</li>
+							<li><input type="checkbox" name="livestock_goats" value="Goats"> Goats</li>
+							<li><input type="checkbox" name="livestock_sheep" value="Sheep"> Sheep</li>
+							<li><input type="checkbox" name="livestock_horses" value="Horses"> Horses</li>
+						</ul>
 					<input type="checkbox" name="aquaculture" value="Aquaculture"> Aquaculture
 					<br />
 					<input type="checkbox" name="tobacco" value="Tobacco"> Tobacco
@@ -120,7 +120,7 @@
 					<br />
 					<b>Equipment Available</b>
 					<br />
-					<input type="checkbox" name="equipment">Yes. Describe: <input type = "textbox" name = "equipment_describe"/>
+					<input type="checkbox" name="equipment">Yes. Describe: <input type = "textbox" name = "equipment_other"/>
 					<br />
 					<input type="checkbox" name="irrigation" value="Bike"> Irrigation Available?
 				</div>
