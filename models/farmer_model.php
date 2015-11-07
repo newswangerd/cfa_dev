@@ -9,7 +9,7 @@ class FarmerForm extends Form {
 
 
 		// General Information
-		$this->fields['fist_name'] = new TextField();
+		$this->fields['first_name'] = new TextField();
 		$this->fields['last_name'] = new TextField();
 		$this->fields['password'] = new TextField();
 		$this->fields['email'] = new TextField();
@@ -24,8 +24,8 @@ class FarmerForm extends Form {
 		$this->fields['terms_other'] = new TextField();
 
 		// Amount and type of land
-		$this->fields['pasture'] = new TextField();
-		$this->fields['tillable'] = new TextField();
+		$this->fields['pasture'] = new IntegerField();
+		$this->fields['tillable'] = new IntegerField();
 		$this->fields['organic'] = new CheckBox();
 
 		// Housing
@@ -62,16 +62,16 @@ class FarmerForm extends Form {
 		$this->fields['purchase_agreement'] = new TextField();
 		
 		// Education
-		$this->fields['highschool'] = new CheckBox();  // CHECK DATABASE
+		$this->fields['highschool'] = new CheckBox(); 
 		$this->fields['some_college'] = new CheckBox();
 		$this->fields['college_graduate'] = new CheckBox();
 		$this->fields['other_education'] = new CheckBox();
 
 		// Location
 		$this->fields['northern'] = new CheckBox();
-		$this->fields['central'] = new CheckBox(); // CHECK DATABASE
+		$this->fields['central'] = new CheckBox();
 		$this->fields['eastern'] = new CheckBox();
-		$this->fields['western'] = new CheckBox(); // CHECK DATABASE
+		$this->fields['western'] = new CheckBox();
 
 		// Short answer
 		$this->fields['goals'] = new TextField();

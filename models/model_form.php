@@ -1,12 +1,36 @@
-<?php 
+<?php
+
+/**
+ * Model Form Class
+ * By: David Newswanger
+ *
+ * The purpose of this library is to provide an easy interface between the data
+ * sent by the user and the database. In order to use this library, the user simply
+ * needs to create a subclass which extends form. In this sub class the user has to
+ * define all of the fields in a database by adding them to the fields array using
+ * the format:
+ *
+ * $this->['fieldname'] = new FieldType();
+ *
+ * The user also has to configure the name table and its primary key using:
+ * $this->table_name = "table_name"; and
+ * $this->id_name = "id_name";
+ *
+ * Currently the only three field types sypported are TextField, CheckBox and
+ * IntegerField.
+ *
+ * This library, once properly configured with the table's information, 
+ * automatically handles validation, updating, inserting and extracting data
+ * from the database. 
+ **/
 
 // Defines the settings to connect to the databse. Can be accessed using the
 // $GLOBALS['name']['value']
 
 $config= array();
-$config['db'] = "test";
-$config['db_user'] = "test";
-$config['db_pass'] = "test";
+$config['db'] = "cfa_dev";
+$config['db_user'] = "cfa_dev";
+$config['db_pass'] = "MartinRichards";
 $config['db_host'] = "localhost";
 
 class TextField {
@@ -21,12 +45,13 @@ class TextField {
 	public $error;
 	private $required;
 	private $length;
-	public $load_without_post = false;
+	public $load_without_post;
 
 	public function __construct($required=True, $value="", $length=255){
 		$this->required = $required;
 		$this->value = $value;
 		$this->length = $length;
+		$this->load_without_post = false;
 	}
 
 	public function set_value($val){
@@ -55,12 +80,12 @@ class TextField {
 class CheckBox {
 	public $value;
 	public $name;
-	public $load_without_post = true;
+	public $load_without_post;
 
 	public function __construct($name="", $value=False){
-		$this->required = $required;
 		$this->value = $value;
 		$this->name = $name;
+		$this->load_without_post = true;
 	}
 
 	public function set_value($val){
@@ -104,16 +129,23 @@ class IntegerField {
 	public $value;
 	public $error;
 	private $required;
-	public $load_without_post = false;
+	public $load_without_post;
 
 
 	public function __construct($required=True, $value=null){
 		$this->required = $required;
 		$this->value = $value;
+		$this->load_without_post = false;
 	}
 
 	public function set_value($val){
-		$this->value = (int)$val;
+		if (!empty($val)){
+			if(is_numeric($val)){
+				$this->value = (int)$val;
+			} else {
+				$this->value = $val;
+			}
+		}
 	}
 
 	function __toString(){
@@ -121,6 +153,11 @@ class IntegerField {
 	}
 
 	public function validate(){
+		if ($this->required and empty($this->value)){
+			$this->error = "This field is required.";
+			return false;
+		}
+
 		if (!is_int($this->value)){
 			$this->error = "Must contain only numbers.";
 			return false;

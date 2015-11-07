@@ -10,7 +10,7 @@ class LandownerForm extends Form {
 
 
 		// General Information
-		$this->fields['fist_name'] = new TextField();
+		$this->fields['first_name'] = new TextField();
 		$this->fields['last_name'] = new TextField();
 		$this->fields['password'] = new TextField();
 		$this->fields['email'] = new TextField();

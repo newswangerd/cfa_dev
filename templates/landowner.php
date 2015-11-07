@@ -1,3 +1,4 @@
+<?php if(!$is_valid){echo '<div class="alert alert-danger" role="alert">It looks like there are some mistakes!</div>';} ?>
 <form action = "landownerq.php" method = "post">
 <div class="col-sm-6">
 	<b>Are you looking to...</b>
@@ -8,19 +9,24 @@
 		<br />
 		<input type="checkbox" name="to_intern" <?php echo $form->fields['to_intern']; ?> > Farm Intern of Apprentice? 
 		<br />
-		<input type="checkbox" name="to_other" <?php echo $form->fields['to_other']; ?> > Other: <input type="text" name="terms_other" value="<?php echo $form->fields['terms_other']; ?>"/>
+		<input type="checkbox" name="to_other" <?php echo $form->fields['to_other']; ?> > 
+		Other: <input type="text" name="terms_other" value="<?php echo $form->fields['terms_other']; ?>"/>
+		<span class="text-danger"><?php echo $form->fields['terms_other']->error; ?></span>
 	<br />
 	<br />
 	<b>Location</b>
 	<br />
 		Street:<br />
 		<input type="text" name="street" value="<?php echo $form->fields['street']; ?>">
+		<span class="text-danger"><?php echo $form->fields['street']->error; ?></span>
 		<br />
 		City:<br />
 		<input type="text" name="city" value="<?php echo $form->fields['city']; ?>">
+		<span class="text-danger"><?php echo $form->fields['city']->error; ?></span>
 		<br />
 		Zip:<br />
 		<input type="text" name="zip" value="<?php echo $form->fields['zip']; ?>">
+		<span class="text-danger"><?php echo $form->fields['zip']->error; ?></span>
 		<br />
 		<br />
 
@@ -28,24 +34,31 @@
 	<br />
 		Total Acres:<br />
 		<input type="text" name="acres_total" value="<?php echo $form->fields['acres_total']; ?>">
+		<span class="text-danger"><?php echo $form->fields['acres_total']->error; ?></span>
 		<br />
 		Pasture:<br />
 		<input type="text" name="pasture_acres" value="<?php echo $form->fields['pasture_acres']; ?>">
+		<span class="text-danger"><?php echo $form->fields['pasture_acres']->error; ?></span>
 		<br />
 		Tillable:<br />
 		<input type="text" name="tillable_acres" value="<?php echo $form->fields['tillable_acres']; ?>">
+		<span class="text-danger"><?php echo $form->fields['tillable_acres']->error; ?></span>
 		<br />
 		Woodland:<br />
 		<input type="text" name="woodland_acres" value="<?php echo $form->fields['woodland_acres']; ?>">
+		<span class="text-danger"><?php echo $form->fields['woodland_acres']->error; ?></span>
+		
 		<br />
 		<br />
-
 	<b>Housing Available</b>
 	<br />
-	<input type="checkbox" name="housing" <?php echo $form->fields['housing']; ?> > Yes. Describe: <input type="text" name="describe_housing" value="<?php echo $form->fields['describe_housing']; ?>" />
+	<input type="checkbox" name="housing" <?php echo $form->fields['housing']; ?> > 
+	Yes. Describe: <input type="text" name="describe_housing" value="<?php echo $form->fields['describe_housing']; ?>" />
+	<span class="text-danger"><?php echo $form->fields['housing']->error; ?></span>
+
 	<br />
 	<br />
-	<b>infrastructure</b>
+	<b>Infrastructure</b>
 		<br />
 		<input type="checkbox" name="infrastructure_storage" <?php echo $form->fields['infrastructure_storage']; ?> > Equipment Storage
 		<br />
@@ -107,7 +120,9 @@
 	<br />
 	<b>Equipment Available</b>
 	<br />
-	<input type="checkbox" name="equipment" <?php echo $form->fields['equipment']; ?> >Yes. Describe: <input type = "textbox" name = "equipment_other" value="<?php echo $form->fields['equipment_other']; ?>"/>
+	<input type="checkbox" name="equipment" <?php echo $form->fields['equipment']; ?> >
+	Yes. Describe: <input type = "textbox" name = "equipment_other" value="<?php echo $form->fields['equipment_other']; ?>"/>
+	<span class="text-danger"><?php echo $form->fields['equipment_other']->error; ?></span>
 	<br />
 	<input type="checkbox" name="irrigation" <?php echo $form->fields['irrigation']; ?> > Irrigation Available?
 </div>
@@ -115,7 +130,8 @@
 <div class="col-sm-12">
 	<br/>
 	<b>Please describe your longterm goals for the land (100 words or less open ended)</b>
-	<br/>
+	<span class="text-danger"><?php echo $form->fields['goals']->error; ?></span>
+	<br />
 	<textarea name="goals" class="form-control"><?php echo $form->fields['goals']; ?></textarea>
 	<br/>
 	<b>Select image to upload:</b>

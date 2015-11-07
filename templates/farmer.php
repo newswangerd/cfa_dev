@@ -1,4 +1,5 @@
- <form action = "farmerq.php" method = "post">
+<?php if(!$is_valid){echo '<div class="alert alert-danger" role="alert">It looks like there are some mistakes!</div>';} ?>
+<form action = "farmerq.php" method = "post">
 	<div class="col-sm-6">
 
 		 <b>Are you looking to...</b>
@@ -9,7 +10,9 @@
 			<br />
 			<input type="checkbox" name="to_intern" <?php echo $form->fields['to_intern']; ?> > Farm Intern of Apprentice? 
 			<br />
-			<input type="checkbox" name="to_other" <?php echo $form->fields['to_other']; ?> > Other: <input type="text" name="terms_other" value="<?php echo $form->fields['terms_other']; ?>"/>
+			<input type="checkbox" name="to_other" <?php echo $form->fields['to_other']; ?> > 
+			Other: <input type="text" name="terms_other" value="<?php echo $form->fields['terms_other']; ?>"/>
+			<span class="text-danger"><?php echo $form->fields['terms_other']->error; ?></span>
 		
 		<br/>
 		<br/>
@@ -18,10 +21,12 @@
 			Pasture: 
 			<br />
 			<input type="text" name="pasture" value="<?php echo $form->fields['pasture']; ?>">
+			<span class="text-danger"><?php echo $form->fields['pasture']->error; ?></span>
 			<br />
 			Tillable: 
 			<br />
 			<input type="text" name="tillable" value="<?php echo $form->fields['tillable']; ?>">
+			<span class="text-danger"><?php echo $form->fields['tillable']->error; ?></span>
 			<br>
 			<br>
 			<input type="checkbox" name="organic" <?php echo $form->fields['organic']; ?> > Certified Organic?
@@ -29,7 +34,9 @@
 		<p>
 		<b>Housing Needed</b>
 		<br>
-		<input type="checkbox" name="housing"  <?php echo $form->fields['housing']; ?> > Yes. Describe: <input type="text" name="describe_housing" value="<?php echo $form->fields['describe_housing']; ?>" />
+		<input type="checkbox" name="housing"  <?php echo $form->fields['housing']; ?> > 
+		Yes. Describe: <input type="text" name="describe_housing" value="<?php echo $form->fields['describe_housing']; ?>" />
+		<span class="text-danger"><?php echo $form->fields['describe_housing']->error; ?></span>
 		<br>
 		<p>
 		<b>Infastructure Needed</b>
@@ -52,6 +59,7 @@
 		<br />
 		<input type="checkbox" name="equipment" <?php echo $form->fields['equipment']; ?> > 
 		Yes. Describe: <input type="text" name="equipment_other" value="<?php echo $form->fields['equipment_other']; ?>"/>
+		<span class="text-danger"><?php echo $form->fields['equipment_other']->error; ?></span>
 		<br>
 		<br />
 		<input type="checkbox" name="irrigation"  <?php echo $form->fields['irrigation']; ?> > Irrigation Needed?
@@ -131,16 +139,19 @@
 	<br>
 		<p>
 		<b>Please describe your longterm goals farming (100 words or less open ended)</b>
+		<span class="text-danger"><?php echo $form->fields['goals']->error; ?></span>
 		<br>
 		 <textarea name="goals" class="form-control"><?php echo $form->fields['goals']; ?></textarea>
 		<br>
 		<br>
 		<b>Where are you currently farming?</b>
+		<span class="text-danger"><?php echo $form->fields['currently_farming']->error; ?></span>
 		<br>
 		 <textarea name="currently_farming" class="form-control"><?php echo $form->fields['currently_farming']; ?></textarea>
 		<br>
 		<br>
 		<b>How do you sell your products?</b>
+		<span class="text-danger"><?php echo $form->fields['sell_produce']->error; ?></span>
 		<br>
 		 <textarea name="sell_produce" class="form-control"><?php echo $form->fields['sell_produce']; ?></textarea>
 	</p>
