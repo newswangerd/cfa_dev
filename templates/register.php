@@ -12,7 +12,8 @@
 	<div class="control-group">
       <label class="control-label" for="lname">Last Name</label>
       <div class="controls">
-        <input type="text" id="lname" name="lname" placeholder="" class="form-control input-lg">
+        <input type="text" id="lname" name="lname" value="<?php echo $fields['lname']; ?>" placeholder="" class="form-control input-lg"> 
+        <?php echo $erros['lname']; ?>
       </div>
     </div>
 

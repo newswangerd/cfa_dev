@@ -21,9 +21,10 @@
  *
  * This library, once properly configured with the table's information, 
  * automatically handles validation, updating, inserting and extracting data
- * from the database. 
+ * from the database.
  **/
 
+//TODO: Fix Foreign key queries so that they aren't making a million connections to the database.
 // Defines the settings to connect to the databse. Can be accessed using the
 // $GLOBALS['name']['value']
 
@@ -61,6 +62,11 @@ class TextField {
 	}
 
 	public function validate() {
+		/*
+			If the field is required and empty returns false.
+			If the length of the value is less than the length, returns false.
+			Else Returns true.
+		*/
 		if ($this->required and empty($this->value)){
 			$this->error = "This field is required.";
 			return false;
@@ -86,6 +92,10 @@ class CheckBox {
 	}
 
 	public function set_value($val){
+		/*
+			Checkboxes return a string "on" or "" for checkboxes.
+			This has to be translated into a boolean value for MySql
+		*/
 		switch($val){
 			case "on":
 				$this->value = true;
@@ -114,6 +124,11 @@ class CheckBox {
 	}
 
 	function __toString(){
+		/* 
+			Since this is primarily used to display if a checkbox is checked or not,
+			the object returns "checked" or "" when called as a string so that it can
+			simply be inserted into an input field.
+		*/
 		if ($this->value){
 			return "checked";
 		} else {
@@ -141,6 +156,9 @@ class IntegerField {
 	}
 
 	public function validate(){
+		/*
+			If contains non numeric fields, validation fails.
+		*/
 		if (!is_int($this->value)){
 			$this->error = "Must contain only numbers.";
 			return false;
@@ -150,6 +168,12 @@ class IntegerField {
 }
 
 class ForeignKey {
+	/*
+		This object simply contains an reference to whatever class the foreign
+		key points to. So, if the foreign key points to the Foo class, then
+		$value is set to the Foo class and is initialized with the primary key
+		that is passed into it.
+	*/
 	public $value;
 	private $form_class;
 
@@ -189,14 +213,17 @@ class Form {
 		*/
 		$this->id_instance = $id;
 
+		// Construct the query
 		$query = "SELECT * FROM %s WHERE %s = %s;";
 		$query = sprintf($query, $this->table_name, $this->id_name, $this->id_instance);
 
+		// Query the database
 		$conn = mysqli_connect($GLOBALS['config']['db_host'], $GLOBALS['config']['db_user'], $GLOBALS['config']['db_pass'], $GLOBALS['config']['db']);
 		if ($result = mysqli_query($conn, $query)) {
 			$row = mysqli_fetch_array($result);
 		}
 
+		// Load the result into the object
 		foreach ($this->fields as $key => $value){
 			$this->fields[$key]->set_value($row[$key]);
 		}
@@ -215,17 +242,26 @@ class Form {
 			Additionally an operator can be passed. This can either be AND or OR, and defaults to
 			AND if nothing is passed in.
 
-			I'm not sure how this should deal with instances values being returned. Currently they are
-			stored in the instances array
+			The values in the "instances" array can be loaded into the "fields" array by using
+			the load_next() method.
+
+			In order to load everything from the table, "" can  be passed as the filter
 		*/
+
+		//TODO: FIX AGAINST MYSQL INJECTION
 
 		$this->instances = array();
 		$this->current_index = 0;
 		
+		// If the filter is empty, the query simply pulls everything from the database.
 		if (!empty($filter)){
 			$conditions = "";
 			$counter = count($filter);
+
+			// Constructs the conditions portion of the query. Ex: WHERE foo = bar AND bar = foo;
 			foreach($filter as $key=>$value){
+
+				// If the value passed is a string, then it must be enclose within a ''
 				if(gettype($value) == "string"){
 					$template = "%s = '%s' %s ";
 				} else {
@@ -233,6 +269,10 @@ class Form {
 				}
 
 				$counter = $counter - 1;
+
+				// If this is the last iteration of the loop, then it doesn't appent an operator.
+				// This is to avoid an invalid SELECT * FROM bar WHERE foo = bar AND ; query where
+				// there is an invalid operator at the end of the query
 				if ($counter == 0){
 					$conditions = $conditions . sprintf($template, $key, (string)$value, "");
 				} else {
@@ -240,26 +280,21 @@ class Form {
 				}
 			}
 
+			// Constructs the query
 			$query = sprintf("SELECT * FROM %s WHERE %s;", $this->table_name, $conditions);
 		} else {
 			$query = sprintf("SELECT * FROM %s", $this->table_name);
 		}
 		$conn = mysqli_connect($GLOBALS['config']['db_host'], $GLOBALS['config']['db_user'], $GLOBALS['config']['db_pass'], $GLOBALS['config']['db']);
  		
+ 		// Loads the name of this class
  		$class_name = get_class($this);
 
  		// Loads a new form object into each cell in the array
 		if ($result = mysqli_query($conn, $query)) {
-			/*
-			if ($result->num_rows == 1){
-				$row = mysqli_fetch_array($result);
-				foreach ($this->fields as $key => $value){
-					$this->fields[$key]->set_value($row[$key]);
-				}
-				$this->id_instance = $row[$this->id_name];
-			} else {
-			*/
 
+			// Each row in the database is stored as a new object of whatever class happens to be
+			// using the Forms class. Each of these objects is stored in the "instances" array
 			while($row = mysqli_fetch_array($result)){
 				$new_form = new $class_name();
 				$new_form->id_instance = $row[$this->id_name];
@@ -270,10 +305,13 @@ class Form {
 				$this->instances[] = $new_form;
 			}
 
+			// The first instance in the "instances" array is loaded into the fields variable of the
+			// current instance.
 			$this->fields = $this->instances[$this->current_index]->fields;
 			$this->id_instance = $this->instances[$this->current_index]->id_instance;
 			return true;
 		} else {
+			// Returns false if the query fails.
 			return false;
 		}
 	}
@@ -281,6 +319,14 @@ class Form {
 	public function load_next(){
 		/*
 			Loads the next object in instances in the the objects fields attribute.
+
+			This can be used in a while loop to iterate through all the instances in
+			the current obect
+			
+			Ex:
+			while ($foo->load_next()){
+				echo $foo->fields['bar'];
+			}
 		*/
 		
 		if (isset($this->instances[$this->current_index])){
@@ -289,6 +335,7 @@ class Form {
 			$this->current_index += 1;
 			return true;
 		} else {
+			$this->current_index = 0;
 			return false;
 		}
 	}
@@ -305,8 +352,13 @@ class Form {
 		*/
 
 		if (empty($this->id_instance)){
+			
+			// If id_instance is not set, add a new entry to the database.
 			$fields = "";
 			$values = "";
+
+			// Constructs the values and fields portion of the quey by looping through
+			// the fields array.
 			foreach ($this->fields as $key => $value){
 				$fields = $fields . $key . ", ";
 				if (get_class($value)=="ForeignKey"){
@@ -316,14 +368,20 @@ class Form {
 				}
 			}
 
+			// Removes ", " from the end of the query so that it's not invalid.
 			$fields = substr($fields, 0, -2);
 			$values = substr($values, 0, -2);
 
+			// builds the final query
 			$query = "INSERT INTO %s (%s) VALUES(%s);";
 			$query = sprintf($query, $this->table_name, $fields, $values);
 
 		} else {
+			// If id_instance is set, saves the current instnace to the database
 			$update = "";
+
+			// Constructs the values and fields portion of the quey by looping through
+			// the fields array.
 			foreach ($this->fields as $key => $value){
 				if (get_class($value)=="ForeignKey"){
 					$update = $update . $key . " = '" . $value->value->id_instance . "', ";
@@ -333,6 +391,7 @@ class Form {
 			}
 			$update = substr($update, 0, -2);
 
+			// Builds the final query.
 			$query = "UPDATE %s SET %s WHERE %s = %s;";
 			$query = sprintf($query, $this->table_name, $update, $this->id_name, $this->id_instance);
 		}
@@ -394,6 +453,9 @@ class Form {
 
 		$data = false;
 		
+		// Loops through all the fields in the fields array. If that field exists in the 
+		// $_POST, then the value is inserted into the corresponding field in the fields
+		// array.
 		foreach($this->fields as $key=>$value){
 			if(isset($_POST[$key])) {
 				$this->fields[$key]->set_value($_POST[$key]);
