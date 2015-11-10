@@ -45,7 +45,7 @@
 
     <div class="control-group">
       <label class="control-label" for="sel1">Are You Looking For...</label>
-	  <select class="form-control" id="sel1">
+	  <select class="form-control" name="choosePurpose" id="sel1">
         <option>...</option>
         <option>Land To Farm</option>
         <option>Someone to Farm on Your Land</option>
