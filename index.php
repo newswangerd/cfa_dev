@@ -37,5 +37,4 @@ $page_body = "register.php";
 
 
 include "templates/template.php";
-
 ?>
