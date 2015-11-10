@@ -17,6 +17,14 @@
       </div>
     </div>
 
+      <div class="control-group">
+      <label class="control-label" for="phone">Phone Number</label>
+      <div class="controls">
+        <input type="email" id="phone" name="phone" placeholder="" class="form-control input-lg">
+        <p class="help-block">Please provide your Phone Number</p>
+      </div>
+    </div>
+
     <div class="control-group">
       <label class="control-label" for="email">E-mail</label>
       <div class="controls">
@@ -26,6 +34,15 @@
     </div>
  
     </div>
+
+      <div class="control-group">
+      <label class="control-label" for="address">Address (Street, City, State, Zip)</label>
+      <div class="controls">
+        <input type="email" id="address" name="address" placeholder="" class="form-control input-lg">
+        <p class="help-block">Please provide your Address</p>
+      </div>
+    </div>
+  </div>
 
     <div class="col-sm-6">
     <div class="control-group">
