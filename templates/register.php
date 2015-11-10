@@ -36,7 +36,7 @@
     </div>
 
       <div class="control-group">
-      <label class="control-label" for="address">Address</label>
+      <label class="control-label" for="address">Address (Street, City, State, Zip)</label>
       <div class="controls">
         <input type="email" id="address" name="address" placeholder="" class="form-control input-lg">
         <p class="help-block">Please provide your Address</p>
