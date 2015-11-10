@@ -45,13 +45,11 @@ class TextField {
 	public $error;
 	private $required;
 	private $length;
-	public $load_without_post;
 
 	public function __construct($required=True, $value="", $length=255){
 		$this->required = $required;
 		$this->value = $value;
 		$this->length = $length;
-		$this->load_without_post = false;
 	}
 
 	public function set_value($val){
@@ -80,12 +78,11 @@ class TextField {
 class CheckBox {
 	public $value;
 	public $name;
-	public $load_without_post;
 
-	public function __construct($name="", $value=False){
+	public function __construct($name, $value=False){
+		$this->required = $required;
 		$this->value = $value;
 		$this->name = $name;
-		$this->load_without_post = true;
 	}
 
 	public function set_value($val){
@@ -129,23 +126,14 @@ class IntegerField {
 	public $value;
 	public $error;
 	private $required;
-	public $load_without_post;
-
 
 	public function __construct($required=True, $value=null){
 		$this->required = $required;
 		$this->value = $value;
-		$this->load_without_post = false;
 	}
 
 	public function set_value($val){
-		if (!empty($val)){
-			if(is_numeric($val)){
-				$this->value = (int)$val;
-			} else {
-				$this->value = $val;
-			}
-		}
+		$this->value = (int)$val;
 	}
 
 	function __toString(){
@@ -153,11 +141,6 @@ class IntegerField {
 	}
 
 	public function validate(){
-		if ($this->required and empty($this->value)){
-			$this->error = "This field is required.";
-			return false;
-		}
-
 		if (!is_int($this->value)){
 			$this->error = "Must contain only numbers.";
 			return false;
@@ -166,12 +149,31 @@ class IntegerField {
 	}
 }
 
+class ForeignKey {
+	public $value;
+	private $form_class;
+
+	function __construct($form_class){
+		$this->form_class = $form_class;
+	}
+
+	function set_value($val){
+		$this->value = new $this->form_class();
+		$this->value->load_by_pk($val);
+	}
+
+	function validate(){
+		return true;
+	}
+}
+
 class Form {
 	public $id_name;
 	public $id_instance;
 	public $table_name;
+	public $current_index;
 	public $fields = array();
-	public $multiple = array();
+	public $instances = array();
 
 	public function load_by_pk($id){
 		/*
@@ -205,42 +207,94 @@ class Form {
 	public function load_by_filter($filter, $operator = "AND"){
 		/*
 			Takes a given filter and loads all of the values returned from that filter into the 
-			"multiple" array.
+			"instances" array.
 
 			Filters are arrays where the keys are the name of a field and the values are the 
 			desired search item in that field.
 
 			Additionally an operator can be passed. This can either be AND or OR, and defaults to
 			AND if nothing is passed in.
+
+			I'm not sure how this should deal with instances values being returned. Currently they are
+			stored in the instances array
 		*/
-		$conditions = "";
-		$counter = count($filter);
-		foreach($filter as $key=>$value){
-			if(gettype($value) == "string"){
-				$template = "%s = '%s' %s ";
-			} else {
-				$template = "%s = %s %s ";
-			}
 
-			$counter = $counter - 1;
-			if ($counter == 0){
-				$conditions = $conditions . sprintf($template, $key, $value, "");
-			} else {
-				$conditions = $conditions . sprintf($template, $key, $value, $operator);
-			}
-		}
+		$this->instances = array();
+		$this->current_index = 0;
+		
+		if (!empty($filter)){
+			$conditions = "";
+			$counter = count($filter);
+			foreach($filter as $key=>$value){
+				if(gettype($value) == "string"){
+					$template = "%s = '%s' %s ";
+				} else {
+					$template = "%s = %s %s ";
+				}
 
-		$query = sprintf("SELECT * FROM %s WHERE %s;", $this->table_name, $conditions);
-
-		$conn = mysqli_connect($GLOBALS['config']['db_host'], $GLOBALS['config']['db_user'], $GLOBALS['config']['db_pass'], $GLOBALS['config']['db']);
- 		
-		if ($result = mysqli_query($conn, $query)) {
-			while($row = mysqli_fetch_array($result)){
-				foreach ($this->fields as $key => $value){
-					$this->multiple[$row[$this->id_name]][$key] = $row[$key];
+				$counter = $counter - 1;
+				if ($counter == 0){
+					$conditions = $conditions . sprintf($template, $key, (string)$value, "");
+				} else {
+					$conditions = $conditions . sprintf($template, $key, (string)$value, $operator);
 				}
 			}
+
+			$query = sprintf("SELECT * FROM %s WHERE %s;", $this->table_name, $conditions);
+		} else {
+			$query = sprintf("SELECT * FROM %s", $this->table_name);
 		}
+		$conn = mysqli_connect($GLOBALS['config']['db_host'], $GLOBALS['config']['db_user'], $GLOBALS['config']['db_pass'], $GLOBALS['config']['db']);
+ 		
+ 		$class_name = get_class($this);
+
+ 		// Loads a new form object into each cell in the array
+		if ($result = mysqli_query($conn, $query)) {
+			/*
+			if ($result->num_rows == 1){
+				$row = mysqli_fetch_array($result);
+				foreach ($this->fields as $key => $value){
+					$this->fields[$key]->set_value($row[$key]);
+				}
+				$this->id_instance = $row[$this->id_name];
+			} else {
+			*/
+
+			while($row = mysqli_fetch_array($result)){
+				$new_form = new $class_name();
+				$new_form->id_instance = $row[$this->id_name];
+				
+				foreach ($new_form->fields as $key => $value){
+					$new_form->fields[$key]->set_value($row[$key]);
+				}
+				$this->instances[] = $new_form;
+			}
+
+			$this->fields = $this->instances[$this->current_index]->fields;
+			$this->id_instance = $this->instances[$this->current_index]->id_instance;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function load_next(){
+		/*
+			Loads the next object in instances in the the objects fields attribute.
+		*/
+		
+		if (isset($this->instances[$this->current_index])){
+			$this->fields = $this->instances[$this->current_index]->fields;
+			$this->id_instance = $this->instances[$this->current_index]->id_instance;
+			$this->current_index += 1;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function number_of_instances(){
+		return count($this->instances);
 	}
 
 	public function save(){
@@ -255,7 +309,11 @@ class Form {
 			$values = "";
 			foreach ($this->fields as $key => $value){
 				$fields = $fields . $key . ", ";
-				$values = $values . "'" . $value->value . "', ";
+				if (get_class($value)=="ForeignKey"){
+					$values = $values . "'" . $value->value->id_instance . "', ";
+				} else {
+					$values = $values . "'" . $value->value . "', ";
+				}
 			}
 
 			$fields = substr($fields, 0, -2);
@@ -267,7 +325,11 @@ class Form {
 		} else {
 			$update = "";
 			foreach ($this->fields as $key => $value){
-				$update = $update . $key . " = '" . $value->value . "', ";
+				if (get_class($value)=="ForeignKey"){
+					$update = $update . $key . " = '" . $value->value->id_instance . "', ";
+				} else {
+					$update = $update . $key . " = '" . $value->value . "', ";
+				}
 			}
 			$update = substr($update, 0, -2);
 
@@ -277,6 +339,20 @@ class Form {
 
 		$conn = mysqli_connect($GLOBALS['config']['db_host'], $GLOBALS['config']['db_user'], $GLOBALS['config']['db_pass'], $GLOBALS['config']['db']);
 		
+		if ($result = mysqli_query($conn, $query)) {
+      		return true;
+    	} else {
+    		return false;
+    	}
+	}
+
+	public function delete(){
+		/*
+			Deletes the entry in the database with the current object's id_instance.
+		*/
+		$conn = mysqli_connect($GLOBALS['config']['db_host'], $GLOBALS['config']['db_user'], $GLOBALS['config']['db_pass'], $GLOBALS['config']['db']);
+		$query = "DELETE FROM %s WHERE %s = %s";
+		$query = sprintf($query, $this->table_name, $this->id_name, $this->id_instance);
 		if ($result = mysqli_query($conn, $query)) {
       		return true;
     	} else {
@@ -322,7 +398,7 @@ class Form {
 			if(isset($_POST[$key])) {
 				$this->fields[$key]->set_value($_POST[$key]);
 				$data = true;
-			} elseif($this->fields[$key]->load_without_post){  // Necesary to load checkboxes because checkboxes don't send a post value if they
+			} elseif(get_class($value)=="CheckBox"){  // Necesary to load checkboxes because checkboxes don't send a post value if they
 				$this->fields[$key]->set_value($_POST[$key]);  // aren't checked.
 				$data = true;
 			}
@@ -331,4 +407,4 @@ class Form {
 		return $data;	
 	}
 }
-?> 
+?>

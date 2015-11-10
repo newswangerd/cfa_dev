@@ -69,7 +69,7 @@ class LandownerForm extends Form {
 
 		// Equipment
 		$this->fields['equipment'] = new CheckBox();
-		$this->fields['equipment_other'] = new TextField(); // CHECK DATABSE
+		$this->fields['equipment_other'] = new TextField(); 
 		
 		// Misc
 		$this->fields['irrigation'] = new CheckBox();
