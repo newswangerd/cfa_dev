@@ -12,10 +12,13 @@ $form->fields['first_name']->set_value($_SESSION['fname']);
 $form->fields['phone']->set_value($_SESSION['phone']);
 $form->fields['address']->set_value($_SESSION['address']);
 
-
 // If data is received, validate it.
+$is_valid = true;
 if($data){
-	$form->validate();
+	$is_valid = $form->validate();
+	if ($is_valid){
+		$form->save();
+	}
 }
 
 // Add support for Select

@@ -93,17 +93,25 @@
 		<br />
 		Rent Lease Agreement
 		<select name="lease_agreement">
-		  <option value="short">Short Term (Less than 2 years)</option>
-		  <option value="Long">Long Term (More than 5 years)</option>
+		  <option value="<?php echo $form->fields['lease_agreement']; ?>">
+		  	<?php if(!empty($form->fields['lease_agreement']->value)){echo $form->fields['lease_agreement'];} else {echo 'Select One';} ?>
+		  </option>
+		  <?php echo $form->fields['lease_agreement']->errors; ?>
+		  <option value="Short Term (Less than 2 years)">Short Term (Less than 2 years)</option>
+		  <option value="Long Term (More than 5 years)">Long Term (More than 5 years)</option>
 		</select>
 		<br>
 		<p>
 		Purchase Arangement
 		<select name="purchase_agreement">
-		  <option value="lease">Lease to own</option>
-		  <option value="Sale">For Sale Only</option>
-		  <option value="contract">Land Contrat</option>
-		  <option value="other">Other</option>
+		  <option value="<?php echo $form->fields['purchase_agreement']; ?>">
+		  	<?php if(!empty($form->fields['purchase_agreement']->value)){echo $form->fields['purchase_agreement'];} else {echo 'Select One';} ?>
+		  </option>
+		  <?php echo $form->fields['purchase_agreement']->errors; ?>
+		  <option value="Lease to own">Lease to own</option>
+		  <option value="For Sale Only">For Sale Only</option>
+		  <option value="Land Contract">Land Contract</option>
+		  <option value="Other">Other</option>
 		</select>
 		<br>
 

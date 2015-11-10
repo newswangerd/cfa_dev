@@ -17,6 +17,9 @@ $form->fields['address']->set_value($_SESSION['address']);
 $is_valid = true;
 if($data){
 	$is_valid = $form->validate();
+	if ($is_valid){
+		$form->save();
+	}
 }
 
 $page_title = "Landowner Questionnaire";

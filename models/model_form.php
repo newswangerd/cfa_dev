@@ -85,7 +85,7 @@ class CheckBox {
 	public $value;
 	public $name;
 
-	public function __construct($name, $value=False){
+	public function __construct($name="", $value=False){
 		$this->required = $required;
 		$this->value = $value;
 		$this->name = $name;
