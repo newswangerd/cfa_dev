@@ -12,8 +12,7 @@
 	<div class="control-group">
       <label class="control-label" for="lname">Last Name</label>
       <div class="controls">
-        <input type="text" id="lname" name="lname" value="<?php echo $fields['lname']; ?>" placeholder="" class="form-control input-lg"> 
-        <?php echo $erros['lname']; ?>
+        <input type="text" id="lname" name="lname" placeholder="" class="form-control input-lg">
       </div>
     </div>
 
@@ -32,19 +31,19 @@
         <p class="help-block">Please provide your E-mail</p>
       </div>
     </div>
- 
-    </div>
-
-      <div class="control-group">
-      <label class="control-label" for="address">Address (Street, City, State, Zip)</label>
-      <div class="controls">
-        <input type="email" id="address" name="address" placeholder="" class="form-control input-lg">
-        <p class="help-block">Please provide your Address</p>
-      </div>
-    </div>
+	
   </div>
 
     <div class="col-sm-6">
+	
+	<div class="control-group">
+      <label class="control-label" for="email">Address: Street, City, Zip, State</label>
+      <div class="controls">
+        <input type="email" id="email" name="email" placeholder="" class="form-control input-lg">
+        <p class="help-block">Please provide your address</p>
+      </div>
+    </div>
+	
     <div class="control-group">
       <label class="control-label" for="password">Password</label>
       <div class="controls">
