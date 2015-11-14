@@ -1,6 +1,12 @@
-<?php 
+<?php
+session_start();
 
 include "models/farmer_model.php";
+
+if (!isset($_SESSION['fname']) or !isset($_SESSION['lname']) or !isset($_SESSION['email']) or !isset($_SESSION['phone']) or !isset($_SESSION['address']) or !isset($_SESSION['password'])){
+	header('Location: index.php');
+	die();
+}
 
 $form = new FarmerForm();
 $data = $form->load_from_post();
@@ -11,28 +17,30 @@ $form->fields['email']->set_value($_SESSION['email']);
 $form->fields['first_name']->set_value($_SESSION['fname']);
 $form->fields['phone']->set_value($_SESSION['phone']);
 $form->fields['address']->set_value($_SESSION['address']);
+$form->fields['password']->set_value($_SESSION['password']);
+
 
 // If data is received, validate it.
 $is_valid = true;
 if($data){
 	$is_valid = $form->validate();
 	if ($is_valid){
-		$form->save();
+		if($form->save()){
+			header('Location: confirmation.php');
+			die();
+		} else {
+			die("Something has gone horribly wrong with our database. Please try submitting your application again later.");
+		}
 	}
 }
 
-// Add support for Select
 $page_title = "Farmer Questionnaire";
-$panel_heading = "Hello John Doe! Tell us about yourself.";
+$panel_heading = "Hello ". $form->fields['first_name'] . " " . $form->fields['last_name'] ."! Tell us about yourself.";
 $page_body = "farmer.php";
 
 include "templates/template.php";
 
-/*
 echo "<pre>";
-print_r($_POST);
-echo "<hr />";
-print_r($form->fields);
+print_r($form);
 echo "</pre>";
-*/
 ?>

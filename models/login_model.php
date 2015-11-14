@@ -1,4 +1,3 @@
-
 <?php 
 include "model_form.php";
 class LoginForm extends Form {
@@ -11,5 +10,4 @@ class LoginForm extends Form {
 		$this->fields['email'] = new TextField();
 		$this->fields['password'] = new TextField();
 		
-?>
-		
+?>		

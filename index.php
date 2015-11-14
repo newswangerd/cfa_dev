@@ -1,31 +1,43 @@
 <?php
 
+//We should write some sort of validation to make sure that people aren't trying to sign up with emails that are already in the system.
+
 session_start();
 
-$fields = array('fname' => '', 'lname' => '', 'email'=> '', 'password'=> '', 'password_confirm'=> '', 'choosePurpose' => '');
-$errors = array('fname' => '', 'lname' => '', 'email'=> '', 'password'=> '', 'password_confirm'=> '', 'choosePurpose' => '');
+$fields = array('fname' => '', 'lname' => '', 'email'=> '', 'password'=> '', 'password_confirm'=> '', 'choosePurpose' => '', 'phone' => '', 'address' => '');
+$errors = array('fname' => '', 'lname' => '', 'email'=> '', 'password'=> '', 'password_confirm'=> '', 'choosePurpose' => '', 'phone' => '', 'address' => '');
 
 $valid = true;
-foreach ($fields as $key => $value){
-	if (isset($_POST[$key])){
-		$fields[$key] = $_POST[$key];
-	} else {
-		$valid = false;
-		$errors[$key] = "This field is required";
+
+if (!empty($_POST)){
+	foreach ($fields as $key => $value){
+		if (!empty($_POST[$key])){
+			$fields[$key] = $_POST[$key];
+		} else {
+			$valid = false;
+			$errors[$key] = "This field is required";
+		}
 	}
-}
 
-if ($valid and $fields["password_confirm"] != $fields["password"]){
-	$fields["password_confirm"] = "";
-	$fields["password"] == "";
-	$errors["password"] = "Passowrd's must match";
-	$valid = false;
-}
+	if ($valid and $fields["password_confirm"] != $fields["password"]){
+		$fields["password_confirm"] = "";
+		$fields["password"] == "";
+		$errors["password"] = "Password's must match";
+		$valid = false;
+	}
 
-if ($valid){
-	foreach ($fields as $key => $value) {
-		$_SESSION[$key] = $value;
-		// redirrect
+	if ($valid){
+		foreach ($fields as $key => $value) {
+			$_SESSION[$key] = $value;
+		}
+
+		if ($fields['choosePurpose'] == "farmer"){
+				header('Location: farmerq.php');
+				die();
+			} elseif($fields['choosePurpose'] == "landowner") {
+				header('Location: landownerq.php');
+				die();
+		}
 	}
 }
 
@@ -37,4 +49,10 @@ $page_body = "register.php";
 
 
 include "templates/template.php";
+
+echo "<pre>";
+print_r($_POST);
+print_r($errors);
+print_r($fields);
+echo "</pre>";
 ?>
