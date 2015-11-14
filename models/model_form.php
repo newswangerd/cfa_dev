@@ -57,8 +57,12 @@ class TextField {
 		$this->value = $val;
 	}
 
-	function __toString(){
-		return $this->value;
+	public function set_required($val){
+		$this->required = $val;
+	}
+
+	public function __toString(){
+		return (string)$this->value;
 	}
 
 	public function validate() {
@@ -123,7 +127,7 @@ class CheckBox {
 		return true;
 	}
 
-	function __toString(){
+	public function __toString(){
 		/* 
 			Since this is primarily used to display if a checkbox is checked or not,
 			the object returns "checked" or "" when called as a string so that it can
@@ -148,10 +152,18 @@ class IntegerField {
 	}
 
 	public function set_value($val){
-		$this->value = (int)$val;
+		if (empty($val)){
+			$this->value = null;
+		} else {
+			$this->value = (int)$val;
+		}
 	}
 
-	function __toString(){
+	public function set_required($val){
+		$this->required = $val;
+	}
+
+	public function __toString(){
 		return (string)$this->value;
 	}
 
@@ -159,6 +171,11 @@ class IntegerField {
 		/*
 			If contains non numeric fields, validation fails.
 		*/
+		if($this->required and empty($this->value)){
+			$this->error = "This field is required";
+			return false;
+		}
+
 		if (!is_int($this->value)){
 			$this->error = "Must contain only numbers.";
 			return false;
@@ -177,16 +194,16 @@ class ForeignKey {
 	public $value;
 	private $form_class;
 
-	function __construct($form_class){
+	public function __construct($form_class){
 		$this->form_class = $form_class;
 	}
 
-	function set_value($val){
+	public function set_value($val){
 		$this->value = new $this->form_class();
 		$this->value->load_by_pk($val);
 	}
 
-	function validate(){
+	public function validate(){
 		return true;
 	}
 }

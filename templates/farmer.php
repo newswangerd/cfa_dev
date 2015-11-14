@@ -6,7 +6,7 @@
 			<br />
 			<input type="checkbox" name="to_rent" <?php echo $form->fields['to_rent']; ?> > Lease or Rent?
 			<br />
-			<input type="checkbox" name="to_sell" <?php echo $form->fields['to_sell']; ?> > Sell
+			<input type="checkbox" name="to_sell" <?php echo $form->fields['to_sell']; ?> > Buy
 			<br />
 			<input type="checkbox" name="to_intern" <?php echo $form->fields['to_intern']; ?> > Farm Intern of Apprentice? 
 			<br />
@@ -16,7 +16,7 @@
 		
 		<br/>
 		<br/>
-	<b>Land Type and Amount</b>
+	<b>Land Type and Amount (in acres)</b>
 		<br>
 			Pasture: 
 			<br />
@@ -96,10 +96,11 @@
 		  <option value="<?php echo $form->fields['lease_agreement']; ?>">
 		  	<?php if(!empty($form->fields['lease_agreement']->value)){echo $form->fields['lease_agreement'];} else {echo 'Select One';} ?>
 		  </option>
-		  <?php echo $form->fields['lease_agreement']->errors; ?>
+		  <option value="N/A">I'm not interested in leasing</option>
 		  <option value="Short Term (Less than 2 years)">Short Term (Less than 2 years)</option>
 		  <option value="Long Term (More than 5 years)">Long Term (More than 5 years)</option>
 		</select>
+		<?php echo $form->fields['lease_agreement']->errors; ?>
 		<br>
 		<p>
 		Purchase Arangement
@@ -107,12 +108,13 @@
 		  <option value="<?php echo $form->fields['purchase_agreement']; ?>">
 		  	<?php if(!empty($form->fields['purchase_agreement']->value)){echo $form->fields['purchase_agreement'];} else {echo 'Select One';} ?>
 		  </option>
-		  <?php echo $form->fields['purchase_agreement']->errors; ?>
+		  <option value="N/A">I'm not interested in buying</option>
 		  <option value="Lease to own">Lease to own</option>
 		  <option value="For Sale Only">For Sale Only</option>
 		  <option value="Land Contract">Land Contract</option>
 		  <option value="Other">Other</option>
 		</select>
+		<?php echo $form->fields['purchase_agreement']->errors; ?>
 		<br>
 
 		<p>
