@@ -1,39 +1,59 @@
 
-<?php if(!$is_valid){echo '<div class="alert alert-danger" role="alert">It looks like there are some mistakes!</div>';} ?>
 <form action = "login.php" method = "post">
+
 <div class="col-sm-6">
-<html>
-<body>
-	<form>
-		<feildset>
-<br>		
-Username:
-<input type="text" name="username" value="<?php echo $form->fields['username']; ?>">
-<span class="text-danger"><?php echo $form->fields['name']->error; ?></span>
- <br />
-<br>
- Password:
-<input type="text" name="password" value="<?php echo $form->fields['password']; ?>">
-<span class="text-danger"><?php echo $form->fields['tillable']->error; ?></span>
-</br>
- <br>
- <br>
- Usertype:
- <br>
- <select name = "usertype" 
-            size = "2" required>
-            <option value = "Landowner">Land to Farm</option>
-            <option value = "Farmer">Someone to Farm your land</option>
-          </select>
-          <br>
-          <br>
-           <button type = "submit">
-            submit
-            </button>
-            </br>
-            <br>
-</feildset>
+	    <div class="control-group">
+      <label class="control-label" for="fname">First Name</label>
+      <div class="controls">
+        <input type="text" id="fname" name="fname" placeholder=""  class="form-control input-lg">
+        <br>
+      </div>
+    </div>
+ 
+	<div class="control-group">
+      <label class="control-label" for="lname">Last Name</label>
+      <div class="controls">
+        <input type="text" id="lname" name="lname" placeholder="" class="form-control input-lg">
+        <br>
+      </div>
+    </div>
+	
+    <div class="control-group">
+      <label class="control-label" for="email">E-mail</label>
+      <div class="controls">
+        <input type="email" id="email" name="email" placeholder="" class="form-control input-lg">
+      </div>
+    </div>
+</div>
+
+    <div class="col-sm-6">
+	
+		<div class="control-group">
+		  <label class="control-label" for="password">Password</label>
+		  <div class="controls">
+			<input type="password" id="password" name="password" placeholder="" class="form-control input-lg"><br>
+		  </div>
+		</div>
+	 
+		<div class="control-group">
+		  <label class="control-label" for="password_confirm">Password (Type it again)</label>
+		  <div class="controls">
+			<input type="password" id="password_confirm" name="password_confirm" placeholder="" class="form-control input-lg">
+		  </div>
+		</div>
+		<br>
+		
+		<div class="control-group">
+		  <label class="control-label" for="sel1">Do want to login as a...</label>
+		  <select class="form-control" name="user_type"  id="sel1">
+			<option value="farmer">Farmer</option>
+			<option value="landowner">Landowner</option>
+		  </select>
+		</div>
+		<br>
+		<div class="container">
+		  <button type="button" class="btn btn-info btn-lg">Login</button>      
+		</div>
+
+	</div>
 </form>
-</body>
-</html>
- 	
