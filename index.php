@@ -45,7 +45,7 @@ if (!empty($_POST)){
 // Add support for Select
 $page_title = "Register";
 $panel_heading = "Register";
-$page_body = "register.php";
+$page_body = "register_template.php";
 
 
 include "templates/template.php";

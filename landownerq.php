@@ -52,7 +52,7 @@ if($data){
 
 $page_title = "Landowner Questionnaire";
 $panel_heading = "Hello ". $form->fields['first_name'] . " " . $form->fields['last_name'] ."! Tell us about your farm.";
-$page_body = "landowner.php";
+$page_body = "landowner_template.php";
 
 
 //TODO: Fix drowpdowns

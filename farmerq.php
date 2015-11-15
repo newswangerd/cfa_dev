@@ -53,7 +53,7 @@ if($data){
 
 $page_title = "Farmer Questionnaire";
 $panel_heading = "Hello ". $form->fields['first_name'] . " " . $form->fields['last_name'] ."! Tell us about yourself.";
-$page_body = "farmer.php";
+$page_body = "farmer_template.php";
 
 include "templates/template.php";
 
