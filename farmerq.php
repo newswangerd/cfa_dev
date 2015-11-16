@@ -2,6 +2,10 @@
 session_start();
 
 include "models/farmer_model.php";
+//I added the error array
+$fields = array('to_rent' => '', 'to_sell' => '', 'to_intern'=> '', 'to_other'=> '');
+$errors = array('to_rent' => '', 'to_sell' => '', 'to_intern'=> '', 'to_other'=> '');
+
 
 /*
 if (!isset($_SESSION['fname']) or !isset($_SESSION['lname']) or !isset($_SESSION['email']) or !isset($_SESSION['phone']) or !isset($_SESSION['address']) or !isset($_SESSION['password'])){

@@ -52,6 +52,7 @@
 			<option value=""><?php if (empty($fields['user_type'])||!empty($fields['user_type'])) echo "Select One";?></option>
 			<option value="farmer">Farmer</option>
 			<option value="landowner">Landowner</option>
+			<option value="landowner">Administrator</option>
 		  </select>
 		  <span class="text-danger"><?php echo $errors['user_type']; ?></span>
 		</div>

@@ -3,20 +3,20 @@
 	<div class="row">
 		<div class="col-sm-2"><h3>Filter by:</h3></div>
 		<div class="col-sm-6"
-		<label class="checkbox-inline"><input type="checkbox" value="">Lease</label>
-		<label class="checkbox-inline"><input type="checkbox" value="">Buy/Sell</label>
-		<label class="checkbox-inline"><input type="checkbox" value="">Intern</label><br>
-		<label class="checkbox-inline"><input type="checkbox" value="">Vegetable</label>
-		<label class="checkbox-inline"><input type="checkbox" value="">Livestock</label>
-		<label class="checkbox-inline"><input type="checkbox" value="">Aquaculture</label>
-		<label class="checkbox-inline"><input type="checkbox" value="">Tobacco</label>
-		<label class="checkbox-inline"><input type="checkbox" value="">Row Crops</label><br>
-		<label class="checkbox-inline"><input type="checkbox" value="">Northern</label>
-		<label class="checkbox-inline"><input type="checkbox" value="">Southern</label>
-		<label class="checkbox-inline"><input type="checkbox" value="">Eastern</label>
-		<label class="checkbox-inline"><input type="checkbox" value="">Western</label>
+		<label class="checkbox-inline"><input type="checkbox" name="lease" value="">Lease</label>
+		<label class="checkbox-inline"><input type="checkbox" name="buy_sell" value="">Buy/Sell</label>
+		<label class="checkbox-inline"><input type="checkbox" name="intern" value="">Intern</label><br>
+		<label class="checkbox-inline"><input type="checkbox" name="vegetable" value="">Vegetable</label>
+		<label class="checkbox-inline"><input type="checkbox" name="livestock" value="">Livestock</label>
+		<label class="checkbox-inline"><input type="checkbox" name="aquaculture" value="">Aquaculture</label>
+		<label class="checkbox-inline"><input type="checkbox" name="tobacco" value="">Tobacco</label>
+		<label class="checkbox-inline"><input type="checkbox" name="row_crops" value="">Row Crops</label><br>
+		<label class="checkbox-inline"><input type="checkbox" name="northern" value="">Northern</label>
+		<label class="checkbox-inline"><input type="checkbox" name="southern" value="">Southern</label>
+		<label class="checkbox-inline"><input type="checkbox" name="eastern" value="">Eastern</label>
+		<label class="checkbox-inline"><input type="checkbox" name="western" value="">Western</label>
 		</div>
-		<div class="col-sm-4"><button type="submit" class="btn btn-primary btn-md">Filter</button></div>
+		<div class="col-sm-4"><button type="submit" class="btn btn-primary btn-md" name="submit">Filter</button></div>
 	</div>
 	</form><br><br>
 	

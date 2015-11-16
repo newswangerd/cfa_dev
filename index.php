@@ -5,7 +5,7 @@
 session_start();
 
 $fields = array('fname' => '', 'lname' => '', 'email'=> '', 'password'=> '', 'password_confirm'=> '', 'choosePurpose' => '', 'phone' => '', 'address' => '');
-$errors = array('fname' => '', 'lname' => '', 'email'=> '', 'password'=> '', 'password_confirm'=> '', 'choosePurpose' => '', 'phone' => '', 'address' => '');
+$error = array('fname' => '', 'lname' => '', 'email'=> '', 'password'=> '', 'password_confirm'=> '', 'choosePurpose' => '', 'phone' => '', 'address' => '');
 
 $valid = true;
 
@@ -15,14 +15,14 @@ if (!empty($_POST)){
 			$fields[$key] = $_POST[$key];
 		} else {
 			$valid = false;
-			$errors[$key] = "This field is required";
+			$error[$key] = "This field is required";
 		}
 	}
 
 	if ($valid and $fields["password_confirm"] != $fields["password"]){
 		$fields["password_confirm"] = "";
 		$fields["password"] == "";
-		$errors["password"] = "Passwords must match";
+		$error["password"] = "Passwords must match";
 		$valid = false;
 	}
 

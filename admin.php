@@ -1,4 +1,7 @@
 <?php
+include "models/admin_model.php";
+$form = new AdminInterface();
+$data = $form->load_from_post();
 
 
 $page_title = "Admin page";
