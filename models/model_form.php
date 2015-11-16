@@ -88,6 +88,7 @@ class TextField {
 class CheckBox {
 	public $value;
 	public $name;
+	public $error; //added
 
 	public function __construct($required="", $value=False){//changed $name to $required
 		$this->required = $required;
