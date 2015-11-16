@@ -3,7 +3,7 @@
     <div class="control-group">
       <div class="controls">
         <h4>Congratulations! You have successfully completed your registration.</h4> <br>
-		<p><b>Thank you for registering your information with Kentucky Comimunity Farm Alliance.
+		<p><b>Thank you for registering your information with Kentucky Community Farm Alliance.
 			Once your application is reviewed and a much has been found, we will contacut you.</b> </p>
       </div>
 	  <br>

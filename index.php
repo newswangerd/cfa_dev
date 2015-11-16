@@ -22,7 +22,7 @@ if (!empty($_POST)){
 	if ($valid and $fields["password_confirm"] != $fields["password"]){
 		$fields["password_confirm"] = "";
 		$fields["password"] == "";
-		$errors["password"] = "Password's must match";
+		$errors["password"] = "Passwords must match";
 		$valid = false;
 	}
 
@@ -49,10 +49,4 @@ $page_body = "register_template.php";
 
 
 include "templates/template.php";
-
-echo "<pre>";
-print_r($_POST);
-print_r($errors);
-print_r($fields);
-echo "</pre>";
 ?>
