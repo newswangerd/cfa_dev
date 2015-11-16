@@ -67,7 +67,7 @@
     <div class="control-group">
       <label class="control-label" for="sel1">Are You Looking For...</label>
 	  <select class="form-control" name="choosePurpose"  id="sel1">
-        <option value="<?php echo $fields['fname'] ?>"><?php if (!empty($fields['fname'])) {echo $fields['fname'];} else {echo "Select One";} ?></option>
+        <option value=""><?php if (!empty($fields['choosePurpose'])||empty($fields['choosePurpose'])) echo "Select One";?></option>
         <option value="farmer">Land To Farm</option>
         <option value="landowner">Someone to Farm on Your Land</option>
       </select>
