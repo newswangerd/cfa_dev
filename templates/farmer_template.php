@@ -100,7 +100,7 @@
 		  <option value="Short Term (Less than 2 years)">Short Term (Less than 2 years)</option>
 		  <option value="Long Term (More than 5 years)">Long Term (More than 5 years)</option>
 		</select>
-		<?php echo $form->fields['lease_agreement']->errors; ?>
+		<?php echo $form->fields['lease_agreement']->error; ?> <?php //fixed errors?>
 		<br>
 		<p>
 		Purchase Arangement
@@ -114,7 +114,7 @@
 		  <option value="Land Contract">Land Contract</option>
 		  <option value="Other">Other</option>
 		</select>
-		<?php echo $form->fields['purchase_agreement']->errors; ?>
+		<?php echo $form->fields['purchase_agreement']->error; ?> <?php //fixed errors?>
 		<br>
 
 		<p>
