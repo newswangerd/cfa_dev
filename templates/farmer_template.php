@@ -8,7 +8,7 @@
 			<br />
 			<input type="checkbox" name="to_sell" <?php echo $form->fields['to_sell']; ?> > Buy
 			<br />
-			<input type="checkbox" name="to_intern" <?php echo $form->fields['to_intern']; ?> > Farm Intern of Apprentice? 
+			<input type="checkbox" name="to_intern" <?php echo $form->fields['to_intern']; ?> > Farm Intern or Apprentice? 
 			<br />
 			<input type="checkbox" name="to_other" <?php echo $form->fields['to_other']; ?> > 
 			Other: <input type="text" name="terms_other" value="<?php echo $form->fields['terms_other']; ?>"/>
