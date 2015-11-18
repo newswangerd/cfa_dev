@@ -1,4 +1,4 @@
-<?php if(!$is_valid){echo '<div class="alert alert-danger" role="alert">It looks like there are some mistakes!</div>';} ?>
+<?php //if(!$is_valid){echo '<div class="alert alert-danger" role="alert">It looks like there are some mistakes!</div>';} ?>
 <form action = "farmerq.php" method = "post">
 	<div class="col-sm-6">
 
@@ -100,7 +100,7 @@
 		  <option value="Short Term (Less than 2 years)">Short Term (Less than 2 years)</option>
 		  <option value="Long Term (More than 5 years)">Long Term (More than 5 years)</option>
 		</select>
-		<?php echo $form->fields['lease_agreement']->error; ?> <?php //fixed errors?>
+		<?php echo $form->fields['lease_agreement']->error; ?> <?php //fixed error?>
 		<br>
 		<p>
 		Purchase Arangement
@@ -114,7 +114,7 @@
 		  <option value="Land Contract">Land Contract</option>
 		  <option value="Other">Other</option>
 		</select>
-		<?php echo $form->fields['purchase_agreement']->error; ?> <?php //fixed errors?>
+		<?php echo $form->fields['purchase_agreement']->error; ?> <?php //fixed error?>
 		<br>
 
 		<p>

@@ -90,10 +90,10 @@ class CheckBox {
 	public $name;
 	public $error; //added
 
-	public function __construct($required="", $value=False){//changed $name to $required
-		$this->required = $required;
+	public function __construct($name="", $value=False){
+		//$this->required = $required; //this is extraneous
 		$this->value = $value;
-		//$this->name = $name;
+		$this->name = $name;
 	}
 
 	public function set_value($val){
@@ -102,6 +102,7 @@ class CheckBox {
 			This has to be translated into a boolean value for MySql
 		*/
 		switch($val){
+				
 			case "on":
 				$this->value = true;
 				break;
@@ -240,6 +241,8 @@ class Form {
 		if ($result = mysqli_query($conn, $query)) {
 			$row = mysqli_fetch_array($result);
 		}
+		//added the following
+		if(!$conn) echo "No connection!";
 
 		// Load the result into the object
 		foreach ($this->fields as $key => $value){
@@ -414,7 +417,7 @@ class Form {
 			$query = sprintf($query, $this->table_name, $update, $this->id_name, $this->id_instance);
 		}
 
-		$conn = mysqli_connect($GLOBALS['config']['db_host'], $GLOBALS['config']['db_user'], $GLOBALS['config']['db_pass'], $GLOBALS['config']['db']);
+		$conn = new mysqli($GLOBALS['config']['db_host'], $GLOBALS['config']['db_user'], $GLOBALS['config']['db_pass'], $GLOBALS['config']['db']);
 		
 		if ($result = mysqli_query($conn, $query)) {
       		return true;
@@ -466,7 +469,7 @@ class Form {
 			found in the $_POST array.
 		*/
 		if (empty($_POST)){
-			return false;
+			return true;
 		}
 
 		$data = false;
@@ -478,10 +481,10 @@ class Form {
 			if(isset($_POST[$key])) {
 				$this->fields[$key]->set_value($_POST[$key]);
 				$data = true;
-			} elseif(get_class($value)=="CheckBox"){  // Necesary to load checkboxes because checkboxes don't send a post value if they
+			} /*elseif(get_class($value)=="CheckBox"){  // Necesary to load checkboxes because checkboxes don't send a post value if they
 				$this->fields[$key]->set_value($_POST[$key]);  // aren't checked.
 				$data = true;
-			}
+			}*/
 		}
 
 		return $data;	

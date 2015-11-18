@@ -3,13 +3,6 @@ session_start();
 
 include "models/landowner_model.php";
 
-/*
-if (!isset($_SESSION['fname']) or !isset($_SESSION['lname']) or !isset($_SESSION['email']) or !isset($_SESSION['phone']) or !isset($_SESSION['address']) or !isset($_SESSION['password'])){
-	header('Location: index.php');
-	die();
-}
-*/
-
 $form = new LandownerForm();
 $data = $form->load_from_post();
 
