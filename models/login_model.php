@@ -2,12 +2,12 @@
 include "model_form.php";
 class LoginForm extends Form {
 	function __construct(){
-		$this->table_name="administrator";
-		$this->id_name="admin_id";
+		$this->table_name=NULL;
+		$this->id_name=NULL;
 		// General Information
-		$this->fields['first_name'] = new TextField();
-		$this->fields['last_name'] = new TextField();
 		$this->fields['email'] = new TextField();
 		$this->fields['password'] = new TextField();
-		
+		$this->fields['user_type'] = new TextField();
+	}
+}
 ?>		
