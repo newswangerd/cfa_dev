@@ -1,6 +1,8 @@
 <?php
 session_start();
-include "models/login_model.php";
+include "models/farmer_model.php";
+include "models/landowner_model.php";
+include "models/admin_model.php";
 
 
 $login_fields = array('email' => '', 'password' => '', 'user_type'=> '');
@@ -36,7 +38,7 @@ if($valid){
 																			//will load one instance only
 			if ($login_fields['user_type'] == "Farmer"){
 					header('Location: farmerq.php');
-				} 
+				}
 			elseif($login_fields['user_type'] == "Landowner") {
 					die();
 					header('Location: landownerq.php');
@@ -44,7 +46,7 @@ if($valid){
 			elseif ($login_fields['user_type'] == "Administrator") {
 					header('Location: admin.php');
 					die();
-			}			
+			}		
 			}
 
 /*	

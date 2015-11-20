@@ -1,6 +1,6 @@
 <?php 
 
-include "model_form.php";
+require_once "model_form.php";
 
 class LandownerForm extends Form {
 

@@ -91,7 +91,6 @@ class CheckBox {
 	public $error; //added
 
 	public function __construct($name="", $value=False){
-		//$this->required = $required; //this is extraneous
 		$this->value = $value;
 		$this->name = $name;
 	}
@@ -314,6 +313,9 @@ class Form {
  		// Loads a new form object into each cell in the array
 		if ($result = mysqli_query($conn, $query)) {
 
+			// If nothing is in the query return false.
+			if (mysqli_num_rows($result)==0) { return false; }
+
 			// Each row in the database is stored as a new object of whatever class happens to be
 			// using the Forms class. Each of these objects is stored in the "instances" array
 			while($row = mysqli_fetch_array($result)){
@@ -481,10 +483,10 @@ class Form {
 			if(isset($_POST[$key])) {
 				$this->fields[$key]->set_value($_POST[$key]);
 				$data = true;
-			} /*elseif(get_class($value)=="CheckBox"){  // Necesary to load checkboxes because checkboxes don't send a post value if they
+			} elseif(get_class($value)=="CheckBox"){  // Necesary to load checkboxes because checkboxes don't send a post value if they
 				$this->fields[$key]->set_value($_POST[$key]);  // aren't checked.
 				$data = true;
-			}*/
+			}
 		}
 
 		return $data;	

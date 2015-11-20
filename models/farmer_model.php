@@ -1,5 +1,5 @@
 <?php 
-include "model_form.php";
+require_once "model_form.php";
 
 class FarmerForm extends Form {
 

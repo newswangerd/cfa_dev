@@ -21,9 +21,9 @@
 		  <label class="control-label" for="sel1">Do you want to login as a...</label>
 		  <select class="form-control" name="user_type"  id="sel1">
 			<option value=""><?php if (empty($login_fields['user_type'])) echo "Select One"; else echo $login_fields['user_type']; ?></option>
-			<option value="Farmer" type="text">Farmer</option>
-			<option value="Landowner" type="text">Landowner</option>
-			<option value="Administrator" type="text">Administrator</option>
+			<option value="farmer" type="text">Farmer</option>
+			<option value="landowner" type="text">Landowner</option>
+			<option value="ldministrator" type="text">Administrator</option>
 		  </select>
 		  <span class="text-danger"><?php echo $errors['user_type']; ?></span>
 		</div>
