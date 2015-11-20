@@ -44,17 +44,23 @@ class TextField {
 	*/
 	public $value;
 	public $error;
+	public $name;
 	private $required;
 	private $length;
 
-	public function __construct($required=True, $value="", $length=255){
+	public function __construct($name="", $required=True, $value="", $length=255){
 		$this->required = $required;
 		$this->value = $value;
 		$this->length = $length;
+		$this->name = $name;
 	}
 
 	public function set_value($val){
 		$this->value = $val;
+	}
+
+	public function get_value(){
+		return $this->value;
 	}
 
 	public function set_required($val){
@@ -123,6 +129,14 @@ class CheckBox {
 		}
 	}
 
+	public function get_value(){
+		if ($this->value){
+			return "True";
+		} else {
+			return "False";
+		}
+	}
+
 	public function validate(){
 		// Always validates to true.
 		return true;
@@ -146,10 +160,11 @@ class IntegerField {
 	public $value;
 	public $error;
 	private $required;
+	public $name;
 
-	public function __construct($required=True, $value=null){
+	public function __construct($name="", $required=True){
 		$this->required = $required;
-		$this->value = $value;
+		$this->name = $name;
 	}
 
 	public function set_value($val){
@@ -162,6 +177,10 @@ class IntegerField {
 
 	public function set_required($val){
 		$this->required = $val;
+	}
+
+	public function get_value(){
+		return $this->value;
 	}
 
 	public function __toString(){

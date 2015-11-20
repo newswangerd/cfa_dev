@@ -14,4 +14,9 @@ $page_body = "admin_template.php";
 
 include "templates/template.php";
 
+/*
+echo "<pre>";
+print_r($farmer);
+echo "</pre>";
+*/
 ?>

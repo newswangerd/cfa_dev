@@ -37,7 +37,7 @@
 			<?php
 			$template = '
 			<tr>
-				<td><a href="#" class="btn btn-default btn-xs" data-toggle="modal" data-target="#Modal%s">See Profile</a>
+				<td><a href="#" class="btn btn-default btn-xs" data-toggle="modal" data-target="#farmerModal%s">See Profile</a>
 				<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
@@ -60,7 +60,7 @@
 			<?php
 			$template = '
 			<tr>
-				<td><a href="#" class="btn btn-default btn-xs" data-toggle="modal" data-target="#Modal%s">See Profile</a>
+				<td><a href="#" class="btn btn-default btn-xs" data-toggle="modal" data-target="#landModal%s">See Profile</a>
 				<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
@@ -95,7 +95,7 @@
 <?php
 
 $template = '
-<div class="modal fade" id="#Modal%s" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="farmerModal%s" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -103,7 +103,9 @@ $template = '
         <h4 class="modal-title" id="myModalLabel">Modal title</h4>
       </div>
       <div class="modal-body">
-        %s
+      <table class="table table-condensed">
+       %s
+       </table>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -111,15 +113,44 @@ $template = '
     </div>
   </div>
 </div>
-'
+';
 
 while ($farmer->load_next()){
 	$modal_body = "";
 	foreach ($farmer->fields as $key => $value) {
-		$modal_body = $modal_body . '<br />' . $value;
+		$modal_body = $modal_body . '<tr><th>'. $value->name . "</th><td>" . $value->get_value() . '</td></tr>';
 	}
 
-	sprintf($template, $farmer->id_instance, $modal_body)
+	echo sprintf($template, $farmer->id_instance, $modal_body);
 }
 
+$template = '
+<div class="modal fade" id="landModal%s" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">%s %s</h4>
+      </div>
+      <div class="modal-body">
+      <table class="table table-condensed">
+       %s
+       </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+';
+
+while ($landO->load_next()){
+	$modal_body = "";
+	foreach ($landO->fields as $key => $value) {
+		$modal_body = $modal_body . '<tr><th>'. $value->name . "</th><td>" . $value->get_value() . '</td></tr>';
+	}
+
+	echo sprintf($template, $landO->id_instance, $landO->fields['first_name'], $landO->fields['last_name'], $modal_body);
+}
 ?>
