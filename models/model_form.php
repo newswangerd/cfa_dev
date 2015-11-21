@@ -253,7 +253,7 @@ class Form {
 		// Construct the query
 		$query = "SELECT * FROM %s WHERE %s = %s;";
 		$query = sprintf($query, $this->table_name, $this->id_name, $this->id_instance);
-
+		$row = "";
 		// Query the database
 		$conn = mysqli_connect($GLOBALS['config']['db_host'], $GLOBALS['config']['db_user'], $GLOBALS['config']['db_pass'], $GLOBALS['config']['db']);
 		if ($result = mysqli_query($conn, $query)) {
