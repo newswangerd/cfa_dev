@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if(isset($_SESSION['type'])||isset($_SESSION['email'])){
+if(isset($_SESSION['type'])){
 
 	include "models/farmer_model.php";
 

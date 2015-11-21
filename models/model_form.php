@@ -3,7 +3,7 @@
 /**
  * Model Form Class
  * By: David Newswanger
- * Atiba Bailey and Yhenew Kassie
+ *
  * The purpose of this library is to provide an easy interface between the data
  * sent by the user and the database. In order to use this library, the user simply
  * needs to create a subclass which extends form. In this sub class the user has to
