@@ -7,10 +7,6 @@ $landO = new LandownerForm();
 $farmer->load_by_filter("");
 $landO->load_by_filter("");
 
-
-
-
-
 $page_title = "Admin page";
 $panel_heading = "Admin";
 $page_body = "admin_template.php";

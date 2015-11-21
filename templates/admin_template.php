@@ -1,5 +1,7 @@
 <form action = "admin.php" method = "post">
 <div class="row">
+	<?php if($request){
+		echo '<div class="alert alert-danger" role="alert">Please select at least one filter criterion!</div>';}?>
 	<div class="col-sm-2"><h3>Filter by:</h3></div>
 	<div class="col-sm-6">
 	<label class="checkbox-inline"><input type="checkbox" name="lease" value="">Lease</label>
