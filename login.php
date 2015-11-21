@@ -69,12 +69,9 @@ session_start();
 	$page_title = "Login Page";
 	$panel_heading = "Login";
 	$page_body = "login_template.php";
-
-
 	include "templates/template.php";
-
-	echo "<pre>";
-	print_r($form);
-	echo "</pre>";
-
+	
+echo "<pre>";
+print_r($form);
+echo "</pre>";
 ?>
