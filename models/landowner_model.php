@@ -46,9 +46,6 @@ class LandownerForm extends Form {
 		$this->fields['infrastructure_barn'] = new CheckBox();
 		$this->fields['infrastructure_stables'] = new CheckBox();
 		$this->fields['infrastructure_greenhouse'] = new CheckBox();
-		$this->fields['infrastructure_goats'] = new CheckBox();
-		$this->fields['infrastructure_sheep'] = new CheckBox();
-		$this->fields['infrastructure_horses'] = new CheckBox();
 		
 		// Type of agriculture
 		$this->fields['horticulture'] = new CheckBox();

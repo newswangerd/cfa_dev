@@ -49,11 +49,6 @@
 			<br>
 			<input type="checkbox" name="infrastructure_greenhouse" <?php echo $form->fields['infrastructure_greenhouse']; ?> > Greenhouse/High Tunnel
 			<br>
-			<input type="checkbox" name="infrastructure_goats" <?php echo $form->fields['infrastructure_goats']; ?> > Goats
-			<br>
-			<input type="checkbox" name="infrastructure_sheep" <?php echo $form->fields['infrastructure_sheep']; ?> > Sheep
-			<br>
-			<input type="checkbox" name="infrastructure_horses" <?php echo $form->fields['infrastructure_horses']; ?> > Horses
 		</p>
 		<b>Equipment Needed</b>
 		<br />
