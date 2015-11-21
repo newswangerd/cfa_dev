@@ -15,7 +15,7 @@
 			<input type="password" id="password" name="password" placeholder="" class="form-control input-lg"><br>
 			<span class="text-danger"><?php echo $errors['password']; ?></span>
 		  </div>
-		</div>
+		</div> 
 		
 		<div class="control-group">
 		  <label class="control-label" for="sel1">Do you want to login as a...</label>
