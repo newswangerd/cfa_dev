@@ -1,7 +1,7 @@
 <?php 
 
 require_once "model_form.php";
-class AdminModel extends Form {
+class AdminForm extends Form {
 	function __construct(){
 		$this->table_name="administrator";
 		$this->id_name="admin_id";
