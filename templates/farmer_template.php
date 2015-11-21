@@ -13,7 +13,7 @@
 			<input type="checkbox" name="to_other" <?php echo $form->fields['to_other']; ?> > 
 			Other: <input type="text" name="terms_other" value="<?php echo $form->fields['terms_other']; ?>"/>
 			<span class="text-danger"><?php echo $form->fields['terms_other']->error; ?></span>
-		 
+		
 		<br/>
 		<br/>
 	<b>Land Type and Amount (in acres)</b>
