@@ -1,6 +1,6 @@
 <?php 
 
-include "model_form.php";
+require_once "model_form.php";
 
 class LandownerForm extends Form {
 
@@ -76,7 +76,7 @@ class LandownerForm extends Form {
 		$this->fields['goals'] = new TextField();
 
 		// Enabled
-		$this->fields['enabled'] = new CheckBox($value=True);
+		$this->fields['enabled'] = new CheckBox("Profile Enabled", True);
 	}
 }
 

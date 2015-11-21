@@ -2,6 +2,9 @@
  	<head>
  		<link rel="stylesheet" type="text/css" href="templates/css/bootstrap.min.css" />
  		<title><?php echo $page_title ?></title>
+ 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" type="text/javascript"></script>
+		<script src="templates/js/bootstrap.min.js"></script>
+
  	 </head>
  <body>
 

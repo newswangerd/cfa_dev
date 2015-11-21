@@ -1,4 +1,5 @@
-<?php if(!$is_valid){echo '<div class="alert alert-danger" role="alert">It looks like there are some mistakes!</div>';} ?>
+<?php //errors fixed?>
+<?php //if(!$is_valid){echo '<div class="alert alert-danger" role="alert">It looks like there are some mistakes!</div>';} ?>
 <form action = "landownerq.php" method = "post">
 <div class="col-sm-6">
 	<b>Are you looking to...</b>
@@ -68,11 +69,6 @@
 		<br />
 		<input type="checkbox" name="infrastructure_greenhouse" <?php echo $form->fields['infrastructure_greenhouse']; ?> > Greenhouse/High Tunnel
 		<br />
-		<input type="checkbox" name="infrastructure_goats" <?php echo $form->fields['infrastructure_goats']; ?> > Goats
-		<br />
-		<input type="checkbox" name="infrastructure_sheep" <?php echo $form->fields['infrastructure_sheep']; ?> > Sheep
-		<br />
-		<input type="checkbox" name="infrastructure_horses" <?php echo $form->fields['infrastructure_horses']; ?> > Horses
 
 </div>
 
@@ -111,7 +107,7 @@
 	  <option value="Short Term (Less than 2 years)">Short Term (Less than 2 years)</option>
 	  <option value="Long Term (More than 5 years)">Long Term (More than 5 years)</option>
 	</select>
-	<?php echo $form->fields['lease_agreement']->errors; ?>
+	<?php echo $form->fields['lease_agreement']->error; ?>
 	<br /> 
 	Purchase Arangement
 	<select name="purchase_agreement">
@@ -124,7 +120,7 @@
 	  <option value="Land Contract">Land Contract</option>
 	  <option value="Other">Other</option>
 	</select>
-	<?php echo $form->fields['purchase_agreement']->errors; ?>
+	<?php echo $form->fields['purchase_agreement']->error; ?>
 	<br />
 	<br />
 	<b>Equipment Available</b>

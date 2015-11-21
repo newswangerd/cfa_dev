@@ -44,17 +44,23 @@ class TextField {
 	*/
 	public $value;
 	public $error;
+	public $name;
 	private $required;
 	private $length;
 
-	public function __construct($required=True, $value="", $length=255){
+	public function __construct($name="", $required=True, $value="", $length=255){
 		$this->required = $required;
 		$this->value = $value;
 		$this->length = $length;
+		$this->name = $name;
 	}
 
 	public function set_value($val){
 		$this->value = $val;
+	}
+
+	public function get_value(){
+		return $this->value;
 	}
 
 	public function set_required($val){
@@ -88,9 +94,9 @@ class TextField {
 class CheckBox {
 	public $value;
 	public $name;
+	public $error; //added
 
 	public function __construct($name="", $value=False){
-		$this->required = $required;
 		$this->value = $value;
 		$this->name = $name;
 	}
@@ -101,6 +107,7 @@ class CheckBox {
 			This has to be translated into a boolean value for MySql
 		*/
 		switch($val){
+				
 			case "on":
 				$this->value = true;
 				break;
@@ -119,6 +126,14 @@ class CheckBox {
 			case "":
 				$this->value = false;
 				break;
+		}
+	}
+
+	public function get_value(){
+		if ($this->value){
+			return "True";
+		} else {
+			return "False";
 		}
 	}
 
@@ -145,10 +160,11 @@ class IntegerField {
 	public $value;
 	public $error;
 	private $required;
+	public $name;
 
-	public function __construct($required=True, $value=null){
+	public function __construct($name="", $required=True){
 		$this->required = $required;
-		$this->value = $value;
+		$this->name = $name;
 	}
 
 	public function set_value($val){
@@ -161,6 +177,10 @@ class IntegerField {
 
 	public function set_required($val){
 		$this->required = $val;
+	}
+
+	public function get_value(){
+		return $this->value;
 	}
 
 	public function __toString(){
@@ -233,12 +253,14 @@ class Form {
 		// Construct the query
 		$query = "SELECT * FROM %s WHERE %s = %s;";
 		$query = sprintf($query, $this->table_name, $this->id_name, $this->id_instance);
-
+		$row = "";
 		// Query the database
 		$conn = mysqli_connect($GLOBALS['config']['db_host'], $GLOBALS['config']['db_user'], $GLOBALS['config']['db_pass'], $GLOBALS['config']['db']);
 		if ($result = mysqli_query($conn, $query)) {
 			$row = mysqli_fetch_array($result);
 		}
+		//added the following
+		if(!$conn) echo "No connection!";
 
 		// Load the result into the object
 		foreach ($this->fields as $key => $value){
@@ -309,6 +331,9 @@ class Form {
 
  		// Loads a new form object into each cell in the array
 		if ($result = mysqli_query($conn, $query)) {
+
+			// If nothing is in the query return false.
+			if (mysqli_num_rows($result)==0) { return false; }
 
 			// Each row in the database is stored as a new object of whatever class happens to be
 			// using the Forms class. Each of these objects is stored in the "instances" array
@@ -413,7 +438,7 @@ class Form {
 			$query = sprintf($query, $this->table_name, $update, $this->id_name, $this->id_instance);
 		}
 
-		$conn = mysqli_connect($GLOBALS['config']['db_host'], $GLOBALS['config']['db_user'], $GLOBALS['config']['db_pass'], $GLOBALS['config']['db']);
+		$conn = new mysqli($GLOBALS['config']['db_host'], $GLOBALS['config']['db_user'], $GLOBALS['config']['db_pass'], $GLOBALS['config']['db']);
 		
 		if ($result = mysqli_query($conn, $query)) {
       		return true;
@@ -465,7 +490,7 @@ class Form {
 			found in the $_POST array.
 		*/
 		if (empty($_POST)){
-			return false;
+			return true;
 		}
 
 		$data = false;

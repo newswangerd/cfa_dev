@@ -1,47 +1,85 @@
 <?php
 session_start();
-$fields = array('first_name' => '', 'last_name' => '', 'email'=> '', 'password'=> '', 'confirm_password'=> '', 'user_type' => '');
-$errors = array('first_name' => '', 'last_name' => '', 'email'=> '', 'password'=> '', 'confirm_password'=> '', 'user_type' => '');
+include "models/farmer_model.php";
+include "models/landowner_model.php";
+include "models/admin_model.php";
+
+
+$login_fields = array('email' => '', 'password' => '', 'user_type'=> '');
+$errors = array('email' => '', 'password' => '', 'user_type'=> '');
+/*
+	$post_email = $post_form->fields['email'];
+	echo "post".$post_email."\n";
+	$query_form = new LoginForm();
+	$test_filter = $query_form->load_by_filter($post_form->fields("email"=>"kassiey@berea.edu", "first_name"=> "Yhenew"));
+}*/
 
 $valid = true;
-
 if (!empty($_POST)){
-	foreach ($fields as $key => $value){
+	foreach ($login_fields as $key => $value){
 		if (!empty($_POST[$key])){
-			$fields[$key] = $_POST[$key];
+			$login_fields[$key] = $_POST[$key];
+			//$login_fields[$key] = "$_POST[$value]";
 		} else {
 			$valid = false;
 			$errors[$key] = "This field is required";
 		}
 	}
 
-	if ($valid and $fields["confirm_password"] != $fields["password"]){
-		$fields["confirm_password"] = "";
-		$fields["password"] == "";
-		$errors["password"] = "Passwords did not match";
-		$valid = false;
-	}
-
-	if ($valid){
-		foreach ($fields as $key => $value) {
+		/*foreach ($login_fields as $key => $value) {
 			$_SESSION[$key] = $value;
-		}
+		}*/
+if($valid){	
+	$post_form = new LoginForm();
+	$test_email = $login_fields['email'];
+	$query = $post_form->load_by_filter($login_fields('email'=>'$test_email'));// if($query) echo "this".$post_form->$fields['password'];
+		if($query)
+		if(($post_form->$fields['password'])==$login_fields['password']){//since email is unique load_by_filter
+																			//will load one instance only
+			if ($login_fields['user_type'] == "Farmer"){
+					header('Location: farmerq.php');
+				}
+			elseif($login_fields['user_type'] == "Landowner") {
+					die();
+					header('Location: landownerq.php');
+			}
+			elseif ($login_fields['user_type'] == "Administrator") {
+					header('Location: admin.php');
+					die();
+			}		
+			}
 
-		if ($fields['user_type'] == "farmer"){
-				header('Location: farmer_edit.php');
+/*	
+$conn = mysqli_connect("localhost", "cfa_dev", "MartinRichards", "cfa_dev");
+	$post_email = $login_fields['email'];
+	$query = "SELECT* FROM farmer WHERE email = '$post_email'";
+		if ($result = mysqli_query($conn, $query)) {
+			$row = mysqli_fetch_array($result);
+		if($row && $row['password']==$login_fields['password']){
+		if ($login_fields['user_type'] == "Farmer"){
+				header('Location: farmerq.php');
+			} 
+		elseif($login_fields['user_type'] == "Landowner") {
 				die();
-			} elseif($fields['user_type'] == "landowner") {
-				header('Location: landowner_edit.php');
+				header('Location: landownerq.php');
+		}
+		elseif ($login_fields['user_type'] == "Administrator") {
+				header('Location: admin.php');
 				die();
 		}
+		}
+		
 	}
 }
-
-$page_title = "User Login";
+}
+*/
+}
+}
+// Add support for Select
+$page_title = "Login Page";
 $panel_heading = "Login";
 $page_body = "login_template.php";
 
 
 include "templates/template.php";
-
 ?>
