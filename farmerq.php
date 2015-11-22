@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if(isset($_SESSION['choosePurpose'])||isset($_SESSION['type'])){
+if(isset($_SESSION['type'])||isset($_SESSION['email'])){
 
 	include "models/farmer_model.php";
 
@@ -28,7 +28,7 @@ if(isset($_SESSION['choosePurpose'])||isset($_SESSION['type'])){
 	$form->fields['first_name']->set_value($_SESSION['fname']);
 	$form->fields['phone']->set_value($_SESSION['phone']);
 	$form->fields['address']->set_value($_SESSION['address']);
-	$form->fields['password']->set_value($_SESSION['password']);
+	$form->fields['password']->new_password($_SESSION['password']);
 
 
 	// If data is received, validate it.
@@ -58,4 +58,15 @@ else {
 	session_destroy();
 	header('Location: index.php');
 }
+
+
+echo "<pre>";
+print_r(password_hash("pass", PASSWORD_BCRYPT, array('salt'=>'9CI3fv72o8kj6KI4Vx6Xsd')));
+echo "\n";
+echo $form->fields['password']->authenticate("pass");
+echo "\n";
+print_r($_SESSION);
+print_r($form);
+echo "</pre>";
+
 ?>

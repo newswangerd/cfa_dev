@@ -11,7 +11,7 @@ class FarmerForm extends Form {
 		// General Information
 		$this->fields['first_name'] = new TextField("First Name");
 		$this->fields['last_name'] = new TextField("Last Name");
-		$this->fields['password'] = new TextField("Password");
+		$this->fields['password'] = new PasswordField("Password");
 		$this->fields['email'] = new TextField("Email Address");
 		$this->fields['phone'] = new TextField("Phone Number");
 		$this->fields['address'] = new TextField("Address");

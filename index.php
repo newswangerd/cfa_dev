@@ -51,9 +51,4 @@ $page_body = "register_template.php";
 
 
 include "templates/template.php";
-
-echo "<pre>";
-$var = array('foo' => "");
-if(isset($var['foo'])) echo "SETTTT";
-echo "</pre>";
 ?>

@@ -1,5 +1,5 @@
 <?php
-	include "models/farmer_view_model.php";
+	include "models/farmer_model.php";
 
 	$error = array('fname' => '', 'lname' => '', 'phone'=> '','email' => '', 'address' => '', 'password'=> '', 'password_confirm'=>'');
 	$fields = array('fname' => '', 'lname' => '', 'phone'=> '','email' => '', 'address' => '', 'password'=> '', 'password_confirm'=>'');

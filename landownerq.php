@@ -24,7 +24,7 @@ $form->fields['email']->set_value($_SESSION['email']);
 $form->fields['first_name']->set_value($_SESSION['fname']);
 $form->fields['phone']->set_value($_SESSION['phone']);
 $form->fields['address']->set_value($_SESSION['address']);
-$form->fields['password']->set_value($_SESSION['password']);;
+$form->fields['password']->new_password($_SESSION['password']);;
 
 
 // If data is received, validate it.

@@ -205,7 +205,7 @@ class IntegerField {
 }
 
 class PasswordField {
-	private $value;
+	public $value;
 	public $error;
 	private $required;
 	public $name;
@@ -216,30 +216,35 @@ class PasswordField {
 	}
 
 	public function set_value($val){
+		$this->value = $val;
+	}
 
+	public function new_password($pass){
+		$this->value = password_hash($val, PASSWORD_BCRYPT, array('salt'=>'9CI3fv72o8kj6KI4Vx6Xsd'));
 	}
 
 	public function get_value(){
-		return $this->value;
+		return "SECRET";
 	}
 
 	public function __toString(){
-		return (string)$this->value;
+		return "SECRET";
+	}
+
+	public function authenticate($pass){
+		if ($this->value == password_hash($pass, PASSWORD_BCRYPT, array('salt'=>'9CI3fv72o8kj6KI4Vx6Xsd'))){
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public function validate(){
-		/*
-			If contains non numeric fields, validation fails.
-		*/
-		if($this->required and empty($this->value)){
-			$this->error = "This field is required";
+		if ($this->required and empty($this->value)){
+			$this->error = "This field is required.";
 			return false;
 		}
 
-		if (!is_int($this->value)){
-			$this->error = "Must contain only numbers.";
-			return false;
-		}
 		return true;
 	}
 }

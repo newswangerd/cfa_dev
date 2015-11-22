@@ -1,5 +1,4 @@
 <?php
-echo password_hash("test", PASSWORD_BCRYPT);
 
 include "models/farmer_model.php";
 include "models/landowner_model.php";

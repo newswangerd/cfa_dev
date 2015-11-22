@@ -25,7 +25,7 @@ session_start();
 				$form = new FarmerForm();
 				$checkQuery = $form->load_by_filter(array("email"=>$_POST['email']));
 				if($checkQuery){
-					if($form->fields['password'] == $_POST['password']){
+					if($form->fields['password']->authenticate($_POST['password'])){
 							$redirect = "Location: farmer_view.php";
 							$valid_password = true;
 						}
@@ -35,7 +35,7 @@ session_start();
 				$form = new LandownerForm();
 				$checkQuery = $form->load_by_filter(array("email"=>$_POST['email']));
 				if($checkQuery){
-					if($form->fields['password'] == $_POST['password']){
+					if($form->fields['password']->authenticate($_POST['password'])){
 							$redirect = "Location: landownerq.php";
 							$valid_password = true;
 						}
@@ -45,7 +45,7 @@ session_start();
 				$form = new AdminForm();
 				$checkQuery = $form->load_by_filter(array("email"=>$_POST['email']));
 				if($checkQuery){
-					if($form->fields['password'] == $_POST['password']){
+					if($form->fields['password']->authenticate($_POST['password'])){
 							$redirect = "Location: admin.php";
 							$valid_password = true;
 						}
@@ -73,4 +73,10 @@ session_start();
 
 	include "templates/template.php";
 
+echo "<pre>";
+echo password_hash("pass", PASSWORD_BCRYPT, array('salt'=>'9CI3fv72o8kj6KI4Vx6Xsd'));
+echo  "\n";
+print_r($login_fields);
+print_r($form);
+echo "</pre>";
 ?>
