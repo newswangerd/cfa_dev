@@ -8,7 +8,7 @@
       </div>
 	  <br>
 	  <div class="container">
-		  <button type="button" class="btn btn-danger btn-sm">Logout</button>      
+			<a href="index.php" class="btn btn-danger btn-sm" role="button">Logout</a>		  
 		</div>
     </div>
  </div>

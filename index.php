@@ -1,5 +1,5 @@
 <?php
-
+session_destroy();//to destroy session from a logout operation
 //We should write some sort of validation to make sure that people aren't trying to sign up with emails that are already in the system.
 
 session_start();
