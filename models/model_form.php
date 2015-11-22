@@ -503,7 +503,6 @@ class Form {
 				$this->fields[$key]->set_value($_POST[$key]);
 				$data = true;
 			} elseif(get_class($value)=="CheckBox"){  // Necesary to load checkboxes because checkboxes don't send a post value if they
-				$this->fields[$key]->set_value($_POST[$key]);  // aren't checked.
 				$data = true;
 			}
 		}
