@@ -1,11 +1,5 @@
+<input type="checkbox" name="edit_enable"> <?php echo $form->fields['edit_enale']; ?> ><b>Uncheck this box to disable your application</b>
 
-<?php
-<HTML>
-<body>
-<form>
- <b>Would you like to edit this form?</b>
-<br />
-<input type="checkbox" name="edit_enable" <?php echo $form->fields['edit_enale']; ?> >
 <b>Enable</b>
 <br />
 <br />
@@ -26,9 +20,3 @@
 <br />
 <b>password</b>
 <input type="text" name="password" value="<?php echo $form->fields['password']; ?>">
-<br />
-<br />
-</form>
-</body>
-</HTML>
-?>

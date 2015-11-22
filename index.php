@@ -4,6 +4,8 @@
 
 session_start();
 
+
+
 $fields = array('fname' => '', 'lname' => '', 'email'=> '', 'password'=> '', 'password_confirm'=> '', 'choosePurpose' => '', 'phone' => '', 'address' => '');
 $error = array('fname' => '', 'lname' => '', 'email'=> '', 'password'=> '', 'password_confirm'=> '', 'choosePurpose' => '', 'phone' => '', 'address' => '');
 
@@ -49,4 +51,9 @@ $page_body = "register_template.php";
 
 
 include "templates/template.php";
+
+echo "<pre>";
+$var = array('foo' => "");
+if(isset($var['foo'])) echo "SETTTT";
+echo "</pre>";
 ?>

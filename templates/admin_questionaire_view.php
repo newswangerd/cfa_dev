@@ -1,10 +1,4 @@
-
-
-<?php
-<HTML>
-<body>
-<form>
- <b>Would you like to edit this form?</b>
+<b>Would you like to edit this form?</b>
 <br />
 <input type="checkbox" name="edit_enable" <?php echo $form->fields['edit_enale']; ?> >
 <b>Enable</b>
@@ -38,4 +32,3 @@
 </form>
 </body>
 </HTML>
-?>

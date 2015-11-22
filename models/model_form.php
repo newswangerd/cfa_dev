@@ -48,7 +48,7 @@ class TextField {
 	private $required;
 	private $length;
 
-	public function __construct($name="", $required=True, $value="", $length=255){
+	public function __construct($name="", $length=255, $required=True, $value=""){
 		$this->required = $required;
 		$this->value = $value;
 		$this->length = $length;
@@ -204,6 +204,46 @@ class IntegerField {
 	}
 }
 
+class PasswordField {
+	private $value;
+	public $error;
+	private $required;
+	public $name;
+
+	public function __construct($name="", $required=True){
+		$this->required = $required;
+		$this->name = $name;
+	}
+
+	public function set_value($val){
+
+	}
+
+	public function get_value(){
+		return $this->value;
+	}
+
+	public function __toString(){
+		return (string)$this->value;
+	}
+
+	public function validate(){
+		/*
+			If contains non numeric fields, validation fails.
+		*/
+		if($this->required and empty($this->value)){
+			$this->error = "This field is required";
+			return false;
+		}
+
+		if (!is_int($this->value)){
+			$this->error = "Must contain only numbers.";
+			return false;
+		}
+		return true;
+	}
+}
+
 class ForeignKey {
 	/*
 		This object simply contains an reference to whatever class the foreign
@@ -294,33 +334,39 @@ class Form {
 		
 		// If the filter is empty, the query simply pulls everything from the database.
 		if (!empty($filter)){
-			$conditions = "";
-			$counter = count($filter);
 
-			// Constructs the conditions portion of the query. Ex: WHERE foo = bar AND bar = foo;
-			foreach($filter as $key=>$value){
+			// Allows for the user to submit the filter as an array or a string
+			if (is_array($filter)){
+				$conditions = "";
+				$counter = count($filter);
 
-				// If the value passed is a string, then it must be enclose within a ''
-				if(gettype($value) == "string"){
-					$template = "%s = '%s' %s ";
-				} else {
-					$template = "%s = %s %s ";
+				// Constructs the conditions portion of the query. Ex: WHERE foo = bar AND bar = foo;
+				foreach($filter as $key=>$value){
+
+					// If the value passed is a string, then it must be enclose within a ''
+					if(gettype($value) == "string"){
+						$template = "%s = '%s' %s ";
+					} else {
+						$template = "%s = %s %s ";
+					}
+
+					$counter = $counter - 1;
+
+					// If this is the last iteration of the loop, then it doesn't appent an operator.
+					// This is to avoid an invalid SELECT * FROM bar WHERE foo = bar AND ; query where
+					// there is an invalid operator at the end of the query
+					if ($counter == 0){
+						$conditions = $conditions . sprintf($template, $key, (string)$value, "");
+					} else {
+						$conditions = $conditions . sprintf($template, $key, (string)$value, $operator);
+					}
 				}
 
-				$counter = $counter - 1;
-
-				// If this is the last iteration of the loop, then it doesn't appent an operator.
-				// This is to avoid an invalid SELECT * FROM bar WHERE foo = bar AND ; query where
-				// there is an invalid operator at the end of the query
-				if ($counter == 0){
-					$conditions = $conditions . sprintf($template, $key, (string)$value, "");
-				} else {
-					$conditions = $conditions . sprintf($template, $key, (string)$value, $operator);
-				}
+			} else {
+				$conditions = $filter;
 			}
-
 			// Constructs the query
-			$query = sprintf("SELECT * FROM %s WHERE %s;", $this->table_name, $conditions);
+				$query = sprintf("SELECT * FROM %s WHERE %s;", $this->table_name, $conditions);
 		} else {
 			$query = sprintf("SELECT * FROM %s", $this->table_name);
 		}
@@ -503,7 +549,6 @@ class Form {
 				$this->fields[$key]->set_value($_POST[$key]);
 				$data = true;
 			} elseif(get_class($value)=="CheckBox"){  // Necesary to load checkboxes because checkboxes don't send a post value if they
-				$this->fields[$key]->set_value($_POST[$key]);  // aren't checked.
 				$data = true;
 			}
 		}

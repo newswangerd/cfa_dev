@@ -1,26 +1,35 @@
 <form action = "admin.php" method = "post">
 <div class="row">
 	<div class="col-sm-2"><h3>Filter by:</h3></div>
-	<div class="col-sm-6">
-	<label class="checkbox-inline"><input type="checkbox" name="lease" value="">Lease</label>
-	<label class="checkbox-inline"><input type="checkbox" name="buy_sell" value="">Buy/Sell</label>
-	<label class="checkbox-inline"><input type="checkbox" name="intern" value="">Intern</label><br>
-	<label class="checkbox-inline"><input type="checkbox" name="vegetable" value="">Vegetable</label>
-	<label class="checkbox-inline"><input type="checkbox" name="livestock" value="">Livestock</label>
-	<label class="checkbox-inline"><input type="checkbox" name="aquaculture" value="">Aquaculture</label>
-	<label class="checkbox-inline"><input type="checkbox" name="tobacco" value="">Tobacco</label>
-	<label class="checkbox-inline"><input type="checkbox" name="row_crops" value="">Row Crops</label><br>
-	<label class="checkbox-inline"><input type="checkbox" name="northern" value="">Northern</label>
-	<label class="checkbox-inline"><input type="checkbox" name="southern" value="">Southern</label>
-	<label class="checkbox-inline"><input type="checkbox" name="eastern" value="">Eastern</label>
-	<label class="checkbox-inline"><input type="checkbox" name="western" value="">Western</label>
+	<div class="col-sm-8">
+	<table class="table table-condensed">
+		<tr>
+			<th>Terms</th>
+			<td><label class="checkbox-inline"><input type="checkbox" name="to_rent" <?php echo $post_data['to_rent'] ?> >Lease</label></td>
+			<td><label class="checkbox-inline"><input type="checkbox" name="to_sell" <?php echo $post_data['to_sell'] ?> >Buy/Sell</label></td>
+			<td><label class="checkbox-inline"><input type="checkbox" name="to_intern" <?php echo $post_data['to_intern'] ?> >Intern</label></td>
+			<td><label class="checkbox-inline"><input type="checkbox" name="to_other" <?php echo $post_data['to_other'] ?> >Other</label></td>
+		</tr>
+		<tr>
+			<th>Ag Type</th>
+			<td><label class="checkbox-inline"><input type="checkbox" name="horticulture" <?php echo $post_data['horticulture'] ?> >Horticulture</label></td>
+			<td><label class="checkbox-inline"><input type="checkbox" name="livestock" <?php echo $post_data['livestock'] ?> >Livestock</label></td>
+			<td><label class="checkbox-inline"><input type="checkbox" name="aquaculture" <?php echo $post_data['aquaculture'] ?> >Aquaculture</label></td>
+			<td><label class="checkbox-inline"><input type="checkbox" name="tobacco" <?php echo $post_data['tobacco'] ?> >Tobacco</label></td>
+			<td><label class="checkbox-inline"><input type="checkbox" name="rowcrops" <?php echo $post_data['rowcrops'] ?> >Row Crops</label></td>
+		</tr>
+		<tr>
+			<th>Location</th>
+			<td><label class="checkbox-inline"><input type="checkbox" name="northern" <?php echo $post_data['northern'] ?> >Northern</label></td>
+			<td><label class="checkbox-inline"><input type="checkbox" name="southern" <?php echo $post_data['southern'] ?> >Southern</label></td>
+			<td><label class="checkbox-inline"><input type="checkbox" name="eastern" <?php echo $post_data['eastern'] ?> >Eastern</label></td>
+			<td><label class="checkbox-inline"><input type="checkbox" name="western" <?php echo $post_data['western'] ?> >Western</label></td>
+		</tr>
+	</table>
 	</div>
 	<div class="col-sm-2"><button type="submit" class="btn btn-primary btn-md" name="submit">Filter</button></div>
-	<div class="col-sm-2"<form action = "admin.php" method = "post" >
-	<label class="checkbox-inline"><input type="checkbox" name="lease" value="">View <br> All Applicants</label</form>
 </div>
 </form>
-</div>
 
 
 <div class="row">

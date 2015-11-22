@@ -37,6 +37,8 @@ class FarmerForm extends Form {
 		$this->fields['infrastructure_barn'] = new CheckBox("Needs Barn");
 		$this->fields['infrastructure_stables'] = new CheckBox("Needs Stables");
 		$this->fields['infrastructure_greenhouse'] = new CheckBox("Needs Greenhouse");
+		
+		// Equipment
 		$this->fields['equipment'] = new CheckBox("Needs eqipment");
 		$this->fields['equipment_other'] = new TextField("Description of Eqipment Needed");
 		$this->fields['irrigation'] = new CheckBox("Needs Irrigation");
