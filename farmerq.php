@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if(isset($_SESSION['type'])||isset($_SESSION['email'])){
+if(isset($_SESSION['choosePurpose'])||isset($_SESSION['type'])){
 
 	include "models/farmer_model.php";
 
@@ -58,10 +58,4 @@ else {
 	session_destroy();
 	header('Location: index.php');
 }
-
-/*
-echo "<pre>";
-print_r($form);
-echo "</pre>";
-*/
 ?>

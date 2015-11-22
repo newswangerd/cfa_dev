@@ -26,7 +26,7 @@ session_start();
 				$checkQuery = $form->load_by_filter(array("email"=>$_POST['email']));
 				if($checkQuery){
 					if($form->fields['password'] == $_POST['password']){
-							$redirect = "Location: farmerq.php";
+							$redirect = "Location: farmer_view.php";
 							$valid_password = true;
 						}
 				}
@@ -69,9 +69,8 @@ session_start();
 	$page_title = "Login Page";
 	$panel_heading = "Login";
 	$page_body = "login_template.php";
+
+
 	include "templates/template.php";
-	
-echo "<pre>";
-print_r($form);
-echo "</pre>";
+
 ?>
