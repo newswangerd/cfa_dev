@@ -60,6 +60,7 @@ else {
 }
 
 
+/*
 echo "<pre>";
 print_r(password_hash("pass", PASSWORD_BCRYPT, array('salt'=>'9CI3fv72o8kj6KI4Vx6Xsd')));
 echo "\n";
@@ -68,5 +69,6 @@ echo "\n";
 print_r($_SESSION);
 print_r($form);
 echo "</pre>";
+*/
 
 ?>
