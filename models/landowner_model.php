@@ -72,6 +72,12 @@ class LandownerForm extends Form {
 		$this->fields['irrigation'] = new CheckBox("Needs Irrigation");
 		$this->fields['goals'] = new TextField("Goals for Land");
 
+		// Location
+		$this->fields['northern'] = new CheckBox("Northern Kentucky");
+		$this->fields['central'] = new CheckBox("Central Kentucky");
+		$this->fields['eastern'] = new CheckBox("Easter Kentucky");
+		$this->fields['western'] = new CheckBox("Western Kentcky");
+
 		// Enabled
 		$this->fields['enabled'] = new CheckBox("Profile Enabled", True);
 	}

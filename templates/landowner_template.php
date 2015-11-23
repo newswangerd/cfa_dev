@@ -31,6 +31,18 @@
 		<br />
 		<br />
 
+	<b>What region is your farm in?</b>
+		<br>
+		<input type="checkbox" name="northern" <?php echo $form->fields['northern']; ?> > Northern Kentucky
+		<br>
+		<input type="checkbox" name="central" <?php echo $form->fields['central']; ?> > Central Kentucky
+		<br>
+		<input type="checkbox" name="eastern" <?php echo $form->fields['eastern']; ?> > Eastern Kentucky
+		<br>
+		<input type="checkbox" name="western" <?php echo $form->fields['western']; ?> >  Western Kentucky
+
+		<br />
+		<br />
 	<b>Farmland</b>
 	<br />
 		Total Acres:<br />

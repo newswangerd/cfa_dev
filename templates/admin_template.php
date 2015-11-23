@@ -21,7 +21,7 @@
 		<tr>
 			<th>Location</th>
 			<td><label class="checkbox-inline"><input type="checkbox" name="northern" <?php echo $post_data['northern'] ?> >Northern</label></td>
-			<td><label class="checkbox-inline"><input type="checkbox" name="southern" <?php echo $post_data['southern'] ?> >Southern</label></td>
+			<td><label class="checkbox-inline"><input type="checkbox" name="central" <?php echo $post_data['central'] ?> >Central</label></td>
 			<td><label class="checkbox-inline"><input type="checkbox" name="eastern" <?php echo $post_data['eastern'] ?> >Eastern</label></td>
 			<td><label class="checkbox-inline"><input type="checkbox" name="western" <?php echo $post_data['western'] ?> >Western</label></td>
 		</tr>
