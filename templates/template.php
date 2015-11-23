@@ -1,4 +1,4 @@
- <HTML>
+ <html>
  	<head>
  		<link rel="stylesheet" type="text/css" href="templates/css/bootstrap.min.css" />
  		<title><?php echo $page_title ?></title>
@@ -28,4 +28,4 @@
 	</div>
 </div>
 </body>
-</HTML>  
+</html>  

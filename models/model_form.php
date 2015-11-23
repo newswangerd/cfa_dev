@@ -3,7 +3,7 @@
 /**
  * Model Form Class
  * By: David Newswanger
- *
+ * Atiba Bailey and Yhenew Kassie
  * The purpose of this library is to provide an easy interface between the data
  * sent by the user and the database. In order to use this library, the user simply
  * needs to create a subclass which extends form. In this sub class the user has to
@@ -220,7 +220,7 @@ class PasswordField {
 	}
 
 	public function new_password($pass){
-		$this->value = password_hash($val, PASSWORD_BCRYPT, array('salt'=>'9CI3fv72o8kj6KI4Vx6Xsd'));
+		$this->value = password_hash($pass, PASSWORD_BCRYPT, array('salt'=>'9CI3fv72o8kj6KI4Vx6Xsd'));//$val changed to $pass
 	}
 
 	public function get_value(){
