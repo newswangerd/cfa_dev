@@ -1,4 +1,4 @@
- <form class="form-horizontal" action="" method="POST">
+<form class="form-horizontal" action="" method="POST">
 <div class = "row">
   <div class="col-sm-6">
     <div class="control-group">
@@ -16,7 +16,8 @@
         <span class="text-danger"><?php echo $error['lname']; ?></span>
       </div>
     </div>
-
+</div>
+<div class="col-sm-6">
       <div class="control-group">
       <label class="control-label" for="phone">Phone Number</label>
       <div class="controls">
@@ -25,8 +26,6 @@
         <span class="text-danger"><?php echo $error['phone']; ?></span>
       </div>
     </div>
-</div>
-<div class="col-sm-6">
     <div class="control-group">
       <label class="control-label" for="email">E-mail</label>
       <div class="controls">

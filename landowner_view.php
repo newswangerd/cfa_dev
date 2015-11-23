@@ -1,10 +1,10 @@
 <?php
-	include "models/farmer_model.php";
+	include "models/landowner_model.php";
 
 	$error = array('fname' => '', 'lname' => '', 'phone'=> '','email' => '', 'address' => '', 'password'=> '', 'password_confirm'=>'');
 	$fields = array('fname' => '', 'lname' => '', 'phone'=> '','email' => '', 'address' => '', 'password'=> '', 'password_confirm'=>'');
 
-	$form = new FarmerForm();
+	$form = new LandownerForm();
 	$data = $form->load_from_post();
 	
 // Add support for Select
