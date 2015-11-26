@@ -1,5 +1,5 @@
-<?php //if(!$is_valid){echo '<div class="alert alert-danger" role="alert">It looks like there are some mistakes!</div>';} ?>
-<form action = "farmerq.php" method = "post">
+<?php ?>
+<form action = "farmer_view.php" method = "post">
 <div class="row">
 	<div class="col-sm-6">
 		<br>
