@@ -8,54 +8,62 @@
 	    <div class="control-group">
       <label class="control-label" for="fname">First Name</label>
       <div class="controls">
-        <input type="text" id="fname" name="fname" placeholder="" value="<?php echo $fields['fname'] ?>" class="form-control input-lg">
-        <span class="text-danger"><?php echo $error['fname']; ?></span>
+        <input type="text" id="fname" name="first_name" placeholder="" value="<?php echo $form->fields['first_name'] ?>" class="form-control input-lg">
+        <span class="text-danger"><?php //echo $error['fname']; ?></span>
       </div>
     </div>
  
 	<div class="control-group">
       <label class="control-label" for="lname">Last Name</label>
       <div class="controls">
-        <input type="text" id="lname" name="lname" placeholder="" value="<?php echo $fields['lname'] ?>" class="form-control input-lg">
-        <span class="text-danger"><?php echo $error['lname']; ?></span>
+        <input type="text" id="lname" name="lname" placeholder="" value="<?php echo $form->fields['last_name'] ?>" class="form-control input-lg">
+        <span class="text-danger"><?php //echo $error['lname']; ?></span>
       </div>
     </div>
 
       <div class="control-group">
       <label class="control-label" for="phone">Phone Number</label>
       <div class="controls">
-        <input type="text" id="phone" name="phone" placeholder="" value="<?php echo $fields['phone'] ?>" class="form-control input-lg">
+        <input type="text" id="phone" name="phone" placeholder="" value="<?php echo $form->fields['phone'] ?>" class="form-control input-lg">
         <p class="help-block">Please provide your Phone Number</p>
-        <span class="text-danger"><?php echo $error['phone']; ?></span>
+        <span class="text-danger"><?php //echo $error['phone']; ?></span>
+      </div>
+    </div>
+	
+	<div class="control-group">
+      <label class="control-label" for="email">E-mail</label>
+      <div class="controls">
+        <input type="email" id="email" name="email" placeholder="" value="<?php echo $form->fields['email'] ?>" class="form-control input-lg">
+        <p class="help-block">Please provide your E-mail</p>
+        <span class="text-danger"><?php //echo $error['email']; ?></span>
       </div>
     </div>
 	
   </div>
 
     <div class="col-sm-6">
-	    <div class="control-group">
-      <label class="control-label" for="email">E-mail</label>
-      <div class="controls">
-        <input type="email" id="email" name="email" placeholder="" value="<?php echo $fields['email'] ?>" class="form-control input-lg">
-        <p class="help-block">Please provide your E-mail</p>
-        <span class="text-danger"><?php echo $error['email']; ?></span>
-      </div>
-    </div>
 	
-	<div class="control-group">
-      <label class="control-label" for="address">Address: Street, City, Zip, State</label>
-      <div class="controls">
-        <input type="address" id="address" name="address" placeholder="" value="<?php echo $fields['address'] ?>" class="form-control input-lg">
-        <span class="text-danger"><?php echo $error['address']; ?></span>
-      </div>
-    </div>
+	<b>Location</b>
+	<br />
+		Street:<br />
+		<input type="text" name="street" value="<?php echo $form->fields['street']; ?>">
+		<span class="text-danger"><?php echo $form->fields['street']->error; ?></span>
+		<br />
+		City:<br />
+		<input type="text" name="city" value="<?php echo $form->fields['city']; ?>">
+		<span class="text-danger"><?php echo $form->fields['city']->error; ?></span>
+		<br />
+		Zip:<br />
+		<input type="text" name="zip" value="<?php echo $form->fields['zip']; ?>">
+		<span class="text-danger"><?php echo $form->fields['zip']->error; ?></span>
+		<br />
 	
     <div class="control-group">
       <label class="control-label" for="password">Password</label>
       <div class="controls">
         <input type="password" id="password" name="password" placeholder="" class="form-control input-lg">
         <p class="help-block">Password should be at least 6 characters</p>
-        <span class="text-danger"><?php echo $error['password']; ?></span>
+        <span class="text-danger"><?php //echo $error['password']; ?></span>
       </div>
     </div>
  
@@ -63,12 +71,12 @@
       <label class="control-label" for="password_confirm">Password (Confirm)</label>
       <div class="controls">
         <input type="password" id="password_confirm" name="password_confirm" placeholder="" class="form-control input-lg">
-        <span class="text-danger"><?php echo $error['password_confirm']; ?></span>
+        <span class="text-danger"><?php //echo $error['password_confirm']; ?></span>
       </div>
     </div>
 	</div>
 </div>
-
+<br>
 <div class="row">
 	<div class="col-sm-6">
 		 <b>Are you looking to...</b>

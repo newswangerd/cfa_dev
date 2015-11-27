@@ -36,7 +36,7 @@ session_start();
 				$checkQuery = $form->load_by_filter(array("email"=>$_POST['email']));
 				if($checkQuery){
 					if($form->fields['password']->authenticate($_POST['password'])){
-							$redirect = "Location: landownerq.php";
+							$redirect = "Location: landowner_view.php";
 							$valid_password = true;
 						}
 				}
@@ -56,6 +56,7 @@ session_start();
 			$_SESSION['first_name'] = $form->fields['first_name'];
 			$_SESSION['last_name'] = $form->fields['last_name'];
 			$_SESSION['usr_id'] = $form->fields->$id_instance;
+			$_SESSION['email'] = $form->fields['email'];
 			header($redirect);
 			die();
 		}

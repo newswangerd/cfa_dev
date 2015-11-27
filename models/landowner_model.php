@@ -15,7 +15,7 @@ class LandownerForm extends Form {
 		$this->fields['password'] = new PasswordField("Password");
 		$this->fields['email'] = new TextField("Email Address");
 		$this->fields['phone'] = new TextField("Phone Number");
-		$this->fields['address'] = new TextField("Address");
+		//$this->fields['address'] = new TextField("Address");
 		
 		// Terms
 		$this->fields['to_rent'] = new CheckBox("Want to rent");

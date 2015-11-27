@@ -5,8 +5,8 @@ session_start();
 
 
 
-$fields = array('fname' => '', 'lname' => '', 'email'=> '', 'password'=> '', 'password_confirm'=> '', 'choosePurpose' => '', 'phone' => '', 'address' => '');
-$error = array('fname' => '', 'lname' => '', 'email'=> '', 'password'=> '', 'password_confirm'=> '', 'choosePurpose' => '', 'phone' => '', 'address' => '');
+$fields = array('fname' => '', 'lname' => '', 'email'=> '', 'password'=> '', 'password_confirm'=> '', 'choosePurpose' => '', 'phone' => '', 'street' => '', 'city' => '', 'zip' => '');
+$error = array('fname' => '', 'lname' => '', 'email'=> '', 'password'=> '', 'password_confirm'=> '', 'choosePurpose' => '', 'phone' => '', 'street' => '', 'city' => '', 'zip' => '');
 
 $valid = true;
 

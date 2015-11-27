@@ -14,7 +14,10 @@ class FarmerForm extends Form {
 		$this->fields['password'] = new PasswordField("Password");
 		$this->fields['email'] = new TextField("Email Address");
 		$this->fields['phone'] = new TextField("Phone Number");
-		$this->fields['address'] = new TextField("Address");
+		//$this->fields['address'] = new TextField("Address");
+		$this->fields['street'] = new TextField("Street");
+		$this->fields['city'] = new TextField("City");
+		$this->fields['zip'] = new IntegerField("Zip");
 
 		// Terms
 		$this->fields['to_rent'] = new CheckBox("Want to rent");

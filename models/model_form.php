@@ -476,6 +476,7 @@ class Form {
 			// Constructs the values and fields portion of the quey by looping through
 			// the fields array.
 			foreach ($this->fields as $key => $value){
+				if($key == "password") $value->value = password_hash($value->value, PASSWORD_BCRYPT, array('salt'=>'9CI3fv72o8kj6KI4Vx6Xsd')); //hash the password before saving it.
 				if (get_class($value)=="ForeignKey"){
 					$update = $update . $key . " = '" . $value->value->id_instance . "', ";
 				} else {
@@ -541,7 +542,7 @@ class Form {
 			found in the $_POST array.
 		*/
 		if (empty($_POST)){
-			return true;
+			return false;//if post is empty return false;
 		}
 
 		$data = false;
