@@ -5,7 +5,7 @@
 		<br>
 		<button type="button" class="btn btn-danger">Deavtivate your account</button>
 		<br><br><br>
-	<div class="control-group">
+	    <div class="control-group">
       <label class="control-label" for="fname">First Name</label>
       <div class="controls">
         <input type="text" id="fname" name="first_name" placeholder="" value="<?php echo $form->fields['first_name'] ?>" class="form-control input-lg">

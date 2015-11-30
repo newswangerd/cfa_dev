@@ -17,7 +17,7 @@ $fields = array('fname' => $form->fields['first_name'], 'lname' => $form->fields
 
 //handle post operation
 $info = $form->load_from_post();
-if($info){
+if($info){ echo "Check";
 	$is_valid = $form->validate();
 	if($is_valid){
 		if($form->save()){
