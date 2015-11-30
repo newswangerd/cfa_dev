@@ -54,7 +54,9 @@ $page_body = "landowner_view_template.php";
 
 include "templates/template.php";
 
+/*
 echo "<pre>";
 print_r($form);
 echo "</pre>";
+*/
 ?>
