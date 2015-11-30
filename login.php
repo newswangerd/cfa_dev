@@ -53,10 +53,10 @@ session_start();
 			}
 		if($valid_password == true){
 			$_SESSION['type'] = $login_fields['user_type'];
-			$_SESSION['first_name'] = $form->fields['first_name'];
-			$_SESSION['last_name'] = $form->fields['last_name'];
-			$_SESSION['usr_id'] = $form->fields->$id_instance;
-			$_SESSION['email'] = $form->fields['email'];
+			$_SESSION['first_name'] = $form->fields['first_name']->get_value();
+			$_SESSION['last_name'] = $form->fields['last_name']->get_value();
+			$_SESSION['usr_id'] = $form->id_instance;
+			$_SESSION['email'] = $form->fields['email']->get_value();
 			header($redirect);
 			die();
 		}

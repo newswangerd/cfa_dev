@@ -7,7 +7,6 @@
 
  	 </head>
  <body>
-<div class="alert alert-info text-center" role="alert">Please fill out our feedback form.</div>
  <div class="container">
  <div class="row">
 		<center><div class="col-md-9">

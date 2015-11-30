@@ -220,7 +220,12 @@ class PasswordField {
 	}
 
 	public function new_password($pass){
-		$this->value = password_hash($pass, PASSWORD_BCRYPT, array('salt'=>'9CI3fv72o8kj6KI4Vx6Xsd'));//$val changed to $pass
+		$this->set_value($pass);
+		$this->hash_pass();
+	}
+
+	public function hash_pass(){
+		$this->value = password_hash($this->value, PASSWORD_BCRYPT, array('salt'=>'9CI3fv72o8kj6KI4Vx6Xsd'));
 	}
 
 	public function get_value(){
@@ -306,7 +311,6 @@ class Form {
 		}
 		//added the following
 		if(!$conn) echo "No connection!";
-
 		// Load the result into the object
 		foreach ($this->fields as $key => $value){
 			$this->fields[$key]->set_value($row[$key]);

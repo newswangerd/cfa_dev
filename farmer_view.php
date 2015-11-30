@@ -5,10 +5,7 @@
 //populate
 if(isset($_SESSION)){
 	$form = new FarmerForm();
-	$form->load_by_filter(array());
-	while($form->load_next()){
-		
-	}
+	$form->load_by_pk($_SESSION['usr_id']);
 }
 /* $error = array('fname' => '', 'lname' => '', 'phone'=> '','email' => '', 'address' => '', 'password'=> '', 'password_confirm'=>'');
 $fields = array('fname' => $form->fields['first_name'], 'lname' => $form->fields['last_name'], 'phone'=> $form->fields['phone'],
@@ -18,6 +15,20 @@ $fields = array('fname' => $form->fields['first_name'], 'lname' => $form->fields
 //handle post operation
 $info = $form->load_from_post();
 if($info){ echo "Check";
+
+	// Sets the "describe" fields to not required if the checkbox isn't set
+	if (!$form->fields['to_other']->value){
+		$form->fields['terms_other']->set_required(false);
+	}
+
+	if (!$form->fields['housing']->value){
+		$form->fields['describe_housing']->set_required(false);
+	}
+
+	if (!$form->fields['equipment']->value){
+		$form->fields['equipment_other']->set_required(false);
+	}
+
 	$is_valid = $form->validate();
 	if($is_valid){
 		if($form->save()){

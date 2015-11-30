@@ -105,7 +105,7 @@
 	<br />
 	<input type="checkbox" name="housing" <?php echo $form->fields['housing']; ?> > 
 	Yes. Describe: <input type="text" name="describe_housing" value="<?php echo $form->fields['describe_housing']; ?>" />
-	<span class="text-danger"><?php echo $form->fields['housing']->error; ?></span>
+	<span class="text-danger"><?php echo $form->fields['describe_housing']->error; ?></span>
 
 	<br />
 	<br />
