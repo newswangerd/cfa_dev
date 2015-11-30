@@ -35,6 +35,7 @@ if($data){
 	$is_valid = $form->validate();
 	if ($is_valid){
 		if($form->save()){
+			mail("kassiey@berea.edu","New application submitted","Login to see the application","");
 			session_destroy();
 			header('Location: confirmation.php');
 			die();

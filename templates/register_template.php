@@ -26,7 +26,7 @@
       </div>
     </div>
 	
-	    <div class="control-group">
+	<div class="control-group">
       <label class="control-label" for="password">Password</label>
       <div class="controls">
         <input type="password" id="password" name="password" placeholder="" class="form-control input-lg">

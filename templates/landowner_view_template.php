@@ -1,6 +1,10 @@
 <form class="form-horizontal" action="landowner_view.php" method="POST">
 <div class = "row">
   <div class="col-sm-6">
+	
+		<button type="button" class="btn btn-danger">Deavtivate your account</button>
+		<br><br>
+	
     <div class="control-group">
       <label class="control-label" for="fname">First Name</label>
       <div class="controls">
@@ -16,9 +20,8 @@
         <span class="text-danger"><?php// echo $error['lname']; ?></span>
       </div>
     </div>
-</div>
-<div class="col-sm-6">
-      <div class="control-group">
+	
+	 <div class="control-group">
       <label class="control-label" for="phone">Phone Number</label>
       <div class="controls">
         <input type="text" id="phone" name="phone" placeholder="" value="<?php echo $form->fields['phone'] ?>" class="form-control input-lg">
@@ -26,6 +29,10 @@
         <span class="text-danger"><?php// echo $error['phone']; ?></span>
       </div>
     </div>
+	
+</div>
+<div class="col-sm-6">
+
     <div class="control-group">
       <label class="control-label" for="email">E-mail</label>
       <div class="controls">
@@ -34,23 +41,28 @@
         <span class="text-danger"><?php// echo $error['email']; ?></span>
       </div>
     </div>
+
+	<div class="control-group">
+      <label class="control-label" for="password">Password</label>
+      <div class="controls">
+        <input type="password" id="password" name="password" placeholder="" class="form-control input-lg">
+        <p class="help-block">Password should be at least 6 characters</p>
+        <span class="text-danger"><?php //echo $error['password']; ?></span>
+      </div>
+    </div>
+ 
+    <div class="control-group">
+      <label class="control-label" for="password_confirm">Password (Confirm)</label>
+      <div class="controls">
+        <input type="password" id="password_confirm" name="password_confirm" placeholder="" class="form-control input-lg">
+        <span class="text-danger"><?php //echo $error['password_confirm']; ?></span>
+      </div>
+    </div>
 	
   </div>
 </div>
 
-	<b>What region is your farm in?</b>
-		<br>
-		<input type="checkbox" name="northern" <?php echo $form->fields['northern']; ?> > Northern Kentucky
-		<br>
-		<input type="checkbox" name="central" <?php echo $form->fields['central']; ?> > Central Kentucky
-		<br>
-		<input type="checkbox" name="eastern" <?php echo $form->fields['eastern']; ?> > Eastern Kentucky
-		<br>
-		<input type="checkbox" name="western" <?php echo $form->fields['western']; ?> >  Western Kentucky
-
-		<br />
-		<br />
-
+<br>
 <div class="col-sm-6">
 	<b>Are you looking to...</b>
 	 	<br />
@@ -81,6 +93,19 @@
 		<br />
 		<br />
 
+	<b>What region is your farm in?</b>
+		<br>
+		<input type="checkbox" name="northern" <?php echo $form->fields['northern']; ?> > Northern Kentucky
+		<br>
+		<input type="checkbox" name="central" <?php echo $form->fields['central']; ?> > Central Kentucky
+		<br>
+		<input type="checkbox" name="eastern" <?php echo $form->fields['eastern']; ?> > Eastern Kentucky
+		<br>
+		<input type="checkbox" name="western" <?php echo $form->fields['western']; ?> >  Western Kentucky
+
+		<br />
+		<br />
+		
 	<b>Farmland</b>
 	<br />
 		Total Acres:<br />
