@@ -1,5 +1,7 @@
 <form action = "admin.php" method = "post">
 <div class="row">
+	<center><h4 class="text-primary">To display all of the applicants in the database, directly click the Filter button without selecting anything.</h4>
+				<h4 class="text-primary">Select one or more of the options to filter out.</h4></center><br>
 	<div class="col-sm-2"><h3>Filter by:</h3></div>
 	<div class="col-sm-8">
 	<table class="table table-condensed">
@@ -34,6 +36,7 @@
 
 <div class="row">
 	<div class="col-sm-6 well">
+		<center><h4>Farmers:</h4></center>
 		<table class="table table-condensed">
 			<tr>
 				<th></th>
@@ -57,6 +60,7 @@
 		</table>
 	</div>
 	<div class="col-sm-6 well">
+		<center><h4>Landowners:</h4></center>
 		<table class="table table-condensed">
 			<tr>
 				<th></th>

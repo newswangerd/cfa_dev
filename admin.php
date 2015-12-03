@@ -38,14 +38,20 @@ if (!empty($_POST)){
 	}
 
 } else {
-	$filter = "";
+	$filter = "nothing";
 }
 
 $farmer = new FarmerForm();
 $landO = new LandownerForm();
 
+$check_post = false;
+if(isset($_POST)){
+	
 $farmer->load_by_filter($filter);
 $landO->load_by_filter($filter);
+$check_post = true;
+}
+else $check_post = false;
 
 $page_title = "Admin page";
 $panel_heading = "Admin";
