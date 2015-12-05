@@ -11,9 +11,10 @@
 			<a href="https://docs.google.com/forms/d/1q5V7bhpi3e3njORD4S3bMo-DN1TYZdv05qIfS4gMdwg/viewform?c=0&w=1">
 				<b>feedback.<b></a></p>
 	  </div>
-	  <div class="container">
-			<a href="index.php" class="btn btn-danger btn-sm" role="button">Logout</a>		  
-		</div>
+	  <center><div class="container">
+							<a href="logout.php" class="btn btn-danger btn-sm" role="button">Logout</a>
+					</button>		  
+		</div></center>
     </div>
  </div>
 </html>

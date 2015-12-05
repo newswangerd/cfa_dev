@@ -42,6 +42,8 @@ if (!empty($_POST)){
 	}
 }
 
+$login = "login_button.php";
+
 
 // Add support for Select
 $page_title = "Register";

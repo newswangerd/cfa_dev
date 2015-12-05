@@ -9,22 +9,22 @@
  <body>
  <div class="container">
  <div class="row">
-		<center><div class="col-md-9">
-			<img src = "templates/CFAlogos-06med.jpg">
-		</div></center>
-		<div class="col-sm-3"><br><br><br><br><button type="button" class="btn btn-warning"><h5>Registered already?</h5></button>
-			<a href="login.php" class="btn btn-warning btn-md" role="button">Login</a></div>		
+		<center><div class="col-md-12">
+			<a href="index.php"><img src = "templates/CFAlogos-06med.jpg"></a>
+		</div>		
 </div>
 	 <div class="row">
 		 <div class="panel panel-primary">
-			 <div class="panel-heading"><?php echo $panel_heading ?></div>
-
+			 <div class="panel-heading">
+			    <div class="container-fluid panel-container">
+                <div class="col-xs-8 text-left"><?php echo $panel_heading ?></div>
+                            <?php if (isset($login)){include $login;} if (isset($logout)){include $logout;}?> 
+			 </div>
+			 </div>
 			 <div class="panel-body">
 			 	<?php include $page_body ?>
 			 </div>
-				
-		</div>
-	</div>
+</div>
 </div>
 </body>
 </html>  

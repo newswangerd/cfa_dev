@@ -1,23 +1,26 @@
 <form class="form-horizontal" action="landowner_view.php" method="POST">
 <div class = "row">
   <div class="col-sm-6">
+	<input type="checkbox" name="enabled" <?php echo $form->fields['enabled']; ?> >Disable your account
+	<br><br>
     <div class="control-group">
       <label class="control-label" for="fname">First Name</label>
       <div class="controls">
-        <input type="text" id="fname" name="fname" placeholder="" value="<?php echo $form->fields['first_name'] ?>" class="form-control input-lg">
+        <input type="text" id="fname" name="first_name" placeholder="" value="<?php echo $form->fields['first_name'] ?>" class="form-control input-lg">
         <span class="text-danger"><?php// echo $error['fname']; ?></span>
       </div>
     </div>
- 
+	<br>
 	<div class="control-group">
       <label class="control-label" for="lname">Last Name</label>
       <div class="controls">
-        <input type="text" id="lname" name="lname" placeholder="" value="<?php echo $form->fields['last_name'] ?>" class="form-control input-lg">
+        <input type="text" id="lname" name="last_name" placeholder="" value="<?php echo $form->fields['last_name'] ?>" class="form-control input-lg">
         <span class="text-danger"><?php// echo $error['lname']; ?></span>
       </div>
     </div>
 </div>
 <div class="col-sm-6">
+	<br>
       <div class="control-group">
       <label class="control-label" for="phone">Phone Number</label>
       <div class="controls">
@@ -37,7 +40,7 @@
 	
   </div>
 </div>
-
+<br><br>
 	<b>What region is your farm in?</b>
 		<br>
 		<input type="checkbox" name="northern" <?php echo $form->fields['northern']; ?> > Northern Kentucky

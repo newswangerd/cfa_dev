@@ -44,6 +44,8 @@ if($info){ echo "Check";
 	}
 }	
 
+$logout = "logout_button.php";
+
 $page_title = "Farmer edit";
 $panel_heading = "Edit";
 $page_body = "farmer_view_template.php";

@@ -47,6 +47,8 @@ if($info){
 	}
 }
 
+$logout = "logout_button.php";
+
 $page_title = "Landowner edit";
 $panel_heading = "Edit";
 $page_body = "landowner_view_template.php";
