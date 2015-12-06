@@ -36,7 +36,9 @@
 
 <div class="row">
 	<div class="col-sm-6 well">
-		<center><h4>Farmers:</h4></center>
+		<center><h4>Farmers:
+		<?php echo " ".$farmer->number_of_instances();?>
+		</h4></center>
 		<table class="table table-condensed">
 			<tr>
 				<th></th>
@@ -60,7 +62,9 @@
 		</table>
 	</div>
 	<div class="col-sm-6 well">
-		<center><h4>Landowners:</h4></center>
+		<center><h4>Landowners:
+		<?php echo " ".$landO->number_of_instances();?>
+		</h4></center>
 		<table class="table table-condensed">
 			<tr>
 				<th></th>
@@ -108,20 +112,26 @@
 $template = '
 <div class="modal fade" id="farmerModal%s" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
+  <div class="panel panel-primary">
     <div class="modal-content">
+	<div class="panel-heading" style="background-color:#FFFF99;">
+	<div class="container-fluid panel-container">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        <center><h4 style="color:red;"> <span class="modal-title" id="myModalLabel"></span>Profile of  %s %s</h4></center>
       </div>
+	  </div>
+	  </div>
       <div class="modal-body">
       <table class="table table-condensed">
        %s
        </table>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
     </div>
+	</div>
   </div>
 </div>
 ';
@@ -132,26 +142,32 @@ while ($farmer->load_next()){
 		$modal_body = $modal_body . '<tr><th>'. $value->name . "</th><td>" . $value->get_value() . '</td></tr>';
 	}
 
-	echo sprintf($template, $farmer->id_instance, $modal_body);
+	echo sprintf($template, $farmer->id_instance,$farmer->fields['first_name'], $farmer->fields['last_name'], $modal_body);
 }
 
 $template = '
 <div class="modal fade" id="landModal%s" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
+  <div class="panel panel-primary">
     <div class="modal-content">
+	<div class="panel-heading" style="background-color:#FFFF99;">
+	<div class="container-fluid panel-container">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">%s %s</h4>
+        <center><h4 style="color:red;"> <span class="modal-title" id="myModalLabel"></span>Profile of  %s %s</h4></center>
       </div>
+	  </div>
+	  </div>
       <div class="modal-body">
       <table class="table table-condensed">
        %s
        </table>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
     </div>
+	</div>
   </div>
 </div>
 ';

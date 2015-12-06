@@ -481,12 +481,14 @@ class Form {
 			// the fields array.
 			foreach ($this->fields as $key => $value){
 				//if($key == "password") $value->value = password_hash($value->value, PASSWORD_BCRYPT, array('salt'=>'9CI3fv72o8kj6KI4Vx6Xsd')); //hash the password before saving it.
-				if (get_class($value)=="ForeignKey"){
+				if (is_object($value)){//check if it is object first
+					if(get_class($value)=="ForeignKey"){
 					$update = $update . $key . " = '" . $value->value->id_instance . "', ";
 				} else {
 					$update = $update . $key . " = '" . $value->value . "', ";
 				}
 			}
+		}
 			$update = substr($update, 0, -2);
 
 			// Builds the final query.
