@@ -58,7 +58,9 @@ if(!empty($_SESSION['email'])){
 
 	$logout = "logout_button.php";
 	$page_title = "Admin page";
-	$panel_heading = "Admin";
+
+	$panel_heading = "Welcome, administrator.";
+	
 	$page_body = "admin_template.php";
 
 
