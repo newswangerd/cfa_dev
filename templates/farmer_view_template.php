@@ -1,5 +1,9 @@
 <?php ?>
 <form action = "farmer_view.php" method = "post">
+		 <?php if($saved) echo '<div calss"container"><div class="jumbotron">
+		<h4 style = "color:green"><b>Your information has been successfully saved! Relax and keep farming.</b></h4>
+		</div></div>';
+	?>	
 <div class="row">
 	<div class="col-sm-6">
 	<input type="checkbox" name="disable" <?php echo $form->fields['to_rent']; ?> > Disable your account

@@ -1,9 +1,9 @@
 <?php
 include_once "models/model_form.php";
 session_start();
-/* include_once "models/landowner_model.php";
-include_once "models/farmer_model.php";
-include_once "models/admin_model.php"; */ 
+
+if(!empty($_SESSION['email'])){
+	
 	$form;
 	if($_SESSION['type'] == "Farmer"){
 		include "models/farmer_model.php";
@@ -62,5 +62,10 @@ $panel_head = false;
 	$page_body = "change_password_template.php";
 
 	include "templates/template.php";
-	
+}
+else {
+	session_unset();
+	session_destroy();
+	header('Location:index.php');
+}	
 ?>

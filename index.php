@@ -1,8 +1,12 @@
 <?php
 //We should write some sort of validation to make sure that people aren't trying to sign up with emails that are already in the system.
-
+session_set_cookie_params(0);
 session_start();
 
+/* include "models/admin_model.php";
+$pass = new PasswordField();
+		$pass->new_password(MartinRichards);
+		echo $pass->value; */
 
 
 $fields = array('fname' => '', 'lname' => '', 'email'=> '', 'password'=> '', 'password_confirm'=> '', 'choosePurpose' => '', 'phone' => '', 'street' => '', 'city' => '', 'zip' => '');

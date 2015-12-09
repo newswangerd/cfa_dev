@@ -4,17 +4,13 @@
 	session_start();
 //populate
 
-if(isset($_SESSION)){
+if(!empty($_SESSION['email'])){
 	$form = new LandownerForm();
 	$form->load_by_pk($_SESSION['usr_id']);
-}
-/* $error = array('fname' => '', 'lname' => '', 'phone'=> '','email' => '', 'address' => '', 'password'=> '', 'password_confirm'=>'');
-$fields = array('fname' => $form->fields['first_name'], 'lname' => $form->fields['last_name'], 'phone'=> $form->fields['phone'],
-					'email' => $form->fields['email'], 'address' => $form->fields['address'], 'password'=> '', 'password_confirm'=>''); */
-
 
 //handle post operation
 $info = $form->load_from_post();
+$saved = false;
 if($info){
 
 	// Sets the "describe" fields to not required if the checkbox isn't set
@@ -30,12 +26,12 @@ if($info){
 		$form->fields['equipment_other']->set_required(false);
 	}
 
-	echo "Check";
+	//echo "Check";
 	$is_valid = $form->validate();
 	
 	if($is_valid){
 		if($form->save()){
-			echo "Saved!";
+			$saved = true;
 			/* session_unset(); 
 			session_destroy() */;
 		}
@@ -56,9 +52,10 @@ $page_body = "landowner_view_template.php";
 
 include "templates/template.php";
 
-/*
-echo "<pre>";
-print_r($form);
-echo "</pre>";
-*/
+}
+	else {
+		session_unset();
+		session_destroy();
+		header('Location: index.php');
+	}
 ?>

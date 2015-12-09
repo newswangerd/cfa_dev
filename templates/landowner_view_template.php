@@ -1,4 +1,8 @@
 <form class="form-horizontal" action="landowner_view.php" method="POST">
+	<?php if($saved) echo '<div calss"container"><div class="jumbotron">
+		<h4 style = "color:green"><b>Your information has been successfully saved! Calm down and keep your farming legacy.</b></h4>
+		</div></div>';
+	?>
 <div class = "row">
   <div class="col-sm-6">
 	<input type="checkbox" name="enabled" <?php echo $form->fields['enabled']; ?> >Disable your account

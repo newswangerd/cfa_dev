@@ -2,7 +2,7 @@
 <div class="row">
 	<div class="col-sm-12">
 	 <?php if($panel_head) echo '<div class="jumbotron">
-		<h4>You have successfully changed your password!</h4>
+		<h4 style="color:green">You have successfully changed your password!</h4>
 		</div>';
 	?>	
     <div class="control-group">
