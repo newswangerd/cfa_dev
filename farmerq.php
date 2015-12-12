@@ -9,6 +9,8 @@ session_start();
 
 		$form = new FarmerForm();
 		$data = $form->load_from_post();
+		$form->fields['enabled']->set_value(true);
+
 
 
 		if (!$form->fields['to_other']->value){

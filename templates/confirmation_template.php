@@ -4,7 +4,7 @@
       <div class="controls">
         <h4>Congratulations! You have successfully completed your registration.</h4> <br>
 		<p><b>Thank you for registering your information with Kentucky Community Farm Alliance.
-			Once your application is reviewed and a much has been found, we will contacut you.</b> </p>
+			Once your application is reviewed, we will contact you.</b> </p>
       </div>
 	  <div class="container">
 		<p>Please provide us your 
@@ -12,7 +12,7 @@
 				<b>feedback.<b></a></p>
 	  </div>
 	  <center><div class="container">
-							<a href="logout.php" class="btn btn-danger btn-sm" role="button">Logout</a>
+							<a href="index.php" class="btn btn-danger btn-sm" role="button">Logout</a>
 					</button>		  
 		</div></center>
     </div>

@@ -2,6 +2,14 @@
 session_set_cookie_params(0);
 session_start();
 
+if(isset($_SESSION['type'])){
+	if ($_SESSION['type'] != "Administrator"){
+		header('Location: index.php');
+	}
+} else {
+	header('Location: index.php');
+}
+
 if(!empty($_SESSION['email'])){
 	include "models/farmer_model.php";
 	include "models/landowner_model.php";
@@ -20,10 +28,10 @@ if(!empty($_SESSION['email'])){
 					"central"=> "",
 					"eastern"=> "",
 					"western"=> "",
+					"enabled"=> "checked",
 					);
 
 	if (!empty($_POST)){
-		$filter = "";
 		$operators = array();
 		foreach ($post_data as $key => $value){
 			if (isset($_POST[$key])){
@@ -31,6 +39,8 @@ if(!empty($_SESSION['email'])){
 				if ($key != "livestock"){
 					$filter = $filter . $key . " = true AND ";
 				}
+			} else {
+				$post_data[$key] = "";
 			}
 		}
 
@@ -49,7 +59,7 @@ if(!empty($_SESSION['email'])){
 
 	$check_post = false;
 	if(isset($_POST)){
-		
+	
 	$farmer->load_by_filter($filter);
 	$landO->load_by_filter($filter);
 	$check_post = true;
@@ -59,7 +69,7 @@ if(!empty($_SESSION['email'])){
 	$logout = "logout_button.php";
 	$page_title = "Admin page";
 
-	$panel_heading = "Welcome, administrator.";
+	$panel_heading = "Welcome back, " . $_SESSION['first_name'] . '!';
 	
 	$page_body = "admin_template.php";
 

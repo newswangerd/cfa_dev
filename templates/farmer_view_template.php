@@ -1,12 +1,25 @@
-<?php ?>
+<?php if($_SESSION['type'] ==  "Administrator") {echo "<a class='btn btn-default btn-sm' href='admin.php'><-- Return to Admin Page</a>";} ?>
 <form action = "farmer_view.php" method = "post">
 		 <?php if($saved) echo '<div calss"container"><div class="jumbotron">
 		<h4 style = "color:green"><b>Your information has been successfully saved! Relax and keep farming.</b></h4>
-		</div></div>';
-	?>	
+		</div></div>'; ?>
+
+<?php if($_SESSION['type'] == "Administrator") {
+	echo '
+	<br />
+	Notes:
+	<br />
+	<div clas="row">
+		<div class="col-sm-12">
+			<textarea name="admin_notes" class="form-control">' . $form->fields['admin_notes'] . '</textarea>
+		</div>
+	</div>
+	';
+}
+?>
 <div class="row">
 	<div class="col-sm-6">
-	<input type="checkbox" name="disable" <?php echo $form->fields['to_rent']; ?> > Disable your account
+	<input type="checkbox" name="enabled" <?php echo $form->fields['enabled']; ?> > Uncheck this box to remove your application from our system.
 		<br><br><br>
 	<div class="control-group">
       <label class="control-label" for="fname">First Name</label>
@@ -230,6 +243,7 @@
 		 <textarea name="sell_produce" class="form-control"><?php echo $form->fields['sell_produce']; ?></textarea>
 	</p>
 	<br>
+	<?php if(isset($_POST['farmer_id'])) echo "<input type='hidden' name='farmer_id' value='". $_POST['farmer_id'] ."' />" ?>
 	<input type="submit" class="btn btn-primary btn-lg" name="submit" value="Submit" />
 	</div>
 </form>

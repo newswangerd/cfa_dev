@@ -78,7 +78,8 @@ class LandownerForm extends Form {
 		$this->fields['eastern'] = new CheckBox("Easter Kentucky");
 		$this->fields['western'] = new CheckBox("Western Kentcky");
 
-		// Enabled
+		// Misc
+		$this->fields['admin_notes'] = new TextField("Administrative Notes", 1000, false);
 		$this->fields['enabled'] = new CheckBox("Profile Enabled", True);
 	}
 }

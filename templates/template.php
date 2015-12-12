@@ -17,7 +17,7 @@
 		 <div class="panel panel-primary">
 			 <div class="panel-heading">
 			    <div class="container-fluid panel-container">
-                <div class="col-xs-8 text-left"><?php echo $panel_heading ?></div>
+                <div class="col-xs-8 text-left"><h5><?php echo $panel_heading ?></h5></div>
                             <?php if (isset($login)){include $login;} if (isset($logout)){include $logout;}?> 
 			 </div>
 			 </div>

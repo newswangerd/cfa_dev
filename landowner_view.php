@@ -3,16 +3,23 @@
 	include_once "models/model_form.php";
 	session_start();
 //populate
+if(isset($_SESSION['type'])){
 
-if(!empty($_SESSION['email'])){
-	$form = new LandownerForm();
-	$form->load_by_pk($_SESSION['usr_id']);
+	if($_SESSION['type'] == "Landowner"){
+		$form = new LandownerForm();
+		$form->load_by_pk($_SESSION['usr_id']);
+	} elseif ($_SESSION['type'] == "Administrator") {
+		if (isset($_POST['landowner_id'])){
+			$form = new LandownerForm();
+			$form->load_by_pk($_POST['landowner_id']);
+		} else { header('Location: admin.php'); }
+	} else { header('Location: index.php'); }
 
 //handle post operation
-$info = $form->load_from_post();
 $saved = false;
-if($info){
+if(isset($_POST['submit'])){
 
+	$form->load_from_post();
 	// Sets the "describe" fields to not required if the checkbox isn't set
 	if (!$form->fields['to_other']->value){
 		$form->fields['terms_other']->set_required(false);
@@ -29,7 +36,7 @@ if($info){
 	//echo "Check";
 	$is_valid = $form->validate();
 	
-	if($is_valid){
+	if($is_valid AND isset($_POST['submit'])){
 		if($form->save()){
 			$saved = true;
 			/* session_unset(); 

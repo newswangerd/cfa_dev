@@ -27,6 +27,10 @@
 			<td><label class="checkbox-inline"><input type="checkbox" name="eastern" <?php echo $post_data['eastern'] ?> >Eastern</label></td>
 			<td><label class="checkbox-inline"><input type="checkbox" name="western" <?php echo $post_data['western'] ?> >Western</label></td>
 		</tr>
+		<tr>
+			<th>Enabled</th>
+			<td colspan="3"><label class="checkbox-inline"><input type="checkbox" name="enabled" <?php echo $post_data['enabled'] ?> >Show only enabled applications.</label></td>
+		</tr>
 	</table>
 	</div>
 	<div class="col-sm-2"><button type="submit" class="btn btn-primary btn-md" name="submit">Filter</button></div>
@@ -126,6 +130,10 @@ $template = '
       <table class="table table-condensed">
        %s
        </table>
+       <form method="post" action="farmer_view.php">
+       <input type="hidden" name="farmer_id" value="%s" />
+       <input type="submit" value="Edit Profile" />
+       </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -142,7 +150,7 @@ while ($farmer->load_next()){
 		$modal_body = $modal_body . '<tr><th>'. $value->name . "</th><td>" . $value->get_value() . '</td></tr>';
 	}
 
-	echo sprintf($template, $farmer->id_instance,$farmer->fields['first_name'], $farmer->fields['last_name'], $modal_body);
+	echo sprintf($template, $farmer->id_instance,$farmer->fields['first_name'], $farmer->fields['last_name'], $modal_body, $farmer->id_instance);
 }
 
 $template = '
@@ -162,6 +170,10 @@ $template = '
       <table class="table table-condensed">
        %s
        </table>
+       <form method="post" action="landowner_view.php">
+       <input type="hidden" name="landowner_id" value="%s" />
+       <input type="submit" value="Edit Profile" />
+       </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -178,6 +190,10 @@ while ($landO->load_next()){
 		$modal_body = $modal_body . '<tr><th>'. $value->name . "</th><td>" . $value->get_value() . '</td></tr>';
 	}
 
-	echo sprintf($template, $landO->id_instance, $landO->fields['first_name'], $landO->fields['last_name'], $modal_body);
+	echo sprintf($template, $landO->id_instance, $landO->fields['first_name'], $landO->fields['last_name'], $modal_body, $landO->id_instance);
 }
 ?>
+
+<hr />
+
+<a class='btn btn-default btn-sm' href='manage_admins.php'>Manage Administrators --></a>
