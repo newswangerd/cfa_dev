@@ -2,6 +2,7 @@
 session_set_cookie_params(0);
 session_start();
 
+// If anyone but an admin comes here they get kicked out.
 if(isset($_SESSION['type'])){
 	if ($_SESSION['type'] != "Administrator"){
 		header('Location: index.php');
@@ -16,6 +17,7 @@ include "models/farmer_model.php";
 include "models/landowner_model.php";
 
 
+ //the following associative array stores the search criteria 
 $post_data = array(
 				"to_rent"=> "",
 				"to_sell"=> "",
@@ -83,6 +85,7 @@ if (!empty($_POST)){
 	$filter = substr($filter, 0, -5);
 
 } else {
+	// If no post operation is set, don't load anything from DB.
 	$filter = "nothing";
 }
 
