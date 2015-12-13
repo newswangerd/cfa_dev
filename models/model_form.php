@@ -531,7 +531,7 @@ class Form {
 		$query = "DELETE FROM %s WHERE %s = ?";
 		$query = sprintf($query, $this->table_name, $this->id_name);
 
-		if (is_array($this->execute_query($query, $this->id_instance)){
+		if (is_array($this->execute_query($query, $this->id_instance))){
 			return True;
 		} else {
 			return False;
