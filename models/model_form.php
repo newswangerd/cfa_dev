@@ -286,14 +286,14 @@ class Form {
 	public $fields = array();
 	public $instances = array();
 
-	private function execute_query($query, $params, $return){
+	private function execute_query($query, $params){
 		$conn = new PDO(sprintf('mysql:host=%s;dbname=%s;charset=utf8', $GLOBALS['config']['db_host'],$GLOBALS['config']['db']), $GLOBALS['config']['db_user'], $GLOBALS['config']['db_pass']);
 		$stmt = $conn->prepare($query);
 		$result = $stmt->execute($params);
-		if ($return){
+		if ($result){
 			return $stmt->fetchAll(PDO::FETCH_ASSOC);
 		} else {
-			return $result;
+			return false;
 		}
 	}
 
@@ -314,7 +314,7 @@ class Form {
 		// Construct the query
 		$query = "SELECT * FROM %s WHERE %s = ?;";
 		$query = sprintf($query, $this->table_name, $this->id_name);
-		$row = $this->execute_query($query, array($this->id_instance), true);
+		$row = $this->execute_query($query, array($this->id_instance));
 		$row = $row[0];
 
 		// Load the result into the object
@@ -327,6 +327,9 @@ class Form {
 
 	public function load_by_filter($filter, $operator = "AND"){
 		/*
+			WARNING: When using a string as a filter, this function is succeptable to SQL inject.
+			Try to use array filter's whenever possible.
+
 			Takes a given filter and loads all of the values returned from that filter into the 
 			"instances" array.
 
@@ -342,10 +345,9 @@ class Form {
 			In order to load everything from the table, "" can  be passed as the filter
 		*/
 
-		//TODO: FIX AGAINST MYSQL INJECTION
-
 		$this->instances = array();
 		$this->current_index = 0;
+		$params = array();
 		
 		// If the filter is empty, the query simply pulls everything from the database.
 		if (!empty($filter)){
@@ -359,11 +361,8 @@ class Form {
 				foreach($filter as $key=>$value){
 
 					// If the value passed is a string, then it must be enclose within a ''
-					if(gettype($value) == "string"){
-						$template = "%s = '%s' %s ";
-					} else {
-						$template = "%s = %s %s ";
-					}
+					$template = "%s = ? %s ";
+					$params[] = $value;
 
 					$counter = $counter - 1;
 
@@ -371,9 +370,9 @@ class Form {
 					// This is to avoid an invalid SELECT * FROM bar WHERE foo = bar AND ; query where
 					// there is an invalid operator at the end of the query
 					if ($counter == 0){
-						$conditions = $conditions . sprintf($template, $key, (string)$value, "");
+						$conditions = $conditions . sprintf($template, $key, "");
 					} else {
-						$conditions = $conditions . sprintf($template, $key, (string)$value, $operator);
+						$conditions = $conditions . sprintf($template, $key, $operator);
 					}
 				}
 
@@ -385,20 +384,20 @@ class Form {
 		} else {
 			$query = sprintf("SELECT * FROM %s", $this->table_name);
 		}
-		$conn = mysqli_connect($GLOBALS['config']['db_host'], $GLOBALS['config']['db_user'], $GLOBALS['config']['db_pass'], $GLOBALS['config']['db']);
  		
  		// Loads the name of this class
  		$class_name = get_class($this);
 
  		// Loads a new form object into each cell in the array
-		if ($result = mysqli_query($conn, $query)) {
+ 		$results = $this->execute_query($query, $params);
+		if ($results) {
 
 			// If nothing is in the query return false.
-			if (mysqli_num_rows($result)==0) { return false; }
+			if (count($results)==0) { return false; }
 
 			// Each row in the database is stored as a new object of whatever class happens to be
 			// using the Forms class. Each of these objects is stored in the "instances" array
-			while($row = mysqli_fetch_array($result)){
+			foreach ($results as $key => $row) {
 				$new_form = new $class_name();
 				$new_form->id_instance = $row[$this->id_name];
 				
@@ -517,7 +516,7 @@ class Form {
     	}
     	*/
 		//print_r($params);
-    	if ($this->execute_query($query, $params, false)){
+    	if (is_array($this->execute_query($query, $params))){
     		return true;
     	} else {
     		return false;
@@ -531,7 +530,12 @@ class Form {
 		*/
 		$query = "DELETE FROM %s WHERE %s = ?";
 		$query = sprintf($query, $this->table_name, $this->id_name);
-		return $this->execute_query($query, $this->id_instance, false);
+
+		if (is_array($this->execute_query($query, $this->id_instance)){
+			return True;
+		} else {
+			return False;
+		}
 	}
 
 	public function validate(){

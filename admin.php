@@ -12,76 +12,97 @@ if(isset($_SESSION['type'])){
 
 $filter = "";
 
-if(!empty($_SESSION['email'])){
-	include "models/farmer_model.php";
-	include "models/landowner_model.php";
+include "models/farmer_model.php";
+include "models/landowner_model.php";
 
-	$post_data = array(
-					"to_rent"=> "",
-					"to_sell"=> "",
-					"to_intern"=> "",
-					"to_other"=> "",
-					"horticulture"=> "", 
-					"livestock"=> "",
-					"aquaculture"=> "", 
-					"tobacco"=> "",
-					"rowcrops"=> "",
-					"northern"=> "",
-					"central"=> "",
-					"eastern"=> "",
-					"western"=> "",
-					"enabled"=> "checked",
-					);
 
-	if (!empty($_POST)){
-		$operators = array();
-		foreach ($post_data as $key => $value){
-			if (isset($_POST[$key])){
-				$post_data[$key] = "checked";
-				if ($key != "livestock"){
-					$filter = $filter . $key . " = true AND ";
+$post_data = array(
+				"to_rent"=> "",
+				"to_sell"=> "",
+				"to_intern"=> "",
+				"to_other"=> "",
+				"horticulture"=> "", 
+				"livestock"=> "",
+				"aquaculture"=> "", 
+				"tobacco"=> "",
+				"rowcrops"=> "",
+				"northern"=> "",
+				"central"=> "",
+				"eastern"=> "",
+				"western"=> "",
+				"enabled"=> "checked",
+				);
+$categories = array(
+				"terms" => array('to_rent', 'to_sell', 'to_intern', 'to_other'),
+				"ag_type" => array('horticulture', 'livestock', 'aquaculture', 'tobacco', 'rowcrops'),
+				"location" => array('northern', 'central', 'eastern', 'western'),	
+				);
+
+if (!empty($_POST)){
+	$conditions = array(
+		"terms" => "",
+		"ag_type" => "",
+		"location" => "",
+		);
+
+// Constructs a WHERE clause for the query. Example: (to_rent = true) AND (horticulture = true) AND (northern = true OR central = true OR eastern = true OR western = true) 
+	foreach ($categories as $category => $field) {
+		$conditions[$category] = "(";
+		$data = false;
+
+		foreach ($field as $key => $value) {
+			if (isset($_POST[$value])){
+				$post_data[$value] = "checked";
+				if ($value != "livestock"){
+					$conditions[$category] = $conditions[$category] . $value . " = true OR ";
+				} else {
+					// There isn't a livestock field in the datbase, so if livestock is true we have to check all of the different livestock options.
+					$conditions[$category] = $conditions[$category] . "(livestock_cattle_dairy = 'true' OR livestock_cattle_beef = 'true' OR livestock_poultry = 'true' OR livestock_hogs = 'true' OR livestock_goats = 'true' OR livestock_sheep = 'true' OR livestock_horses = 'true') OR";
 				}
+				$data = true;
 			} else {
-				$post_data[$key] = "";
+				$post_data[$value] = "";
 			}
 		}
+		$conditions[$category] = substr($conditions[$category], 0, -4);
 
-		if (isset($_POST['livestock'])){
-			$filter = $filter . "(livestock_cattle_dairy = 'true' OR livestock_cattle_beef = 'true' OR livestock_poultry = 'true' OR livestock_hogs = 'true' OR livestock_goats = 'true' OR livestock_sheep = 'true' OR livestock_horses = 'true')";
+		if ($data){
+			$conditions[$category] = $conditions[$category] . ")";
 		} else {
-			$filter = substr($filter,0 ,-4);
+			$conditions[$category] = "";
 		}
-
-	} else {
-		$filter = "nothing";
 	}
 
-	$farmer = new FarmerForm();
-	$landO = new LandownerForm();
-
-	$check_post = false;
-	if(isset($_POST)){
-	
-	$farmer->load_by_filter($filter);
-	$landO->load_by_filter($filter);
-	$check_post = true;
+	$filter = "";
+	foreach ($conditions as $key => $value) {
+		if (!empty($value)){
+			$filter =  $filter . $value . " AND ";
+		}
 	}
-	else $check_post = false;
 
-	$logout = "logout_button.php";
-	$page_title = "Admin page";
+	$filter = substr($filter, 0, -5);
 
-	$panel_heading = "Welcome back, " . $_SESSION['first_name'] . '!';
-	
-	$page_body = "admin_template.php";
-
-
-	include "templates/template.php";
+} else {
+	$filter = "nothing";
 }
 
-	else {
-		session_unset();
-		session_destroy();
-		header('Location: index.php');
-	}
+$farmer = new FarmerForm();
+$landO = new LandownerForm();
+
+
+	
+$farmer->load_by_filter($filter);
+$landO->load_by_filter($filter);
+
+
+$logout = "logout_button.php";
+$page_title = "Admin page";
+
+$panel_heading = "Welcome back, " . $_SESSION['first_name'] . '!';
+
+$page_body = "admin_template.php";
+
+
+include "templates/template.php";
+
 ?>

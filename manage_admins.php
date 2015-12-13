@@ -34,6 +34,7 @@ if (isset($_POST['add_admin'])){
 	$valid = $to_edit->validate();
 	if($valid){
 		$to_edit->save();
+		$to_edit = new AdminForm();
 	}
 }
 $admins->load_by_filter("");
