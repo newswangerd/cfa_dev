@@ -36,6 +36,16 @@
         <span class="text-danger"><?php// echo $error['lname']; ?></span>
       </div>
     </div>
+    	<br><br>
+	<b>What region is your farm in?</b>
+		<br>
+		<input type="checkbox" name="northern" <?php echo $form->fields['northern']; ?> > Northern Kentucky
+		<br>
+		<input type="checkbox" name="central" <?php echo $form->fields['central']; ?> > Central Kentucky
+		<br>
+		<input type="checkbox" name="eastern" <?php echo $form->fields['eastern']; ?> > Eastern Kentucky
+		<br>
+		<input type="checkbox" name="western" <?php echo $form->fields['western']; ?> >  Western Kentucky
 </div>
 <div class="col-sm-6">
 	<br>
@@ -55,22 +65,13 @@
         <span class="text-danger"><?php// echo $error['email']; ?></span>
       </div>
     </div>
-	
-  </div>
-</div>
-<br><br>
-	<b>What region is your farm in?</b>
-		<br>
-		<input type="checkbox" name="northern" <?php echo $form->fields['northern']; ?> > Northern Kentucky
-		<br>
-		<input type="checkbox" name="central" <?php echo $form->fields['central']; ?> > Central Kentucky
-		<br>
-		<input type="checkbox" name="eastern" <?php echo $form->fields['eastern']; ?> > Eastern Kentucky
-		<br>
-		<input type="checkbox" name="western" <?php echo $form->fields['western']; ?> >  Western Kentucky
 
 		<br />
-		<br />
+		<img src="templates/kentucky.png" width="75%" />
+  </div>
+
+</div>
+
 
 <div class="col-sm-6">
 	<b>Are you looking to...</b>

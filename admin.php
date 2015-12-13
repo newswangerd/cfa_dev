@@ -10,6 +10,8 @@ if(isset($_SESSION['type'])){
 	header('Location: index.php');
 }
 
+$filter = "";
+
 if(!empty($_SESSION['email'])){
 	include "models/farmer_model.php";
 	include "models/landowner_model.php";
