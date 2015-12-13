@@ -1,6 +1,6 @@
 <?php
-session_set_cookie_params(0);
-session_start();
+	session_set_cookie_params(0);
+	session_start();
 
 	if(!empty($_SESSION['email'])){
 
@@ -8,7 +8,11 @@ session_start();
 
 
 		$form = new FarmerForm();
+
 		$data = $form->load_from_post();//load data from the post operation to the fields array
+
+		$data = $form->load_from_post();
+		$form->fields['enabled']->set_value(true);
 
 
 		if (!$form->fields['to_other']->value){

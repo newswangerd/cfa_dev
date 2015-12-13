@@ -562,6 +562,7 @@ class Form {
 				$data = true;
 			} elseif(get_class($value)=="CheckBox"){  // Necesary to load checkboxes because checkboxes don't send a post value if they
 				$data = true;
+				$this->fields[$key]->set_value(false);
 			}
 		}
 

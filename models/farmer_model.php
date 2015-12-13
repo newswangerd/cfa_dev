@@ -81,6 +81,7 @@ class FarmerForm extends Form {
 		$this->fields['sell_produce'] = new TextField("Where do you sell Produce");
 
 		// Enabled
+		$this->fields['admin_notes'] = new TextField("Administrative Notes", 1000, false);
 		$this->fields['enabled'] = new CheckBox("Profile Enabled", True);
 	}
 }

@@ -1,11 +1,25 @@
+<?php if($_SESSION['type'] ==  "Administrator") {echo "<a class='btn btn-default btn-sm' href='admin.php'><-- Return to Admin Page</a>";} ?>
 <form class="form-horizontal" action="landowner_view.php" method="POST">
 	<?php if($saved) echo '<div calss"container"><div class="jumbotron">
 		<h4 style = "color:green"><b>Your information has been successfully saved! Calm down and keep your farming legacy.</b></h4>
 		</div></div>';
 	?>
+<?php if($_SESSION['type'] == "Administrator") {
+	echo '
+	<br />
+	Notes:
+	<br />
+	<div clas="row">
+		<div class="col-sm-12">
+			<textarea name="admin_notes" class="form-control">' . $form->fields['admin_notes'] . '</textarea>
+		</div>
+	</div>
+	';
+}
+?>
 <div class = "row">
   <div class="col-sm-6">
-	<input type="checkbox" name="enabled" <?php echo $form->fields['enabled']; ?> >Disable your account
+	<input type="checkbox" name="enabled" <?php echo $form->fields['enabled']; ?> > Uncheck this box to remove your application from our system.
 	<br><br>
     <div class="control-group">
       <label class="control-label" for="fname">First Name</label>
@@ -199,6 +213,7 @@
 	<b>Select image to upload:</b>
 	<input type="file" name="fileToUpload" id="fileToUpload">
 	<br />
+	<?php if(isset($_POST['landowner_id'])) echo "<input type='hidden' name='landowner_id' value='". $_POST['landowner_id'] ."' />" ?>
 	<input type="submit" class="btn btn-primary btn-lg" name="submit" value="Submit" />
 </div>
 </form>

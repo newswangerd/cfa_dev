@@ -8,6 +8,10 @@
 		$form = new LandownerForm();
 		$data = $form->load_from_post();
 
+	$form = new LandownerForm();
+	$data = $form->load_from_post();
+	$form->fields['enabled']->set_value(true);
+
 		if (!$form->fields['to_other']->value){
 			$form->fields['terms_other']->set_required(false);
 		}
