@@ -3,7 +3,7 @@
 	include_once "models/model_form.php";
 	session_start();
 //populate
-if(!empty($_SESSION['email'])){
+if(!empty($_SESSION['email'])){//checks if the session email is not empty. if so, create the necessary object and load the info from the database table
 	$form = new FarmerForm();
 	$form->load_by_pk($_SESSION['usr_id']);
 
@@ -11,7 +11,7 @@ if(!empty($_SESSION['email'])){
 $info = $form->load_from_post();
 
 $saved = false;
-if($info){// echo "Check";
+if($info){
 
 	// Sets the "describe" fields to not required if the checkbox isn't set
 	if (!$form->fields['to_other']->value){

@@ -8,7 +8,7 @@ session_start();
 
 
 		$form = new FarmerForm();
-		$data = $form->load_from_post();
+		$data = $form->load_from_post();//load data from the post operation to the fields array
 
 
 		if (!$form->fields['to_other']->value){
@@ -22,7 +22,7 @@ session_start();
 		if (!$form->fields['equipment']->value){
 			$form->fields['equipment_other']->set_required(false);
 		}
-
+//store the data from the registration page into the fields array of the current farmer object
 		$form->fields['first_name']->set_value($_SESSION['fname']);
 		$form->fields['last_name']->set_value($_SESSION['lname']);
 		$form->fields['email']->set_value($_SESSION['email']);
@@ -37,7 +37,7 @@ session_start();
 		// If data is received, validate it.
 		$is_valid = true;
 		if($data){
-			$is_valid = $form->validate();
+			$is_valid = $form->validate();//validate the data. if valid save it to the database. if not redirect the user to the farmerq page
 			if ($is_valid){
 				if($form->save()){
 					session_destroy();
@@ -46,6 +46,7 @@ session_start();
 				} else {
 					session_destroy();
 					die("Something has gone horribly wrong with our database. Please try submitting your application again later.");
+					header('Refresh: 5; url = farmerq.php');
 				}
 			}
 		}

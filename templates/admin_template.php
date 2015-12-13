@@ -37,7 +37,7 @@
 <div class="row">
 	<div class="col-sm-6 well">
 		<center><h4>Farmers:
-		<?php echo " ".$farmer->number_of_instances();?>
+		<?php echo " ".$farmer->number_of_instances(); // for displaying the number of farmers?>
 		</h4></center>
 		<table class="table table-condensed">
 			<tr>
@@ -46,7 +46,7 @@
 				<th>Last Name</th>
 				<th>Email</th>
 			</tr>
-			<?php
+			<?php //this creates the See profile button for farmers
 			$template = '
 			<tr>
 				<td><a href="#" class="btn btn-default btn-xs" data-toggle="modal" data-target="#farmerModal%s">See Profile</a>
@@ -63,7 +63,7 @@
 	</div>
 	<div class="col-sm-6 well">
 		<center><h4>Landowners:
-		<?php echo " ".$landO->number_of_instances();?>
+		<?php echo " ".$landO->number_of_instances(); //for displaying the number of landowners?>
 		</h4></center>
 		<table class="table table-condensed">
 			<tr>
@@ -72,7 +72,7 @@
 				<th>Last Name</th>
 				<th>Email</th>
 			</tr>
-			<?php
+			<?php //this creates the See profile button for landowners
 			$template = '
 			<tr>
 				<td><a href="#" class="btn btn-default btn-xs" data-toggle="modal" data-target="#landModal%s">See Profile</a>
@@ -107,7 +107,7 @@
   </div>
 </div>
 
-<?php
+<?php //modal for viewing farmer profile
 
 $template = '
 <div class="modal fade" id="farmerModal%s" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -136,7 +136,7 @@ $template = '
 </div>
 ';
 
-while ($farmer->load_next()){
+while ($farmer->load_next()){//loads the farmers into an HTML table
 	$modal_body = "";
 	foreach ($farmer->fields as $key => $value) {
 		$modal_body = $modal_body . '<tr><th>'. $value->name . "</th><td>" . $value->get_value() . '</td></tr>';
@@ -144,7 +144,7 @@ while ($farmer->load_next()){
 
 	echo sprintf($template, $farmer->id_instance,$farmer->fields['first_name'], $farmer->fields['last_name'], $modal_body);
 }
-
+//modal for viewing landowner profile
 $template = '
 <div class="modal fade" id="landModal%s" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
@@ -172,7 +172,7 @@ $template = '
 </div>
 ';
 
-while ($landO->load_next()){
+while ($landO->load_next()){//loads the landowners into an HTML table
 	$modal_body = "";
 	foreach ($landO->fields as $key => $value) {
 		$modal_body = $modal_body . '<tr><th>'. $value->name . "</th><td>" . $value->get_value() . '</td></tr>';

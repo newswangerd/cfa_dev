@@ -72,7 +72,7 @@ class LandownerForm extends Form {
 		$this->fields['irrigation'] = new CheckBox("Needs Irrigation");
 		$this->fields['goals'] = new TextField("Goals for Land");
 
-		// Location
+		// The geographic region the farm is in
 		$this->fields['northern'] = new CheckBox("Northern Kentucky");
 		$this->fields['central'] = new CheckBox("Central Kentucky");
 		$this->fields['eastern'] = new CheckBox("Easter Kentucky");

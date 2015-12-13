@@ -4,11 +4,12 @@ session_start();
 	include "models/landowner_model.php";
 	include "models/admin_model.php";
 
+	//associative arrays for handling data from the login operation and displaying error message if invalid data is found
 	$login_fields = array('email' => '', 'password' => '', 'user_type'=> '');
 	$errors = array('email' => '', 'password' => '', 'user_type'=> '');
 
 	$valid = true;
-	if (!empty($_POST)){
+	if (!empty($_POST)){//if post has data, store them in the $login_fields rray
 		foreach ($login_fields as $key => $value){
 			if (!empty($_POST[$key])){
 				$login_fields[$key] = $_POST[$key];
@@ -18,7 +19,8 @@ session_start();
 			}
 		}
 			
-	if($valid){
+	if($valid){//if the fields are valid, do the login query
+				//check if the typed password matches the one in the database, if so the user will be logged in and directed to the correct page, else redirect to login page
 			$valid_password = false;
 			$redirect = "";
 			if($login_fields['user_type']=="Farmer"){
