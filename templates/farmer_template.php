@@ -49,6 +49,7 @@
 			<input type="checkbox" name="infrastructure_greenhouse" <?php echo $form->fields['infrastructure_greenhouse']; ?> > Greenhouse/High Tunnel
 			<br>
 		</p>
+		<br />
 		<b>Equipment Needed</b>
 		<br />
 		<input type="checkbox" name="equipment" <?php echo $form->fields['equipment']; ?> > 
@@ -57,6 +58,17 @@
 		<br>
 		<br />
 		<input type="checkbox" name="irrigation"  <?php echo $form->fields['irrigation']; ?> > Irrigation Needed?
+		<br />
+			<b>Education</b>
+			<br>
+			<input type="checkbox" name="highschool" <?php echo $form->fields['highschool']; ?> > Highschool Graduate
+			<br>
+			<input type="checkbox" name="some_college" <?php echo $form->fields['some_college']; ?> > Some College
+			<br>
+			<input type="checkbox" name="college_graduate"<?php echo $form->fields['college_graduate']; ?> > College Graduate
+			<br>
+			<input type="checkbox" name="other_education" <?php echo $form->fields['other_education']; ?> > Other
+			<br>
 
 	</div>
 	<div class="col-sm-6">
@@ -112,16 +124,6 @@
 		<br>
 
 		<p>
-			<b>Education</b>
-			<br>
-			<input type="checkbox" name="highschool" <?php echo $form->fields['highschool']; ?> > Highschool Graduate
-			<br>
-			<input type="checkbox" name="some_college" <?php echo $form->fields['some_college']; ?> > Some College
-			<br>
-			<input type="checkbox" name="college_graduate"<?php echo $form->fields['college_graduate']; ?> > College Graduate
-			<br>
-			<input type="checkbox" name="other_education" <?php echo $form->fields['other_education']; ?> > Other
-			<br>
 			<br>
 			<b>Where are you willing to farm?</b>
 			<br>
@@ -133,7 +135,8 @@
 			<br>
 			<input type="checkbox" name="western" <?php echo $form->fields['western']; ?> >  Western Kentucky
 		</p>
-
+		<img src="templates/kentucky.png" width="75%" />
+		<br />
 	</div>
 
 	<div class="col-sm-12">

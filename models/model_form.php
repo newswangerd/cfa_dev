@@ -286,6 +286,17 @@ class Form {
 	public $fields = array();
 	public $instances = array();
 
+	private function execute_query($query, $params, $return){
+		$conn = new PDO(sprintf('mysql:host=%s;dbname=%s;charset=utf8', $GLOBALS['config']['db_host'],$GLOBALS['config']['db']), $GLOBALS['config']['db_user'], $GLOBALS['config']['db_pass']);
+		$stmt = $conn->prepare($query);
+		$result = $stmt->execute($params);
+		if ($return){
+			return $stmt->fetchAll(PDO::FETCH_ASSOC);
+		} else {
+			return $result;
+		}
+	}
+
 	public function load_by_pk($id){
 		/*
 			Loads a single item into the object based on the objects primary key. This can
@@ -301,16 +312,11 @@ class Form {
 		$this->id_instance = $id;
 
 		// Construct the query
-		$query = "SELECT * FROM %s WHERE %s = %s;";
-		$query = sprintf($query, $this->table_name, $this->id_name, $this->id_instance);
-		$row = "";
-		// Query the database
-		$conn = mysqli_connect($GLOBALS['config']['db_host'], $GLOBALS['config']['db_user'], $GLOBALS['config']['db_pass'], $GLOBALS['config']['db']);
-		if ($result = mysqli_query($conn, $query)) {
-			$row = mysqli_fetch_array($result);
-		}
-		//added the following
-		if(!$conn) echo "No connection!";
+		$query = "SELECT * FROM %s WHERE %s = ?;";
+		$query = sprintf($query, $this->table_name, $this->id_name);
+		$row = $this->execute_query($query, array($this->id_instance), true);
+		$row = $row[0];
+
 		// Load the result into the object
 		foreach ($this->fields as $key => $value){
 			$this->fields[$key]->set_value($row[$key]);
@@ -453,6 +459,7 @@ class Form {
 			// If id_instance is not set, add a new entry to the database.
 			$fields = "";
 			$values = "";
+			$params = array();
 
 			// Constructs the values and fields portion of the quey by looping through
 			// the fields array.
@@ -461,7 +468,8 @@ class Form {
 				if (get_class($value)=="ForeignKey"){
 					$values = $values . "'" . $value->value->id_instance . "', ";
 				} else {
-					$values = $values . "'" . $value->value . "', ";
+					$values = $values . "?, ";
+					$params[] = $value->value;
 				}
 			}
 
@@ -474,28 +482,32 @@ class Form {
 			$query = sprintf($query, $this->table_name, $fields, $values);
 
 		} else {
-			// If id_instance is set, saves the current instnace to the database
+			// If id_instance is set, saves the current instance to the database
 			$update = "";
+			$params = array();
 
 			// Constructs the values and fields portion of the quey by looping through
 			// the fields array.
-			foreach ($this->fields as $key => $value){
-				//if($key == "password") $value->value = password_hash($value->value, PASSWORD_BCRYPT, array('salt'=>'9CI3fv72o8kj6KI4Vx6Xsd')); //hash the password before saving it.
-				if (is_object($value)){//check if it is object first
+			foreach ($this->fields as $key => $value){				
+				if (is_object($value)){//check if it is object first 
 					if(get_class($value)=="ForeignKey"){
-					$update = $update . $key . " = '" . $value->value->id_instance . "', ";
-				} else {
-					$update = $update . $key . " = '" . $value->value . "', ";
-				}
+						$update = $update . $key . " = ?, ";
+						$params[] = $value->value->id_instance;
+					} else {
+						$update = $update . $key . " = ?, ";
+						$params[] = $value->value;
+					}
 			}
 		}
 			$update = substr($update, 0, -2);
 
 			// Builds the final query.
-			$query = "UPDATE %s SET %s WHERE %s = %s;";
-			$query = sprintf($query, $this->table_name, $update, $this->id_name, $this->id_instance);
+			$query = "UPDATE %s SET %s WHERE %s = ?;";
+			$query = sprintf($query, $this->table_name, $update, $this->id_name);
+			$params[] = $this->id_instance;
 		}
 
+		/*
 		$conn = new mysqli($GLOBALS['config']['db_host'], $GLOBALS['config']['db_user'], $GLOBALS['config']['db_pass'], $GLOBALS['config']['db']);
 		
 		if ($result = mysqli_query($conn, $query)) {
@@ -503,20 +515,23 @@ class Form {
     	} else {
     		return false;
     	}
+    	*/
+		//print_r($params);
+    	if ($this->execute_query($query, $params, false)){
+    		return true;
+    	} else {
+    		return false;
+    	}
+
 	}
 
 	public function delete(){
 		/*
 			Deletes the entry in the database with the current object's id_instance.
 		*/
-		$conn = mysqli_connect($GLOBALS['config']['db_host'], $GLOBALS['config']['db_user'], $GLOBALS['config']['db_pass'], $GLOBALS['config']['db']);
-		$query = "DELETE FROM %s WHERE %s = %s";
-		$query = sprintf($query, $this->table_name, $this->id_name, $this->id_instance);
-		if ($result = mysqli_query($conn, $query)) {
-      		return true;
-    	} else {
-    		return false;
-    	}
+		$query = "DELETE FROM %s WHERE %s = ?";
+		$query = sprintf($query, $this->table_name, $this->id_name);
+		return $this->execute_query($query, $this->id_instance, false);
 	}
 
 	public function validate(){

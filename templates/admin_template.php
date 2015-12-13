@@ -29,7 +29,7 @@
 		</tr>
 		<tr>
 			<th>Enabled</th>
-			<td colspan="3"><label class="checkbox-inline"><input type="checkbox" name="enabled" <?php echo $post_data['enabled'] ?> >Show only enabled applications.</label></td>
+			<td colspan="3"><label class="checkbox-inline"><input type="checkbox" name="enabled" <?php echo $post_data['enabled'] ?> >Only show enabled applications.</label></td>
 		</tr>
 	</table>
 	</div>

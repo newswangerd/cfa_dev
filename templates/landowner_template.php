@@ -42,6 +42,7 @@
 		<input type="checkbox" name="western" <?php echo $form->fields['western']; ?> >  Western Kentucky
 
 		<br />
+		<img src="templates/kentucky.png" width="75%" />
 		<br />
 	<b>Farmland</b>
 	<br />

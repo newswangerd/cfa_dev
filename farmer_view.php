@@ -6,7 +6,7 @@
 	if(!empty($_SESSION['email'])){//checks if the session email is not empty. if so, create the necessary object and load the info from the database table
 		$form = new FarmerForm();
 		$form->load_by_pk($_SESSION['usr_id']);
-	=======
+
 	if(isset($_SESSION['type'])){
 
 		if($_SESSION['type'] == "Farmer"){
@@ -18,8 +18,6 @@
 				$form->load_by_pk($_POST['farmer_id']);
 			} else { header('Location: admin.php'); }
 		} else { header('Location: index.php'); }
-
-	>>>>>>> origin/master
 
 	//handle post operation
 
@@ -63,7 +61,6 @@
 	$page_title = "Farmer edit";
 	$panel_heading = "Edit";
 	$page_body = "farmer_view_template.php";
-
 
 	include "templates/template.php";
 	}
