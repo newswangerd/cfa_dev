@@ -1,6 +1,6 @@
 <?php
 
-/*
+
 if(isset($_SESSION['type'])){
 	if ($_SESSION['type'] != "Administrator"){
 		header('Location: index.php');
@@ -8,7 +8,7 @@ if(isset($_SESSION['type'])){
 } else {
 	header('Location: index.php');
 }
-*/
+
 
 include "models/admin_model.php";
 
