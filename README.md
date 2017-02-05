@@ -2,7 +2,7 @@
 
 This is a project that we created for the Community Farm Alliance in order to help them match farm owners with workers that need a farm to work on.
 
-Since PHP allows you to write really messy code where the HTML is mixed with the business logic for the page, we built our own simple MVT framework and object relational mapper to help structure the project a little better. The following is a description of how this MVT framework library works.
+Since PHP allows you to write really messy code where the HTML is mixed with the business logic for the page, we built our own simple MVT framework and object relational mapper which is loosely based off of Django to help structure the project a little better. The following is a description of how this MVT framework library works.
 
 #Technical
 Our database application consists of three major components. These are models, templates (views) and controllers. 
